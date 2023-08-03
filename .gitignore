@@ -1,0 +1,7 @@
+node_modules/*
+.next/*
+.DS_Store
+db/*
+gcp.json
+.yarn/*
+.env.local
