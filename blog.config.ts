@@ -55,7 +55,7 @@ const blogConfig: BlogConfig = {
       base: "#F2F4F3",
       border: "",
       bg: "#F7F7F7",
-      text: "#2C2C2C",
+      text: "#333333",
       grayLighter: "#A0A0A0",
     },
     breakPoints: {
@@ -79,12 +79,8 @@ const blogConfig: BlogConfig = {
   },
   navigation: [
     {
-      name: "travel",
-      url: `/travel`,
-    },
-    {
-      name: "camp",
-      url: `/camp`,
+      name: "tec",
+      url: `/tec`,
     },
   ],
   subNavigation: [
@@ -98,29 +94,23 @@ const blogConfig: BlogConfig = {
     },
     {
       name: "GitHub",
-      url: "https://github.com/steelydylan/Awesome",
+      url: "https://github.com/youta-ms",
     },
   ],
   account: {
-    name: "steelydylan",
-    description: "profile here profile here profile here profile here",
+    name: "Youta",
+    description: "■現役のWebエンジニア。",
     image: `/images/me.jpeg`,
     social: {
-      twitter: "https://twitter.com/steelydylan",
-      github: "https://github.com/steelydylan",
+      twitter: "https://twitter.com/youta_ms",
+      github: "https://github.com/youta-ms",
     },
   },
   writers: [
     {
-      id: "awesome",
-      name: "Mr. AWESOME",
-      description: "profile here profile here profile here profile here",
-      image: "/images/me.jpeg",
-    },
-    {
-      id: "steelydylan",
-      name: "steelydylan",
-      description: "profile here profile here profile here profile here",
+      id: "me",
+      name: "Youta",
+      description: "■現役のWebエンジニア。",
       image: "/images/me.jpeg",
     },
   ],
@@ -142,6 +132,12 @@ const blogConfig: BlogConfig = {
       title: "Travel",
       imagePath: "/images/london.jpeg",
       description: "Look at my awesome travel life",
+    },
+    {
+      id: "tec",
+      title: "Tec",
+      imagePath: "/images/london.jpeg",
+      description: "技術に関する記事です",
     },
   ],
   tags: [
