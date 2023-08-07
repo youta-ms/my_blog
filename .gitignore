@@ -5,3 +5,5 @@ db/*
 gcp.json
 .yarn/*
 .env.local
+.yarnrc.yml
+yarn.lock

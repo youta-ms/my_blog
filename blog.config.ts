@@ -3,9 +3,9 @@ import { BlogConfig } from "./types/config";
 const blogConfig: BlogConfig = {
   use: "mdx", // mdx or notion
   siteLogo: {
-    url: "/images/logo.svg",
+    url: "/images/logo.png",
     width: 201,
-    height: 39,
+    height: 53.67,
   },
   siteName: "AWESOME",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
