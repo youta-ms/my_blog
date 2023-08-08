@@ -114,6 +114,7 @@ export interface BlogConfig {
   googleAnalyticsCode: string;
   googleAdsenseCode: string;
   notFoundPage: Hero;
+  notFoundTagId: Hero;
   topPage: Page;
   categoryPage: Page;
   articlePage: ArticlePage;

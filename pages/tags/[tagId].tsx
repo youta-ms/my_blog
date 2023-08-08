@@ -13,7 +13,7 @@ import { Article, Tag } from "@/types";
 import blogConfig from "@/blog.config";
 import { LinkButton } from "@/components/buttons";
 import { useArticles } from "@/hooks/use-articles";
-import { NotFound } from "@/components/common/not-found";
+import { NotFound } from "@/components/common/not-tagId";
 
 type Props = {
   tag: Tag;

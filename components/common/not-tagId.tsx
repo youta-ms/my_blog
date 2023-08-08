@@ -7,15 +7,15 @@ export const NotFound = () => {
     <Layout>
       <div className="inner">
         <div className="row">
-          <h1 className="title">{blogConfig.notFoundPage.title}</h1>
+          <h1 className="title">{blogConfig.notFoundTagId.title}</h1>
         </div>
         <div className="row">
-          <p className="notfound-text">{blogConfig.notFoundPage.subtitle}</p>
+          <p className="notfound-text">{blogConfig.notFoundTagId.subtitle}</p>
         </div>
         <div className="row">
           <img
             className="notfound-image"
-            src={blogConfig.notFoundPage.image}
+            src={blogConfig.notFoundTagId.image}
             width="320"
             height="176"
             alt="404"
@@ -23,7 +23,7 @@ export const NotFound = () => {
         </div>
         <div className="row">
           <div className="notfound-desc">
-            {blogConfig.notFoundPage.description}
+            {blogConfig.notFoundTagId.description}
           </div>
         </div>
         <div className="row">
@@ -47,6 +47,7 @@ export const NotFound = () => {
               font-weight: 600;
               text-align: center;
               line-height: 1.7;
+
               @media screen and (max-width: ${blogConfig.styles.breakPoints
                   .medium}) {
                 font-size: var(--text-lg);
