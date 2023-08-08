@@ -7,9 +7,9 @@ const blogConfig: BlogConfig = {
     width: 201,
     height: 53.67,
   },
-  siteName: "AWESOME",
+  siteName: "Youtaの雑記ブログ",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
-  title: "AWESOME",
+  title: "Youtaの雑記ブログ",
   description: "AWESOME Next.js TypeScript MDX Blog Theme",
   googleAnalyticsCode: "", // G-**********
   googleAdsenseCode: "", // ca-pub-****************
@@ -85,11 +85,11 @@ const blogConfig: BlogConfig = {
   ],
   subNavigation: [
     {
-      name: "terms",
+      name: "免責事項",
       url: "/about/terms",
     },
     {
-      name: "privacy",
+      name: "プライバシーボリシー",
       url: "/about/privacy",
     },
     {
