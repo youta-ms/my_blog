@@ -10,6 +10,7 @@ import { Header } from "@/components/layouts/header";
 import { Footer } from "@/components/layouts/footer";
 import { Comp } from "@/components/layouts/comp";
 import blogConfig from "@/blog.config";
+import {googleTagManagerId} from '@/utils/gtm';
 
 const faviconPath = `${blogConfig.siteUrl}/favicon`;
 
@@ -37,7 +38,7 @@ library.add(faTwitter, faInstagram, faGithub);
 
 export function Layout(props: { children: React.ReactNode }) {
   return (
-    <div className="aaa">
+    <>
       <DefaultSeo {...nextSeoConfig} />
       <Head>
         <link
@@ -49,13 +50,6 @@ export function Layout(props: { children: React.ReactNode }) {
       <main>{props.children}</main>
       <Footer />
       <Comp />
-      <style>
-        {`
-          .aaa {
-            position: relative;
-          }
-        `}
-      </style>
-    </div>
+    </>
   );
 }
