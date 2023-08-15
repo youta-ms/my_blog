@@ -11,6 +11,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { useRouter } from "next/dist/client/router";
 import { useEffect } from "react";
 import blogConfig from "@/blog.config";
+import { googleTagManagerId } from '@/utils/gtm';
+import GoogleTagManager, {
+  GoogleTagManagerId,
+} from '@/components/GoogleTagManager';
 
 library.add(faTwitter, faFacebook, faGithub);
 
@@ -40,6 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       {canAnalyze && (
         <>
+          <GoogleTagManager
+            googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
+          />
           <Script
             defer
             strategy="afterInteractive"
