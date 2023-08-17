@@ -2,7 +2,7 @@ import { SubTitle } from "@/components/texts";
 import blogConfig from "@/blog.config";
 import { Profile } from "../sides/profile";
 import { CategoryList } from "../common/category-list";
-import { TagList } from "../common/tag-list";
+import { TagList } from "../common/common-tag-list";
 import { Toc } from "../toc";
 
 export const Side: React.VFC<{ id?: string }> = ({ id }) => {

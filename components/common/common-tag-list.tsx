@@ -8,7 +8,7 @@ export const TagList: React.VFC<{ category?: Category; tags: Tag[] }> = ({
   return (
     <ul className="taglist">
       {category && (
-        <li className="category">
+        <li>
           <Link href={`/${category.id}`}>{category.title}</Link>
         </li>
       )}
@@ -37,11 +37,6 @@ export const TagList: React.VFC<{ category?: Category; tags: Tag[] }> = ({
             color: var(--c-primary);
             border-radius: 10px;
             font-size: var(--text-sm);
-          }
-          .taglist li.category {
-            border: 1px solid var(--c-primary-sub);
-            color: var(--c-primary-sub);
-            border-radius: 0;
           }
         `}
       </style>

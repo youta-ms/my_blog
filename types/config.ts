@@ -64,6 +64,7 @@ interface BreakPoints {
 
 interface Colors {
   primary: string;
+  primarySub: string;
   primaryLighter: string;
   primaryGradient: string;
   base: string;
