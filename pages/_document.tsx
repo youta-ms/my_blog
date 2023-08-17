@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import {googleTagManagerId} from '@/utils/gtm';
 
 class MyDocument extends Document {
   render() {
@@ -8,12 +9,12 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
         </Head>
         <body>
-          <iframe
-            src='https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}'
-            height="0"
-            width="0"
-            className="tag"
-          />
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
+          height="0"
+          width="0"
+          className="tag"
+        />
           <Main />
           <NextScript />
           <style>
