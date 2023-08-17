@@ -10,7 +10,6 @@ import { Header } from "@/components/layouts/header";
 import { Footer } from "@/components/layouts/footer";
 import { Comp } from "@/components/layouts/comp";
 import blogConfig from "@/blog.config";
-import {googleTagManagerId} from '@/utils/gtm';
 
 const faviconPath = `${blogConfig.siteUrl}/favicon`;
 
