@@ -42,11 +42,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <GoogleTagManager
+        googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
+      />
       {canAnalyze && (
         <>
-          <GoogleTagManager
-            googleTagManagerId={googleTagManagerId as GoogleTagManagerId}
-          />
           <Script
             defer
             strategy="afterInteractive"
