@@ -135,6 +135,10 @@ const blogConfig: BlogConfig = {
       id: "markdown",
       title: "MarkDown",
     },
+    {
+      id: "coding",
+      title: "HTML/CSS",
+    },
   ],
 };
 
