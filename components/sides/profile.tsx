@@ -64,6 +64,7 @@ export const Profile = () => {
             text-align: center;
           }
           .profile-content {
+            white-space: break-spaces;
             font-size: var(--text-md);
             line-height: 1.7;
           }

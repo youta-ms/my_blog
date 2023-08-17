@@ -1,7 +1,7 @@
 import blogConfig from "@/blog.config";
 import { CategoryList } from "../common/category-list";
 import { SocialList } from "../common/social-list";
-import { TagList } from "../common/tag-list";
+import { TagList } from "../common/common-tag-list";
 import { SubTitle } from "../texts";
 
 export const Footer: React.VFC = () => {

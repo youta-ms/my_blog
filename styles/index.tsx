@@ -13,6 +13,7 @@ export const GlobalStyle = () => {
             --text-xl: 24px;
             --c-gray: ${blogConfig.styles.colors.bg};
             --c-primary: ${blogConfig.styles.colors.primary};
+            --c-primary-sub: ${blogConfig.styles.colors.primarySub};
             --c-primary-lighter: ${blogConfig.styles.colors.primaryLighter};
             --c-base: ${blogConfig.styles.colors.base};
             --c-text: ${blogConfig.styles.colors.text};

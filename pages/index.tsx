@@ -63,6 +63,11 @@ const TopPage = ({
             flex: 1;
             margin-right: 80px;
             word-break: break-all;
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+              .medium}) {
+              margin-right: 0;
+          }
           }
           .link-button-wrap {
             text-align: center;
