@@ -123,6 +123,12 @@ const blogConfig: BlogConfig = {
       imagePath: "/images/london.jpeg",
       description: "技術に関する記事です",
     },
+    {
+      id: "about",
+      title: "About",
+      imagePath: "/images/london.jpeg",
+      description: "その他",
+    },
   ],
   tags: [
     {
