@@ -4,13 +4,13 @@ const blogConfig: BlogConfig = {
   use: "mdx", // mdx or notion
   siteLogo: {
     url: "/images/logo.png",
-    width: 201,
-    height: 53.67,
+    width: 300,
+    height: 80.1045,
   },
   siteName: "Youtaの雑記ブログ",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
   title: "Youtaの雑記ブログ",
-  description: "AWESOME Next.js TypeScript MDX Blog Theme",
+  description: "現役Webエンジニアが主にプログラミング・興味のあることについて書くブログです。",
   googleAnalyticsCode: "", // G-**********
   googleAdsenseCode: "", // ca-pub-****************
   notFoundPage: {
@@ -54,7 +54,8 @@ const blogConfig: BlogConfig = {
   styles: {
     containerMaxWidth: "1280px",
     colors: {
-      primary: "#50C0A1",
+      primary: "#20B2AB",
+      primarySub: "#FFA500",
       primaryLighter: "#EFF7F3",
       primaryGradient: "linear-gradient(to right, #06A9B7, #B0DE87)",
       base: "#F2F4F3",
@@ -71,12 +72,12 @@ const blogConfig: BlogConfig = {
     },
   },
   hero: {
-    title: "My awesome life",
+    title: "ホーム",
     image: "/images/plane.jpeg",
-    description: "AWESOME Next.js TypeScript MDX Blog Theme",
+    description: "Webの世界を駆ける20代エンジニアの、日常とアイデアの記録",
   },
   footer: {
-    title: "AWESOME Next.js TypeScript MDX Blog Theme",
+    title: "Webの世界を駆ける20代エンジニアの、日常とアイデアの記録",
   },
   article: {
     defaultThumbnail: "/images/plane.jpeg",
@@ -97,14 +98,10 @@ const blogConfig: BlogConfig = {
       name: "プライバシーボリシー",
       url: "/about/privacy",
     },
-    {
-      name: "GitHub",
-      url: "https://github.com/youta-ms",
-    },
   ],
   account: {
     name: "Youta",
-    description: "■現役のWebエンジニア。",
+    description: "■現役のWebエンジニア\n■HTML, CSS(SCSS), PHP, Javascript（Jquery）,Laravel ,他\n■Next.js勉強中",
     image: `/images/me.jpeg`,
     social: {
       twitter: "https://twitter.com/youta_ms",
@@ -115,29 +112,11 @@ const blogConfig: BlogConfig = {
     {
       id: "me",
       name: "Youta",
-      description: "■現役のWebエンジニア。",
+      description: "■現役のWebエンジニア\n■HTML, CSS(SCSS), PHP, Javascript（Jquery）,Laravel ,他\n■Next.js勉強中",
       image: "/images/me.jpeg",
     },
   ],
   categories: [
-    {
-      id: "about",
-      title: "About",
-      imagePath: "/images/camp.jpeg",
-      description: "",
-    },
-    {
-      id: "camp",
-      title: "Camp",
-      imagePath: "/images/camp.jpeg",
-      description: "Look at my awesome camp life",
-    },
-    {
-      id: "travel",
-      title: "Travel",
-      imagePath: "/images/london.jpeg",
-      description: "Look at my awesome travel life",
-    },
     {
       id: "tec",
       title: "Tec",
@@ -147,24 +126,8 @@ const blogConfig: BlogConfig = {
   ],
   tags: [
     {
-      id: "london",
-      title: "London",
-    },
-    {
-      id: "boston",
-      title: "Boston",
-    },
-    {
-      id: "paris",
-      title: "Paris",
-    },
-    {
-      id: "fire",
-      title: "Fire",
-    },
-    {
-      id: "sky",
-      title: "Sky",
+      id: "markdown",
+      title: "MarkDown",
     },
   ],
 };
