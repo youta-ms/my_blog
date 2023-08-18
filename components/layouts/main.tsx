@@ -7,7 +7,7 @@ export function Main({ children }: { children: React.ReactNode }) {
       <style jsx>
         {`
           .main {
-            flex: 1;
+            width: calc(100% - (25% + 80px));
             margin-right: 80px;
             word-break: break-all;
             @media screen and (max-width: ${blogConfig.styles.breakPoints
