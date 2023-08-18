@@ -60,7 +60,7 @@ const TopPage = ({
       <style jsx>
         {`
           .main {
-            flex: 1;
+            width: calc(100% - (25% + 80px));
             margin-right: 80px;
             word-break: break-all;
 

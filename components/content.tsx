@@ -257,9 +257,10 @@ export function Content({ content }: { content: string }) {
               border-radius: 4px;
             }
             :global(pre) {
+              width: 100%;
               margin: 1.5rem 0;
               background: #1c2131;
-              overflow-x: auto;
+              overflow-x: scroll;
               border-radius: 3px;
               word-break: normal;
               word-wrap: normal;
