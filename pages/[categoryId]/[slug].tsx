@@ -32,6 +32,7 @@ export default ({ article: defaultArticle, related }: DetailProps) => {
   }
 
   const { article } = useArticle(defaultArticle.slug, defaultArticle);
+
   const jsonLd: ArticleJsonLdProps = {
     url: process.env.NEXT_PUBLIC_SITE_URL,
     title: article.data.title,
@@ -52,7 +53,7 @@ export default ({ article: defaultArticle, related }: DetailProps) => {
               <Main>
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
-                <Content content={article.content} />
+                <Content content={article.text_data} slug={article.slug} />
                 <TagList
                   category={getCategory(article.data.category)}
                   tags={getTagList(article.data.tags)}

@@ -1,14 +1,27 @@
 import { useHighlight } from "@/hooks/use-highlight";
+import { Fragment, useEffect, useState } from 'react'
+import markdownToReact from '@/components/utils/markdownToReact'
 
-export function Content({ content }: { content: string }) {
+export function Content({ content, slug }: { content: string, slug:string }) {
   const highlightRef = useHighlight();
+
+  const [component, setComponent] = useState(<Fragment />)
+  useEffect(() => {
+    (async () => {
+      const contentComponent:any = await markdownToReact(content, slug)
+      setComponent(contentComponent)
+    })()
+    return () => {}
+  }, [content])
+
   return (
     <>
       <article
         className="content"
         ref={highlightRef}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      >
+        { component }
+      </article>
       <style jsx>
         {`
           .content {
@@ -104,7 +117,7 @@ export function Content({ content }: { content: string }) {
                 color: var(--c-primary-hover);
               }
             }
-            :global(p + p) {
+            :global(p  p) {
               margin-top: 1.6rem;
             }
             :global(ul),
@@ -159,7 +172,7 @@ export function Content({ content }: { content: string }) {
             :global(h4),
             :global(h5),
             :global(h6) {
-              & + :global(p) {
+              &  :global(p) {
                 margin-top: 0.3em;
               }
             }

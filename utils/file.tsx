@@ -1,6 +1,10 @@
 import blogConfig from "@/blog.config";
 import { Article } from "@/types";
 import { renderToString } from "react-dom/server";
+import matter from 'gray-matter'
+import fs from 'fs'
+import { join } from 'path'
+const postsDirectory = join(process.cwd(), 'contents')
 
 export const getArticlesFromFile = () => {
   // Get articles from folder
@@ -42,14 +46,18 @@ export const getArticlesFromFile = () => {
 };
 
 export const getArticleFromFile = async (slug: string) => {
+  const fullPath = join(postsDirectory, `${slug}/index.mdx`)
+  const fileContents = fs.readFileSync(fullPath, 'utf8')
   const article = await import(`@/contents/${slug}/index.mdx`);
   const { default: Default, ...data } = article;
   const articles = await getArticlesFromFile();
+  const { content } = matter(fileContents)
   const { related } = data;
 
   return {
     article: {
       content: renderToString(<Default />),
+      text_data: content,
       data,
       permalink: `${blogConfig.siteUrl}/${data.category}/${slug}`,
       slug,
