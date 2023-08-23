@@ -1,4 +1,3 @@
-import blogConfig from "@/blog.config";
 import { getArticles, getFilteredArticles } from "@/utils/get-articles";
 import { ApiHandler, createRouter, validate } from "next-zod-router";
 import { z } from "zod";
