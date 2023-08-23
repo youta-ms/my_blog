@@ -13,23 +13,9 @@ export const useArticles = ({
   tagId?: string;
   defaultArticles: Article[];
 }) => {
-  if (blogConfig.use !== "notion") {
-    return {
-      articles: defaultArticles,
-      isLoading: false,
-      isError: false,
-    };
-  }
-  const { data, error } = useClientSWR("/api/notion/articles", {
-    query: {
-      categoryId,
-      tagId,
-      current: `${current}`,
-    },
-  });
   return {
-    articles: (data?.articles ?? defaultArticles) as Article[],
-    isLoading: !error && !data,
-    isError: error,
+    articles: defaultArticles,
+    isLoading: false,
+    isError: false,
   };
 };

@@ -18,6 +18,7 @@ export type Tag = {
 
 export type Article = {
   content?: string;
+  text_data: string;
   data: ArticleData;
   permalink: string;
   slug?: string;
