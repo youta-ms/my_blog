@@ -1,0 +1,77 @@
+---
+title: Laravelで複数のページネーションを活用するテクニック
+date: 2023-08-22
+writtenBy: me
+category: tec
+tags: [laravel]
+related: []
+---
+
+もしも、Laravelのページネーションを同じ画面で複数回利用したい場合、ちょっとしたポイントが必要です。そのままだと、異なるテーブルのリストが同時にページ遷移してしまうことがあります。
+
+例えば、以下のようなコードを考えてみましょう。
+
+```php
+// コントローラー
+public function index()
+{
+   $users = DB::table('users')->paginate(5);
+   $items = DB::table('items')->paginate(5);
+
+   $hash = array(
+         'users' => $users,
+         'items' => $items
+   );
+
+   return view('user/index')->with($hash);
+}
+```
+
+このままでは、ページ遷移時には `user/index?page=2` というリクエストが送られ、両方のリストが同じページ番号を参照してしまいます。
+
+そこで、各ページネーションに異なるパラメータ名を設定することをおすすめします。
+
+```php
+// コントローラー
+public function index()
+{
+   $users = DB::table('users')->paginate(5, ["*"], 'user-page');
+   $items = DB::table('items')->paginate(5, ["*"], 'item-page');
+
+   $hash = array(
+         'users' => $users,
+         'items' => $items
+   );
+
+   return view('user/index')->with($hash);
+}
+```
+
+これにより、ページ遷移時には例えば `user/index?user-page=2` や `user/index?item-page=2` のように、異なるパラメータが使用されるようになります。
+
+ただし、ここで新たな課題が浮かび上がります。片方のリストでページ遷移すると、もう片方のリストが最初のページに戻ってしまう問題です。これは、ページ遷移時に片方のパラメータがリセットされるためです。
+
+この問題を解消するためには、各ページネーションで他方のリストのパラメータも保持する必要があります。これには `appends` メソッドを使用します。
+
+最終的なコードは以下の通りです。
+
+```php
+// コントローラー
+public function index(Request $request)
+{
+   $users = DB::table('users')->paginate(5, ["*"], 'user-page')
+                         ->appends(["item-page" => $request->input('item-page')]);
+
+   $items = DB::table('items')->paginate(5, ["*"], 'item-page')
+                        ->appends(["user-page" => $request->input('user-page')]);
+
+   $hash = array(
+         'users' => $users,
+         'items' => $items
+   );
+
+   return view('user/index')->with($hash);
+}
+```
+
+これにより、例えば `user/index?user-page=2&item-page=3` のように、各リストが独立してページ遷移できるようになります。
