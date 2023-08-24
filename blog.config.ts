@@ -72,7 +72,7 @@ const blogConfig: BlogConfig = {
     },
   },
   hero: {
-    title: "ホーム",
+    title: "HOME",
     image: "/images/plane.jpeg",
     description: "Webの世界を駆ける20代エンジニアの、日常とアイデアの記録",
   },
@@ -87,6 +87,10 @@ const blogConfig: BlogConfig = {
     {
       name: "tec",
       url: `/tec`,
+    },
+    {
+      name: "Web3.0",
+      url: `/web3`,
     },
   ],
   subNavigation: [
@@ -129,6 +133,12 @@ const blogConfig: BlogConfig = {
       imagePath: "/images/london.jpeg",
       description: "その他",
     },
+    {
+      id: "web3",
+      title: "Web3.0",
+      imagePath: "/images/london.jpeg",
+      description: "Web3.0に関する記事です",
+    },
   ],
   tags: [
     {
@@ -138,6 +148,30 @@ const blogConfig: BlogConfig = {
     {
       id: "coding",
       title: "HTML/CSS",
+    },
+    {
+      id: "laravel",
+      title: "Laravel",
+    },
+    {
+      id: "git",
+      title: "Git",
+    },
+    {
+      id: "dao",
+      title: "DAO",
+    },
+    {
+      id: "web3",
+      title: "Web3.0",
+    },
+    {
+      id: "blockchain",
+      title: "Blockchain",
+    },
+    {
+      id: "digital_token",
+      title: "Digital Token",
     },
   ],
 };

@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router';
 import tocbot from "tocbot";
 
 const addIdsToTitle = () => {
   const entryContainer = document.querySelector(".content");
+
   if (!entryContainer) {
     return;
   }
@@ -31,7 +33,16 @@ const isHeadingsExists = () => {
 };
 
 export const Toc = ({ id }: { id: string }) => {
+  const router = useRouter();
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
   useEffect(() => {
+    if (isFirstRender) {
+      // 初回描画時は処理をスキップ
+      setIsFirstRender(false);
+      return;
+    }
+
     addIdsToTitle();
     const item = document.querySelector(".js-toc") as HTMLElement;
     if (!item) {
@@ -49,7 +60,7 @@ export const Toc = ({ id }: { id: string }) => {
     return () => {
       tocbot.destroy();
     };
-  }, [id]);
+  }, [router.asPath, isFirstRender]);
 
   return (
     <div>
