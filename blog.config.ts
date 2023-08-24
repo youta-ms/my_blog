@@ -173,6 +173,10 @@ const blogConfig: BlogConfig = {
       id: "digital_token",
       title: "Digital Token",
     },
+    {
+      id: "nft",
+      title: "NFT",
+    },
   ],
 };
 
