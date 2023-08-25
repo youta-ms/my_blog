@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@notionhq/client": "^2.2.0",
+    "@types/jsdom": "^21.1.2",
     "aws-sdk": "^2.1397.0",
     "axios": "^0.21.1",
     "dayjs": "^1.8.21",
@@ -36,6 +37,7 @@
     "gray-matter": "^4.0.2",
     "highlight.js": "^10.6.0",
     "image-size": "^1.0.2",
+    "jsdom": "^22.1.0",
     "mailchimp-api-v3": "^1.15.0",
     "metascraper": "^5.11.16",
     "metascraper-description": "^5.11.16",
@@ -100,5 +102,11 @@
     "plugins": {
       "postcss-nested": {}
     }
+  },
+  "browser": {
+    "tls": false,
+    "net": false,
+    "fs": false,
+    "child_process": false
   }
 }
