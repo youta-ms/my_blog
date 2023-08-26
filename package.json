@@ -53,6 +53,7 @@
     "react-markdown": "^5.0.3",
     "remark-images": "^2.0.0",
     "rss": "^1.2.2",
+    "styled-components": "^6.0.7",
     "styled-jsx-plugin-postcss": "^4.0.1",
     "styled-media-query": "^2.1.2",
     "swr": "^2.1.5",
@@ -104,9 +105,9 @@
     }
   },
   "browser": {
-    "tls": false,
-    "net": false,
+    "child_process": false,
     "fs": false,
-    "child_process": false
+    "net": false,
+    "tls": false
   }
 }
