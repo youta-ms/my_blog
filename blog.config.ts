@@ -177,6 +177,10 @@ const blogConfig: BlogConfig = {
       id: "nft",
       title: "NFT",
     },
+    {
+      id: "metaverse",
+      title: "MetaVerse",
+    },
   ],
 };
 
