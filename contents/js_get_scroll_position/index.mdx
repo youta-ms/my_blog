@@ -1,0 +1,105 @@
+---
+title: jQueryを用いてスクロール位置の取得と設定方法について
+date: 2023-09-01
+writtenBy: me
+category: tec
+tags: [js, coding]
+related: []
+thumbnail: /images/tec.png
+---
+
+この記事では、jQueryを利用してページ内のスクロール位置を取得・設定する方法について詳しく解説します。
+
+## スクロール位置の取得方法
+
+特定の位置にページ内で移動したり、表示を変更する際に、スクロール位置は重要な情報です。スクロール位置を取得するには、`scrollTop()`メソッドを使用します。このメソッドは、垂直方向のスクロール位置を返します。また、ページの最上部が0となります。
+
+以下が`scrollTop()`メソッドの記述例です。
+
+```javascript
+$(要素).scrollTop();
+```
+
+例えば、`<div>`要素のスクロール位置を取得する場合は、以下のように記述します。
+
+```javascript
+$('div').scrollTop();
+```
+
+ブラウザ全体のスクロール位置を取得する場合は、`$(window)`を指定します。
+
+```javascript
+$(window).scrollTop();
+```
+
+以下は、スクロール時に現在のスクロール位置を表示するサンプルコードです。
+
+```html
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+
+<body>
+  <p>スクロール位置：<span id="scroll-amount">0px</span></p>
+  <div id="scroll-box">
+    <div id="scroll-contents">スクロール領域</div>
+  </div>
+</body>
+
+<style>
+#scroll-box {
+  overflow: scroll;
+  height: 100px;
+  border: 1px solid black;
+}
+
+#scroll-contents {
+  height: 700px;
+}
+</style>
+
+<script>
+  $('#scroll-box').scroll(function() {
+    $('#scroll-amount').text($(this).scrollTop() + 'px');
+  });
+</script>
+
+</html>
+```
+
+スクロール領域を操作することで、現在のスクロール位置が表示されます。
+
+## スクロール位置の設定と移動方法
+
+`scrollTop()`メソッドの引数に特定のスクロール値を指定することで、スクロール位置を設定することができます。ページの最上部に移動する場合は、引数に0を指定します。
+
+以下は、ページの水平方向に300pxの位置に移動するサンプルコードです。
+
+```html
+<!DOCTYPE html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+
+<body>
+  <p>ボタンを押すとページが300pxの位置に移動します。</p>
+  <button id="button">移動する</button>
+</body>
+
+<script>
+  $('#button').on('click', function(){
+    $(window).scrollTop(300);
+  });
+</script>
+
+</html>
+```
+
+ボタンをクリックすることで、指定したスクロール位置に移動します。
+
+スクロール時にアニメーションを実装したい場合は、"jQueryでページ内スクロールの速度・位置をカスタマイズする"の記事を参考にすることをおすすめします。これによって、滑らかなアニメーションとカスタマイズされた位置設定を実現できます。
+
+スクロール位置の取得と設定は、Webページのユーザーエクスペリエンスを向上させるために重要なテクニックです。jQueryを利用して、スクロールに関する操作をスムーズに行いましょう。
