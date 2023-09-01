@@ -181,6 +181,10 @@ const blogConfig: BlogConfig = {
       id: "metaverse",
       title: "MetaVerse",
     },
+    {
+      id: "js",
+      title: "JS/Jquery",
+    },
   ],
 };
 
