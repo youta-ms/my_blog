@@ -5,6 +5,7 @@ import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import PostImage from '@/components/common/post-image'
 import BlogCard from '@/components/common/blog-card'
+import CodeBlock from '@/components/common/CodeBlock'
 
 export default async function markdownToReact(markdown: string, slug: string) {
   const result = (await unified()
@@ -15,7 +16,8 @@ export default async function markdownToReact(markdown: string, slug: string) {
       Fragment,
       components: {
         a: BlogCard(markdown),
-        img: PostImage(slug)
+        img: PostImage(slug),
+        code: CodeBlock
       }
     })
     .process(markdown)).result
