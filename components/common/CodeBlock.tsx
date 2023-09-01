@@ -6,10 +6,6 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   const match = /language-(\w+)(:.+)/.exec(className || '');
   const match1 = /language-(\w+)/.exec(className || '');
 
-  console.log("inline:" + inline);
-  console.log("match:" + match);
-  console.log("match1:" + match1);
-
   if (!match && !match1) {
     return <code className={className}>{children}</code>;
   }
