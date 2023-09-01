@@ -1,4 +1,5 @@
 import { Meta } from '@/types';
+import { log } from 'console';
 import { JSDOM } from "jsdom";
 import React from 'react'
 
@@ -27,6 +28,16 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
       description: metas.description || '',
       image: metas.image || '',
     };
+
+    if(filteredMetas.image == "" || filteredMetas.description == "" || filteredMetas.title == "") {
+      return (
+        <iframe
+          className="mx-auto w-full max-w-7xl dark:opacity-80"
+          src={href}
+        />
+      );
+    }
+
 
     return (
       <a href={href} target="_blank" rel="noreferrer" className="blog_card">
@@ -91,12 +102,6 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
       </a>
     );
   }
-
-  return (
-    <a href={href} target="_blank" rel="noreferrer">
-      {title || href}
-    </a>
-  );
 };
 
 
