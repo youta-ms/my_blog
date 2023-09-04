@@ -7,7 +7,8 @@ type BlogCardFunc = (markdown: string) => React.FC<JSX.IntrinsicElements['a']>
 
 const BlogCard: BlogCardFunc = (slug) => (props) => {
   const [metas, setMetas] = React.useState<Meta | null>(null);
-  const { href , title } = props
+
+  const { href } = props
 
   React.useEffect(() => {
     const fetchMetaData = async () => {
