@@ -6,10 +6,10 @@ import { ArticleCard } from "./card";
 export function Related({ related }: { related: Article[] }) {
   return (
     <ArticleList>
-      <Title>RELATED</Title>
+      <Title>RELATED ARTICLES</Title>
       <LatestArticle>
         {related.map((post) => (
-          <AritcleColumn key={post.slug} column={3}>
+          <AritcleColumn key={post.slug} column={2}>
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
