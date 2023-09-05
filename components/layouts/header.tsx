@@ -1,6 +1,7 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
 import { SocialList } from "../common/social-list";
+import { HeaderLink } from "@/components/common/header-link";
 
 export function Header() {
   return (
@@ -29,13 +30,7 @@ export function Header() {
               ))}
             </ul>
           )}
-          <ul className="header-nav">
-            {blogConfig.navigation.map((n) => (
-              <li key={n.url}>
-                <Link href={n.url}>{n.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <HeaderLink />
         </div>
       </div>
       <style jsx>
@@ -52,8 +47,7 @@ export function Header() {
           }
           .header-content {
             max-width: calc(var(--container-width) + 20px);
-            padding: 0 10px;
-            margin: 0 auto;
+            margin: 0 10px 0;
             position: relative;
           }
           .logo-wrap {
@@ -61,22 +55,6 @@ export function Header() {
             width: 100%;
             align-items: center;
             justify-content: center;
-          }
-          .header-nav {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            border-bottom: 3px solid #f0f4f2;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            overflow-x: auto;
-          }
-          .header-nav li {
-            padding: 15px 25px;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: var(--c-text-gray-lighter);
           }
           .header-sub-nav {
             position: absolute;

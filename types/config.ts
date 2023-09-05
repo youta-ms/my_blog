@@ -62,6 +62,13 @@ interface BreakPoints {
   small: string;
 }
 
+interface BreakPointsNumber {
+  huge: number;
+  large: number;
+  medium: number;
+  small: number;
+}
+
 interface Colors {
   primary: string;
   primarySub: string;
@@ -78,6 +85,7 @@ interface Styles {
   containerMaxWidth: string;
   colors: Colors;
   breakPoints: BreakPoints;
+  breakPointsNumber: BreakPointsNumber;
 }
 
 interface Tag {

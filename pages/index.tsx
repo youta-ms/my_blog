@@ -67,6 +67,7 @@ const TopPage = ({
             @media screen and (max-width: ${blogConfig.styles.breakPoints
               .medium}) {
               margin-right: 0;
+              width: 100%;
           }
           }
           .link-button-wrap {

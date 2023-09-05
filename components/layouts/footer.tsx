@@ -61,6 +61,11 @@ export const Footer: React.VFC = () => {
           .copyright {
             font-size: 14px;
             text-align: center;
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+                .small}) {
+              margin-top: 2em;
+            }
           }
         `}
       </style>

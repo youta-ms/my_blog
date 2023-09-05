@@ -30,7 +30,7 @@ const blogConfig: BlogConfig = {
     readMoreLabel: "Read More",
   },
   categoryPage: {
-    title: "NEW POSTS",
+    title: "POSTS",
     readMoreLabel: "Read More",
   },
   articlePage: {
@@ -69,6 +69,12 @@ const blogConfig: BlogConfig = {
       large: "1170px",
       medium: "768px",
       small: "450px",
+    },
+    breakPointsNumber: {
+      huge: 1440,
+      large: 1170,
+      medium: 768,
+      small: 450,
     },
   },
   hero: {
