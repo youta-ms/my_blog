@@ -1,4 +1,5 @@
 import blogConfig from "@/blog.config";
+import Image from "next/image";
 
 export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
   const writer = blogConfig.writers.find((w) => w.id === writtenBy);
@@ -9,14 +10,15 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
   return (
     <div className="article-author">
       <div className="article-author-image-wrap">
-        <img
-          alt=""
-          loading="lazy"
-          src={writer.image}
-          width={110}
-          height={110}
-          className="article-author-image"
-        />
+        <div>
+          <Image
+            alt=""
+            loading="lazy"
+            src={writer.image}
+            className="article-author-image"
+            fill
+          />
+        </div>
       </div>
       <div className="article-author-inner">
         <p className="article-author-subtitle">Author</p>
@@ -32,6 +34,7 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
             border-radius: 20px;
             display: flex;
             :global(.article-author-image) {
+              position: relative!important;
               border-radius: 50%;
             }
             @media screen and (max-width: ${blogConfig.styles.breakPoints
@@ -42,6 +45,13 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
             }
           }
           .article-author-image-wrap {
+            width: 5.7229vw;
+
+            div {
+              width: 100%;
+              height: auto;
+            }
+
             @media screen and (max-width: ${blogConfig.styles.breakPoints
                 .medium}) {
               transform: translateY(-65px);

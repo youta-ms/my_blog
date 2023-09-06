@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import Script from "next/script";
+import { ResetStyle } from "@/styles/reset";
 import { GlobalStyle } from "@/styles";
 import {
   faFacebook,
@@ -64,6 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
           />
         </>
       )}
+      <ResetStyle />
       <GlobalStyle />
       <SWRConfig
         value={{

@@ -1,6 +1,8 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
 import { SocialList } from "../common/social-list";
+import { HeaderLink } from "@/components/common/header-link";
+import Image from "next/image";
 
 export function Header() {
   return (
@@ -12,12 +14,13 @@ export function Header() {
           </div>
           <div className="logo-wrap">
             <Link href="/">
-              <img
-                src={blogConfig.siteLogo.url}
-                alt={blogConfig.siteName}
-                width={blogConfig.siteLogo.width}
-                height={blogConfig.siteLogo.height}
-              />
+              <div className="netx_img_box">
+                <Image
+                  src={blogConfig.siteLogo.url}
+                  alt={blogConfig.siteName}
+                  fill
+                />
+              </div>
             </Link>
           </div>
           {blogConfig.subNavigation.length > 0 && (
@@ -29,13 +32,7 @@ export function Header() {
               ))}
             </ul>
           )}
-          <ul className="header-nav">
-            {blogConfig.navigation.map((n) => (
-              <li key={n.url}>
-                <Link href={n.url}>{n.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <HeaderLink />
         </div>
       </div>
       <style jsx>
@@ -52,7 +49,6 @@ export function Header() {
           }
           .header-content {
             max-width: calc(var(--container-width) + 20px);
-            padding: 0 10px;
             margin: 0 auto;
             position: relative;
           }
@@ -61,22 +57,11 @@ export function Header() {
             width: 100%;
             align-items: center;
             justify-content: center;
-          }
-          .header-nav {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            border-bottom: 3px solid #f0f4f2;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            overflow-x: auto;
-          }
-          .header-nav li {
-            padding: 15px 25px;
-            text-transform: uppercase;
-            font-weight: bold;
-            color: var(--c-text-gray-lighter);
+
+            .netx_img_box {
+              width: ${blogConfig.siteLogo.width}px;
+              height: ${blogConfig.siteLogo.height}px;
+            }
           }
           .header-sub-nav {
             position: absolute;

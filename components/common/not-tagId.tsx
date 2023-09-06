@@ -1,6 +1,7 @@
 import blogConfig from "@/blog.config";
 import { LinkButton } from "../buttons";
 import { Layout } from "../layout";
+import Image from "next/image";
 
 export const NotFound = () => {
   return (
@@ -13,13 +14,14 @@ export const NotFound = () => {
           <p className="notfound-text">{blogConfig.notFoundTagId.subtitle}</p>
         </div>
         <div className="row">
-          <img
-            className="notfound-image"
-            src={blogConfig.notFoundTagId.image}
-            width="320"
-            height="176"
-            alt="404"
-          />
+          <div>
+            <Image
+              className="notfound-image"
+              src={blogConfig.notFoundTagId.image}
+              alt="404"
+              fill
+            />
+          </div>
         </div>
         <div className="row">
           <div className="notfound-desc">
@@ -40,6 +42,11 @@ export const NotFound = () => {
               display: flex;
               justify-content: center;
               flex-wrap: nowrap;
+
+              div {
+                width: 100%;
+                height: auto;
+              }
             }
 
             .notfound-text {
