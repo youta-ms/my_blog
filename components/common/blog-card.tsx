@@ -2,6 +2,7 @@ import { Meta } from '@/types';
 import { log } from 'console';
 import { JSDOM } from "jsdom";
 import React from 'react'
+import Image from "next/image";
 
 type BlogCardFunc = (markdown: string) => React.FC<JSX.IntrinsicElements['a']>
 
@@ -44,7 +45,9 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
       <a href={href} target="_blank" rel="noreferrer" className="blog_card">
         <div className="blog_card_box">
           <div className="blog_card_img_box">
-            <img src={filteredMetas.image} alt={filteredMetas.title} />
+            <div>
+              <Image src={filteredMetas.image} alt={filteredMetas.title} />
+            </div>
           </div>
           <div className="blog_card_text_box">
             <div className="blog_card_title">{filteredMetas.title}</div>
@@ -70,9 +73,14 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
           .blog_card_img_box {
             width: 50%;
 
-            img {
-              max-height: 5rem;
-              margin: auto;
+            div {
+              width: 100%;
+              height: auto;
+
+              img {
+                max-height: 5rem;
+                margin: auto;
+              }
             }
           }
           .blog_card_text_box {

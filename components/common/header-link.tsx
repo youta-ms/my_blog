@@ -1,6 +1,6 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
-import { useEffect, useState, useRef } from "react";
+import { useLayoutEffect, useState, useRef } from "react";
 import { CategoryHamburgerList } from "../common/category-hamburger-list";
 
 export const HeaderLink = () => {
@@ -9,31 +9,26 @@ export const HeaderLink = () => {
     height: 0,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const getWindowDimensions = () => {
+
       const { innerWidth: width, innerHeight: height } = window;
       return {
         width,
         height
       };
     }
-    const onResize = () => {
-      setWindowDimensions(getWindowDimensions());
-    }
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
+
+    setWindowDimensions(getWindowDimensions());
+
+    return () => setWindowDimensions(getWindowDimensions());
   }, []);
 
   const [isModal, setIsModal] = useState(false);
 
-  useEffect(() => {
-    console.log(isModal);
-  }, [isModal]);
-
-
   return (
     <>
-      {windowDimensions.width >= Number(blogConfig.styles.breakPointsNumber.medium) ? (
+      {windowDimensions.width <= Number(blogConfig.styles.breakPointsNumber.medium) ? (
         // ウィンドウの幅が指定のブレークポイント以上の場合に表示する内容
         <ul className="header-nav">
           {blogConfig.navigation.map((n) => (
