@@ -41,9 +41,36 @@ export function SubTitle({ children }: { children: React.ReactNode }) {
       <style jsx>
         {`
           .subtitle {
-            font-size: var(--text - md);
+            font-size: var(--text-md);
             font-weight: 600;
             padding: 12px 0;
+          }
+          .subtitle:after {
+            content: "";
+            height: 3px;
+            width: 35px;
+            border-radius: 1.5px;
+            display: block;
+            margin-top: 5px;
+            background: var(--c-primary-gradient);
+          }
+        `}
+      </style>
+    </h3>
+  );
+}
+
+export function  HamburgerSubTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="subtitle">
+      {children}
+      <style jsx>
+        {`
+          .subtitle {
+            font-size: var(--text-md);
+            font-weight: 600;
+            padding: 12px 0;
+            color: #fff;
           }
           .subtitle:after {
             content: "";

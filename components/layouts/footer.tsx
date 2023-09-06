@@ -3,20 +3,22 @@ import { CategoryList } from "../common/category-list";
 import { SocialList } from "../common/social-list";
 import { TagList } from "../common/common-tag-list";
 import { SubTitle } from "../texts";
+import Image from "next/image";
 
 export const Footer: React.VFC = () => {
   return (
     <footer className="footer">
       <div className="footer-columns">
         <div className="footer-column">
-          <img
-            loading="lazy"
-            src={blogConfig.siteLogo.url}
-            className="footer-logo"
-            alt="logo"
-            width={blogConfig.siteLogo.width}
-            height={blogConfig.siteLogo.height}
-          />
+          <div className="netx_img_box">
+            <Image
+              loading="lazy"
+              src={blogConfig.siteLogo.url}
+              className="footer-logo"
+              alt="logo"
+              fill
+            />
+          </div>
           <p className="footer-description">{blogConfig.footer.title}</p>
           <div className="social-wrap">
             <SocialList />
@@ -49,6 +51,16 @@ export const Footer: React.VFC = () => {
                 .medium}) {
               display: block;
             }
+
+            .netx_img_box {
+              position: relative;
+              width: 100%;
+              height: auto;
+
+              .footer-logo {
+                position: relative!important;
+              }
+            }
           }
           .footer-column {
             flex: 1;
@@ -61,6 +73,7 @@ export const Footer: React.VFC = () => {
           .copyright {
             font-size: 14px;
             text-align: center;
+            margin-top: 2em;
           }
         `}
       </style>

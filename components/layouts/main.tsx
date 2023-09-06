@@ -13,6 +13,7 @@ export function Main({ children }: { children: React.ReactNode }) {
             @media screen and (max-width: ${blogConfig.styles.breakPoints
                 .medium}) {
               margin-right: 0;
+              width: 100%;
             }
           }
         `}

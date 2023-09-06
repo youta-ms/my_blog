@@ -1,4 +1,5 @@
 import blogConfig from "@/blog.config";
+import Image from "next/image";
 
 export function CategoryHero({
   title,
@@ -11,7 +12,14 @@ export function CategoryHero({
 }) {
   return (
     <div className="category-hero">
-      <img src={image} alt="" className="category-hero-img" />
+      <div className="netx_img_box">
+        <Image
+          src={image}
+          alt=""
+          className="category-hero-img"
+          fill
+        />
+      </div>
       <div className="category-content">
         <h2 className="category-title fadein">{title}</h2>
         <p className="category-description fadein">{description}</p>
@@ -35,6 +43,11 @@ export function CategoryHero({
               width: calc(100% + 20px);
               border-radius: 0;
               margin-top: -32px;
+            }
+
+            .netx_img_box {
+              width: 100%;
+              height: auto;
             }
           }
           .category-hero-img {

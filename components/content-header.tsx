@@ -4,6 +4,7 @@ import blogConfig from "@/blog.config";
 import { TagList } from "./common/tag-list";
 import { getTagList } from "./utils/get-tag-list";
 import { getCategory } from "./utils/get-category";
+import Image from "next/image";
 
 export function ContentHeader({ data }: { data?: ArticleData }) {
   const dateFormatted = data.date
@@ -20,11 +21,14 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
       )}
       {!data.hideThumbnail && (
         <div className="thumbnail-wrap fadein">
-          <img
-            src={data.thumbnail || blogConfig.article.defaultThumbnail}
-            alt="thumbnail"
-            className="thumbnail"
-          />
+          <div>
+            <Image
+              src={data.thumbnail || blogConfig.article.defaultThumbnail}
+              alt="thumbnail"
+              className="thumbnail"
+              fill
+            />
+          </div>
         </div>
       )}
       {!data.hideThumbnail && <time className="time">{dateFormatted}</time>}
@@ -54,6 +58,11 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 10px;
+
+            div {
+              width: 100%;
+              height: auto;
+            }
           }
           .thumbnail {
             object-fit: cover;

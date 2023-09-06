@@ -5,6 +5,7 @@ import Link from "next/link";
 import { TagList } from "../common/tag-list";
 import { getTagList } from "../utils/get-tag-list";
 import { getCategory } from "../utils/get-category";
+import Image from "next/image";
 
 function PublishdAt({ date }: { date: string }) {
   return (
@@ -34,12 +35,15 @@ export function ArticleCard({ article, className, href }: Props) {
     <div className={className}>
       <div className="article-img-wrap">
         <Link href={href}>
-          <img
-            src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
-            className="article-img"
-            alt=""
-            loading="lazy"
-          />
+          <div className="link_img">
+            <Image
+              src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
+              className="article-img"
+              alt=""
+              loading="lazy"
+              fill
+            />
+          </div>
         </Link>
       </div>
       <div className="article-content">
@@ -88,6 +92,10 @@ export function ArticleCard({ article, className, href }: Props) {
           .article-title {
             font-size: var(--text-md);
             line-height: 1.7;
+          }
+          .link_img {
+            width: 100%;
+            height: auto;
           }
         `}
       </style>

@@ -1,5 +1,6 @@
 import blogConfig from "@/blog.config";
 import { SocialList } from "../common/social-list";
+import Image from "next/image";
 
 export const Profile = () => {
   return (
@@ -7,13 +8,14 @@ export const Profile = () => {
       <div className="profile-inner">
         <div className="profile-img-wrap">
           <div className="profile-img">
-            <img
-              loading="lazy"
-              src={blogConfig.account.image}
-              width="130"
-              height="130"
-              alt="avatar"
-            />
+            <div className="netx_img_box">
+              <Image
+                loading="lazy"
+                src={blogConfig.account.image}
+                fill
+                alt="avatar"
+              />
+            </div>
           </div>
         </div>
         <p className="profile-subtitle">PROFILE</p>
@@ -39,6 +41,11 @@ export const Profile = () => {
             width: 130px;
             height: 130px;
             margin: 0 auto;
+
+            .netx_img_box {
+              width: 100%;
+              height: auto;
+            }
           }
           .profile-img :global(img) {
             border: solid 3px #fff;
