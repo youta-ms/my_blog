@@ -26,9 +26,13 @@ export const HeaderLink = () => {
 
   const [isModal, setIsModal] = useState(false);
 
+  console.log(windowDimensions.width);
+  console.log(Number(blogConfig.styles.breakPointsNumber.medium));
+
+
   return (
     <>
-      {windowDimensions.width <= Number(blogConfig.styles.breakPointsNumber.medium) ? (
+      {windowDimensions.width >= Number(blogConfig.styles.breakPointsNumber.medium) ? (
         // ウィンドウの幅が指定のブレークポイント以上の場合に表示する内容
         <ul className="header-nav">
           {blogConfig.navigation.map((n) => (
