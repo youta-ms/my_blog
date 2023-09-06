@@ -26,10 +26,6 @@ export const HeaderLink = () => {
 
   const [isModal, setIsModal] = useState(false);
 
-  console.log(windowDimensions.width);
-  console.log(Number(blogConfig.styles.breakPointsNumber.medium));
-
-
   return (
     <>
       {windowDimensions.width >= Number(blogConfig.styles.breakPointsNumber.medium) ? (
