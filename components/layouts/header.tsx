@@ -51,6 +51,11 @@ export function Header() {
             max-width: calc(var(--container-width) + 20px);
             margin: 0 auto;
             position: relative;
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+              .medium}) {
+                margin: 0 10px 0;
+            }
           }
           .logo-wrap {
             display: flex;
