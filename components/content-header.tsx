@@ -21,7 +21,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
       )}
       {!data.hideThumbnail && (
         <div className="thumbnail-wrap fadein">
-          <div>
+          <div className="next_img_box">
             <Image
               src={data.thumbnail || blogConfig.article.defaultThumbnail}
               alt="thumbnail"
@@ -53,13 +53,12 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           }
           .thumbnail-wrap {
             width: 100%;
-            padding-bottom: 50%;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 10px;
 
-            div {
+            .next_img_box {
               width: 100%;
               height: auto;
             }
