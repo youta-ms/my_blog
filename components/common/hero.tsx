@@ -1,5 +1,4 @@
 import blogConfig from "@/blog.config";
-import { Wrapper } from "./wrapper";
 import Image from "next/image";
 import styles from './common.module.css';
 
@@ -21,12 +20,12 @@ export function Hero({
         />
       </div>
       <div className="hero-cover">
-        <Wrapper>
+        <div className="hero-wrapper">
           <div className="hero-inner">
             <h1 className="hero-title fadein">{title}</h1>
             <p className="hero-description fadein">{description}</p>
           </div>
-        </Wrapper>
+        </div>
       </div>
       <style jsx>
         {`
@@ -37,6 +36,11 @@ export function Hero({
             height: 13.6979vw;
             position: relative;
 
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+              .medium}) {
+              height: 100%;
+            }
+
             .next_img_box {
               width: 100%;
               height: 100%;
@@ -44,11 +48,19 @@ export function Hero({
 
           }
           .hero-cover {
-            padding: 50px 0;
             background-color: rgba(0, 0, 0, 0.3);
             position: absolute;
             top: 0;
             width: 100%;
+            height: 100%;
+          }
+          .hero-wrapper {
+            display: flex;
+            justify-content: space-between;
+            max-width: calc(var(--container-width) + 20px);
+            margin: 0 auto;
+            height: 100%;
+            align-items: center;
           }
           .hero-description {
             font-size: var(--text-lg);
