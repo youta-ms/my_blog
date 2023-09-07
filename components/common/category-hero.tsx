@@ -1,5 +1,6 @@
 import blogConfig from "@/blog.config";
 import Image from "next/image";
+import styles from './common.module.css'
 
 export function CategoryHero({
   title,
@@ -16,7 +17,7 @@ export function CategoryHero({
         <Image
           src={image}
           alt=""
-          className="category-hero-img"
+          className={styles.next_img}
           fill
         />
       </div>
@@ -28,8 +29,7 @@ export function CategoryHero({
         {`
           .category-hero {
             width: 100%;
-            height: 0;
-            padding-bottom: 25%;
+            height: 16.6666vw;
             position: relative;
             border-radius: 25px;
             overflow: hidden;
@@ -47,16 +47,8 @@ export function CategoryHero({
 
             .netx_img_box {
               width: 100%;
-              height: auto;
+              height: 100%;
             }
-          }
-          .category-hero-img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            object-fit: cover;
           }
           .category-content {
             background-color: rgba(0, 0, 0, 0.3);

@@ -34,7 +34,7 @@ export function ArticleCard({ article, className, href }: Props) {
   return (
     <div className={className}>
       <div className="article-img-wrap">
-        <Link href={href}>
+        <Link href={href} prefetch={false}>
           <div className="link_img">
             <Image
               src={article.thumbnail ?? blogConfig.article.defaultThumbnail}

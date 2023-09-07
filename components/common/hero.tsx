@@ -1,5 +1,7 @@
 import blogConfig from "@/blog.config";
 import { Wrapper } from "./wrapper";
+import Image from "next/image";
+import styles from './common.module.css';
 
 export function Hero({
   title,
@@ -10,6 +12,14 @@ export function Hero({
 }) {
   return (
     <div className="hero">
+      <div className="next_img_box">
+        <Image
+          src={blogConfig.hero.image}
+          alt="hero"
+          className={styles.next_img}
+          fill
+        />
+      </div>
       <div className="hero-cover">
         <Wrapper>
           <div className="hero-inner">
@@ -22,15 +32,23 @@ export function Hero({
         {`
           .hero {
             background-color: var(--c-primary);
-            background-image: url(${blogConfig.hero.image});
-            background-size: cover;
-            background-position: center center;
             text-align: center;
             margin-bottom: 30px;
+            height: 13.6979vw;
+            position: relative;
+
+            .next_img_box {
+              width: 100%;
+              height: 100%;
+            }
+
           }
           .hero-cover {
             padding: 50px 0;
             background-color: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 0;
+            width: 100%;
           }
           .hero-description {
             font-size: var(--text-lg);
