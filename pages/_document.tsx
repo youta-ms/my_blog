@@ -18,7 +18,7 @@ class MyDocument extends Document {
             src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
             height="0"
             width="0"
-            className="tag"
+            className="google_tag"
           />
           <Main />
           <NextScript />
@@ -27,7 +27,7 @@ class MyDocument extends Document {
               body {
                 position: relative;
               }
-              .tag {
+              .google_tag {
                 display:none;
                 visibility:hidden
               }

@@ -37,7 +37,7 @@ const TagIndex: NextPage<Props> = (props) => {
   return (
     <Layout>
       <div className="tag">
-        <Title>{tag.title}</Title>
+        <Title>{tag.title} Articles</Title>
       </div>
       <ArticleWrapper>
         <LatestArticle>
