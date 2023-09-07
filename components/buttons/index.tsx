@@ -9,7 +9,7 @@ export function LinkButton({
 }) {
   return (
     <>
-      <Link href={href} className="link-button">
+      <Link href={href} className="link-button" prefetch={false}>
         {children}
       </Link>
       <style jsx>
