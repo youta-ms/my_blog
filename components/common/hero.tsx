@@ -65,6 +65,11 @@ export function Hero({
           .hero-description {
             font-size: var(--text-lg);
             color: #fff;
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+              .medium}) {
+              padding: 0 1em;
+            }
           }
           .hero-inner {
             width: 100%;

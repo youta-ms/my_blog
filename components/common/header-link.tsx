@@ -1,6 +1,6 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
-import { useLayoutEffect, useState, useRef } from "react";
+import { useLayoutEffect, useState } from "react";
 import { CategoryHamburgerList } from "../common/category-hamburger-list";
 
 export const HeaderLink = () => {
@@ -30,10 +30,12 @@ export const HeaderLink = () => {
     <>
       {windowDimensions.width >= Number(blogConfig.styles.breakPointsNumber.medium) ? (
         // ウィンドウの幅が指定のブレークポイント以上の場合に表示する内容
-        <ul className="header-nav">
+        <ul className="header-nav gnavi">
           {blogConfig.navigation.map((n) => (
             <li key={n.url}>
-              <Link href={n.url}>{n.name}</Link>
+              <span>
+                <Link href={n.url}>{n.name}</Link>
+              </span>
             </li>
           ))}
           <style jsx>
@@ -53,6 +55,88 @@ export const HeaderLink = () => {
                 text-transform: uppercase;
                 font-weight: bold;
                 color: var(--c-text-gray-lighter);
+
+                &:hover {
+                  color: var(--c-primary);
+                }
+              }
+
+              /*==================================================
+              　5-3-11 左右から線が伸びて枠線になる
+              ===================================*/
+
+              .gnavi li{
+                /*線の基点とするためrelativeを指定*/
+                position: relative;
+                margin:0 10px;
+              }
+
+              /*線の基点位置*/
+              .gnavi li::before,
+              .gnavi li::after{
+                content:"";
+                /*絶対配置で線の位置を決める*/
+                position: absolute;
+                /*線の形状*/
+                width: 0;
+                height:2px;
+                background: var(--c-primary);
+                /*アニメーションの指定*/
+                transition: all 0.2s linear;
+                transition-delay: 0.2s;
+              }
+
+              .gnavi li::before{
+                right: 0;
+                top: 0;
+              }
+              .gnavi li::after{
+                left: 0;
+                bottom: 0;
+              }
+
+              /*線の基点位置2 spanタグ*/
+
+              .gnavi li span{
+                display: block;
+              }
+
+              .gnavi li span::before,
+              .gnavi li span::after{
+                content:"";
+                /*絶対配置で線の位置を決める*/
+                position: absolute;
+                /*線の形状*/
+                width:2px;
+                height:0;
+                background: var(--c-primary);
+                /*アニメーションの指定*/
+                transition: all 0.2s linear;
+              }
+
+              .gnavi li span::before{
+                left: 0;
+                top: 0;
+              }
+              .gnavi li span::after{
+                right: 0;
+                bottom: 0;
+              }
+
+              /*現在地とhoverした際の線の変化*/
+
+              .gnavi li.current::before,
+              .gnavi li.current::after,
+              .gnavi li:hover::before,
+              .gnavi li:hover::after{
+                width: 100%;/*横幅を100%に*/
+              }
+
+              .gnavi li.current span::before,
+              .gnavi li.current span::after,
+              .gnavi li:hover span::before,
+              .gnavi li:hover span::after{
+                height: 100%;/*縦幅を100%に*/
               }
             `}
           </style>

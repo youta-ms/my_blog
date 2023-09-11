@@ -1,5 +1,4 @@
 import { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
-import { Fragment } from "react";
 
 export const Text = ({
   text: sourceText,

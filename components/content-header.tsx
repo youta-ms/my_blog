@@ -45,7 +45,6 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           }
           .content-header {
             border-bottom: solid 1px var(--c-gray-border);
-            padding-bottom: 1rem;
           }
           .title {
             font-size: 28px;
