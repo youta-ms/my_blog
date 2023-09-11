@@ -4,7 +4,7 @@ import { googleTagManagerId } from '@/utils/gtm';
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html lang="ja">
         <Head>
           {/* 1: Google Tag Manager ---------------------------- */}
           <script dangerouslySetInnerHTML={{

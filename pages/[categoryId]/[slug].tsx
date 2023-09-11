@@ -1,4 +1,3 @@
-import { renderToString } from "react-dom/server";
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo, ArticleJsonLd, ArticleJsonLdProps } from "next-seo";
 import { getArticle, getArticles } from "@/utils/get-articles";
@@ -22,7 +21,6 @@ import { NotFound } from "@/components/common/not-found";
 
 type DetailProps = {
   article: Article;
-  // errorCode?: number;
   related: Article[];
 };
 
@@ -43,7 +41,6 @@ export default ({ article: defaultArticle, related }: DetailProps) => {
     publisherName: "",
     publisherLogo: "",
   };
-
   return (
     <Layout>
       {article && (

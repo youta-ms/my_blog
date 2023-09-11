@@ -61,12 +61,6 @@ export function CategoryHero({
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            @media screen and (max-width: ${blogConfig.styles.breakPoints
-                .medium}) {
-              padding-top: 25px;
-              padding-bottom: 25px;
-              position: relative;
-            }
           }
           .category-title {
             text-transform: uppercase;

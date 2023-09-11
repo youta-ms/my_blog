@@ -1,5 +1,4 @@
 import { Meta } from '@/types';
-import { log } from 'console';
 import { JSDOM } from "jsdom";
 import React from 'react'
 import Image from "next/image";
@@ -45,8 +44,12 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
       <a href={href} target="_blank" rel="noreferrer" className="blog_card">
         <div className="blog_card_box">
           <div className="blog_card_img_box">
-            <div>
-              <Image src={filteredMetas.image} alt={filteredMetas.title} />
+            <div className='next_img_box'>
+              <Image
+                src={filteredMetas.image}
+                alt={filteredMetas.title}
+                fill
+              />
             </div>
           </div>
           <div className="blog_card_text_box">
@@ -71,9 +74,9 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
             border-radius: 0.375rem;
           }
           .blog_card_img_box {
-            width: 50%;
+            width: 25%;
 
-            div {
+            .next_img_box {
               width: 100%;
               height: auto;
 

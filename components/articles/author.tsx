@@ -10,7 +10,7 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
   return (
     <div className="article-author">
       <div className="article-author-image-wrap">
-        <div>
+        <div className="next_img_box">
           <Image
             alt=""
             loading="lazy"
@@ -47,7 +47,7 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
           .article-author-image-wrap {
             width: 5.7229vw;
 
-            div {
+            .next_img_box {
               width: 100%;
               height: auto;
             }

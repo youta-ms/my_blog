@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { getServerSideSitemap, ISitemapField, getServerSideSitemapLegacy } from "next-sitemap";
+import { ISitemapField, getServerSideSitemapLegacy } from "next-sitemap";
 import { getArticles } from "@/utils/get-articles";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
