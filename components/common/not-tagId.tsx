@@ -14,7 +14,7 @@ export const NotFound = () => {
           <p className="notfound-text">{blogConfig.notFoundTagId.subtitle}</p>
         </div>
         <div className="row">
-          <div>
+          <div className="next_img_box">
             <Image
               className="notfound-image"
               src={blogConfig.notFoundTagId.image}
@@ -43,7 +43,7 @@ export const NotFound = () => {
               justify-content: center;
               flex-wrap: nowrap;
 
-              div {
+              .next_img_box {
                 width: 100%;
                 height: auto;
               }

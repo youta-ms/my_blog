@@ -117,7 +117,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
                 color: var(--c-primary-hover);
               }
             }
-            :global(p  p) {
+            :global(p) {
               margin-top: 1.6rem;
             }
             :global(ul),
