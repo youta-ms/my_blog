@@ -17,6 +17,7 @@ export function Hero({
           alt="hero"
           className={styles.next_img}
           fill
+          loading="eager"
         />
       </div>
       <div className="hero-cover">
