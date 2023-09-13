@@ -10,8 +10,7 @@
     "build": "next-zod-router && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "eslint './**/*.{ts,tsx}'",
-    "analyze": "ANALYZE=true next build"
+    "lint": "eslint './**/*.{ts,tsx}'"
   },
   "engines": {
     "node": "18.x"
