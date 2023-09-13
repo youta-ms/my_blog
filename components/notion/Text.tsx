@@ -18,6 +18,7 @@ export const Text = ({
         } = value;
         return (
           <span
+            key={href}
             className={[
               bold ? "font-bold" : "",
               code
