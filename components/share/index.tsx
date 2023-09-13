@@ -37,6 +37,7 @@ export const Share = ({
           }
           return (
             <a
+              key={s}
               href={href}
               className={`social-link ${s}`}
               target="_blank"
