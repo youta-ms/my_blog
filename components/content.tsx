@@ -160,10 +160,54 @@ export function Content({ content, slug }: { content: string, slug:string }) {
                 }
               }
             }
-            :global(ol) {
-              margin-left: 0;
-              padding-left: 1.4rem;
-              list-style: decimal;
+            :global(ul:not(li ul,.toc-list,dd ul,.widget ul)) {
+              background: #F7F7F7;/*背景色*/
+              line-height:2;
+              border-radius: 4px;
+              border:1.5px dashed;
+              border-color: var(--c-primary); /*枠の色*/
+              padding: 1.5em;
+              padding-left:3em;
+
+              @media (min-width: 640px) {
+                padding-left:2.5em;
+              }
+
+              & > :global(li) {
+                list-style: none;
+                list-style-position: inside;
+                position: relative;
+                padding-left: 1.5em;
+                margin: 0em;
+
+                &:before {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  top: 0.7em;
+                  left: 0.3em;
+                  width: 7px;
+                  height: 7px;
+                  border-radius: 50%;
+                  background: var(--c-primary);
+                }
+                li:before {
+                  background: var(--c-primary);
+                }
+              }
+            }
+            :global(ol:not(li ol,.toc-list,dd ol,.widget ol)) {
+              background: #F7F7F7;/*背景色*/
+              line-height:2;
+              border-radius: 4px;
+              border:1.5px dashed;
+              border-color: var(--c-primary); /*枠の色*/
+              padding: 1.5em;
+              padding-left:3em;
+
+              @media (min-width: 640px) {
+                padding-left:2.5em;
+              }
             }
 
             :global(h1),
@@ -197,20 +241,62 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               border-bottom: solid 1px var(--gray2);
             }
             :global(h2) {
-              position: relative;
+              line-height: 1.5;
+              background-color: #f6f6f6;
               font-size: 1.7em;
-              border-bottom: 2px solid var(--c-primary);
-              margin-bottom: 30px;
+              color: #333333;
+              border-radius: 1px;
+              border-left: solid 14px var(--c-primary);/*H2の色の変更はこちら*/
+              padding: 0.5em 1em;
+              margin: 2em 0;
+
+              :before {
+                background-image: none;
+              }
+
+              @media (max-width: 480px) {
+                padding:1.5em 1em 1.5em 0.5em;
+              }
             }
             :global(h3) {
+              line-height: 2;
               font-size: 1.3em;
-              margin-bottom: 20px;
+              border: none;
+              color:#333333;
+              border-radius: 2px;
+              border-left:10px solid var(--c-primary);/*H3の色の変更はこちら*/
+              padding: 0.4em 0.8em;
+              margin-top: 2em;
+
+              :before {
+                width: 0em;
+              }
             }
             :global(h4) {
+              line-height:2;
+              background-color:#F6F6F6;/*H4背景色の変更はこちら*/
               font-size: 1.1em;
+              font-weight:bold;
+              color:#333333;
+              border-radius:1px;
+              padding:1em;
+              margin-top:1.5em;
+              margin-bottom:1.5em;
             }
             :global(h5) {
+              background: #F7F7F7;/*H5背景色の変更はこちら*/
               font-size: 1em;
+              font-weight:bold;
+              line-height:2;
+              color:#333333;
+              border-bottom: none;
+              border-radius: 4px;
+              padding: 1.5em;
+              margin-left:0 auto;
+              border:1.5px dashed;
+              border-color:#93b69c;/*H5枠色の変更はこちら*/
+              margin-top:1.5em;
+              margin-bottom:1.5em;
             }
             :global(h5),
             :global(h6) {
