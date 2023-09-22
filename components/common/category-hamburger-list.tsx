@@ -14,7 +14,7 @@ export const CategoryHamburgerList = (props: { isModal: boolean }) => {
     <>
       <HamburgerSubTitle>{blogConfig.widgets.categoryList.title}</HamburgerSubTitle>
       <ul className="category-nav">
-        {blogConfig.categories.map((category) => (
+        {blogConfig.showCategories.map((category) => (
           <li key={category.id} className="category-item" onClick={() => setIsModal(!isModal)}>
             <Link href={`/${category.id}`}>{category.title}</Link>
           </li>

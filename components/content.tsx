@@ -375,7 +375,6 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               }
               & > :global(code) {
                 display: block;
-                padding: 1rem;
               }
             }
             :global(img) {
