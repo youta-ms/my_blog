@@ -2,7 +2,7 @@ import { ArticleData } from "@/types";
 import blogConfig from "@/blog.config";
 import dayjs from "dayjs";
 import Link from "next/link";
-import { TagList } from "../common/tag-list";
+import { TagList } from "../common/text-tag-list";
 import { getTagList } from "../utils/get-tag-list";
 import { getCategory } from "../utils/get-category";
 import Image from "next/image";
@@ -33,8 +33,8 @@ type Props = {
 export function ArticleCard({ article, className, href }: Props) {
   return (
     <div className={className}>
-      <div className="article-img-wrap">
-        <Link href={href} prefetch={false}>
+      <Link href={href} prefetch={false}>
+        <div className="article-img-wrap">
           <div className="link_img">
             <Image
               src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
@@ -44,61 +44,61 @@ export function ArticleCard({ article, className, href }: Props) {
               fill
             />
           </div>
-        </Link>
-      </div>
-      <div className="article-content">
-        <TagList
-          tags={getTagList(article.tags)}
-          category={getCategory(article.category)}
-        />
-        <h2 className="article-title">
-          <Link href={href}>{article.title}</Link>
-        </h2>
-        <PublishdAt date={article.date} />
-      </div>
-      <style jsx>
-        {`
-          .category-label-wrap {
-            display: block;
-            margin-bottom: 20px;
-          }
-          .category-label {
-            color: var(--c-primary);
-            border: 1px solid var(--c-primary);
-            font-size: var(--text-sm);
-            border-radius: 10px;
-            padding: 3px 10px;
-            display: inline-block;
-          }
-          .article-content {
-            padding: 12px 0;
-          }
-          .article-img-wrap {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 50%;
-            border-radius: 20px;
-            overflow: hidden;
-          }
-          .article-img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-          }
-          .article-title {
-            font-size: var(--text-md);
-            line-height: 1.7;
-          }
-          .link_img {
-            width: 100%;
-            height: auto;
-          }
-        `}
-      </style>
+        </div>
+        <div className="article-content">
+          <TagList
+            tags={getTagList(article.tags)}
+            category={getCategory(article.category)}
+          />
+          <h2 className="article-title">
+            {article.title}
+          </h2>
+          <PublishdAt date={article.date} />
+        </div>
+        <style jsx>
+          {`
+            .category-label-wrap {
+              display: block;
+              margin-bottom: 20px;
+            }
+            .category-label {
+              color: var(--c-primary);
+              border: 1px solid var(--c-primary);
+              font-size: var(--text-sm);
+              border-radius: 10px;
+              padding: 3px 10px;
+              display: inline-block;
+            }
+            .article-content {
+              padding: 12px 0;
+            }
+            .article-img-wrap {
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 50%;
+              border-radius: 20px;
+              overflow: hidden;
+            }
+            .article-img {
+              object-fit: cover;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+            .article-title {
+              font-size: var(--text-md);
+              line-height: 1.7;
+            }
+            .link_img {
+              width: 100%;
+              height: auto;
+            }
+          `}
+        </style>
+      </Link>
     </div>
   );
 }

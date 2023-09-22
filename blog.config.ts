@@ -134,15 +134,9 @@ const blogConfig: BlogConfig = {
       description: "技術に関する記事です",
     },
     {
-      id: "about",
-      title: "About",
-      imagePath: "/images/london.jpeg",
-      description: "その他",
-    },
-    {
       id: "web3",
       title: "Web3.0",
-      imagePath: "/images/london.jpeg",
+      imagePath: "/images/web3_thumbnail.jpg",
       description: "Web3.0に関する記事です",
     },
   ],

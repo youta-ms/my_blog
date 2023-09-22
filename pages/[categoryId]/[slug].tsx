@@ -18,6 +18,7 @@ import { getCategory } from "@/components/utils/get-category";
 import { getTagList } from "@/components/utils/get-tag-list";
 import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
+import { Contact } from "@/components/common/contact";
 
 type DetailProps = {
   article: Article;
@@ -51,6 +52,7 @@ export default ({ article: defaultArticle, related }: DetailProps) => {
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
                 <Content content={article.text_data} slug={article.slug} />
+                <Contact />
                 <TagList
                   category={getCategory(article.data.category)}
                   tags={getTagList(article.data.tags)}
