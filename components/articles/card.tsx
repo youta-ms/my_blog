@@ -70,7 +70,7 @@ export function ArticleCard({ article, className, href }: Props) {
               display: inline-block;
             }
             .article-content {
-              padding: 12px 0;
+              padding-top: 12px;
             }
             .article-img-wrap {
               position: relative;
