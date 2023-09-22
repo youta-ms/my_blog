@@ -7,7 +7,7 @@ export const CategoryList = () => {
     <>
       <SubTitle>{blogConfig.widgets.categoryList.title}</SubTitle>
       <ul className="category-nav">
-        {blogConfig.categories.map((category) => (
+        {blogConfig.showCategories.map((category) => (
           <li key={category.id} className="category-item">
             <Link href={`/${category.id}`} prefetch={false}>{category.title}</Link>
           </li>

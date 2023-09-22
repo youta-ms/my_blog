@@ -146,6 +146,20 @@ const blogConfig: BlogConfig = {
       description: "Web3.0に関する記事です",
     },
   ],
+  showCategories: [
+    {
+      id: "tec",
+      title: "Tec",
+      imagePath: "/images/london.jpeg",
+      description: "技術に関する記事です",
+    },
+    {
+      id: "web3",
+      title: "Web3.0",
+      imagePath: "/images/web3_thumbnail.jpg",
+      description: "Web3.0に関する記事です",
+    },
+  ],
   tags: [
     {
       id: "markdown",

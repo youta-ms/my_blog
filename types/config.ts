@@ -137,5 +137,6 @@ export interface BlogConfig {
   writers: Account[];
   article: Article;
   categories: Category[];
+  showCategories: Category[];
   tags: Tag[];
 }
