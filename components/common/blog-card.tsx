@@ -42,21 +42,21 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
 
     return (
       <a href={href} target="_blank" rel="noreferrer" className="blog_card">
-        <div className="blog_card_box">
-          <div className="blog_card_img_box">
-            <div className='next_img_box'>
+        <span className="blog_card_box">
+          <span className="blog_card_img_box">
+            <span className='next_img_box'>
               <Image
                 src={filteredMetas.image}
                 alt={filteredMetas.title}
                 fill
               />
-            </div>
-          </div>
-          <div className="blog_card_text_box">
-            <div className="blog_card_title">{filteredMetas.title}</div>
-            <div className="blog_card_text">{filteredMetas.description}</div>
-          </div>
-        </div>
+            </span>
+          </span>
+          <span className="blog_card_text_box">
+            <span className="blog_card_title">{filteredMetas.title}</span>
+            <span className="blog_card_text">{filteredMetas.description}</span>
+          </span>
+        </span>
         <style jsx>
         {`
           .blog_card {
@@ -79,6 +79,7 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
             .next_img_box {
               width: 100%;
               height: auto;
+              display: block;
 
               img {
                 max-height: 5rem;

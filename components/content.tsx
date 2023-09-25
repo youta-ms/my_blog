@@ -378,7 +378,6 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               }
             }
             :global(img) {
-              margin: 1.5rem auto;
               display: table;
               box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.25);
               border-radius: 5px;
