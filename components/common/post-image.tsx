@@ -10,7 +10,7 @@ const PostImage: PostImageFunc = (slug) => (props) => {
     const image = require('@/contents/' + slug + '/' + src).default
 
     return (
-      <div className='next_img_box'>
+      <span className='next_img_box'>
         <Image
           src={image}
           alt={alt}
@@ -23,10 +23,11 @@ const PostImage: PostImageFunc = (slug) => (props) => {
             .next_img_box {
               width: 100%;
               height: auto;
+              display: block;
             }
           `}
         </style>
-      </div>
+      </span>
     )
 
   } catch (e) {
