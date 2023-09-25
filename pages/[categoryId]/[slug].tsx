@@ -1,6 +1,6 @@
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo, ArticleJsonLd, ArticleJsonLdProps } from "next-seo";
-import { getArticle, getArticles } from "@/utils/get-articles";
+import { getArticle, getArticles, getFilteredArticles } from "@/utils/get-articles";
 import { Article } from "@/types";
 import { Content } from "@/components/content";
 import { ContentHeader } from "@/components/content-header";
@@ -11,6 +11,7 @@ import { Wrapper } from "@/components/common/wrapper";
 import blogConfig from "@/blog.config";
 import { Main } from "@/components/layouts/main";
 import { Related } from "@/components/articles/related";
+import { Other } from "@/components/articles/other";
 import { ArticleAuthor } from "@/components/articles/author";
 import { Share } from "@/components/share";
 import { TagList } from "@/components/common/tag-list";
@@ -19,18 +20,22 @@ import { getTagList } from "@/components/utils/get-tag-list";
 import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
 import { Contact } from "@/components/common/contact";
+import { useArticles } from "@/hooks/use-articles";
 
 type DetailProps = {
   article: Article;
   related: Article[];
+  articles: Article[];
+  current: number;
 };
 
-export default ({ article: defaultArticle, related }: DetailProps) => {
+export default ({ article: defaultArticle, related, articles: defaultArticles, current, }: DetailProps) => {
   if (!defaultArticle) {
     return <NotFound />;
   }
 
   const { article } = useArticle(defaultArticle.slug, defaultArticle);
+  const { articles } = useArticles({ defaultArticles, current });
 
   const jsonLd: ArticleJsonLdProps = {
     url: process.env.NEXT_PUBLIC_SITE_URL,
@@ -63,6 +68,7 @@ export default ({ article: defaultArticle, related }: DetailProps) => {
                 />
                 <ArticleAuthor writtenBy={article.data.writtenBy} />
                 {related.length > 0 && <Related related={related} />}
+                <Other other={articles} />
                 {!!blogConfig.articlePage.afterContentAd && (
                   <div
                     className="after-content-ad"
@@ -143,6 +149,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       article,
       related,
       category,
+      articles: await getFilteredArticles({
+        current: 0,
+      }),
     },
   };
 };
