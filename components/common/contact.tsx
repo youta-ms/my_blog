@@ -17,15 +17,26 @@ export const Contact = () => {
             margin-top: 1.6rem;
           }
           h2 {
-            &  :global(p) {
+            line-height: 1.5;
+            background-color: #f6f6f6;
+            font-size: 1.7em;
+            color: #333333;
+            border-radius: 1px;
+            border-left: solid 14px var(--c-primary);/*H2の色の変更はこちら*/
+            padding: 0.5em 1em;
+            margin: 1em 0;
+
+            :global(p) {
               margin-top: 0.3em;
             }
-            margin-top: 0.3em;
-            margin-bottom: 0.5em;
-            position: relative;
-            font-size: 1.7em;
-            border-bottom: 2px solid var(--c-primary);
-            margin-bottom: 30px;
+
+            :before {
+              background-image: none;
+            }
+
+            @media (max-width: 480px) {
+              padding:1.5em 1em 1.5em 0.5em;
+            }
           }
 
           /* クリックしたら波紋が広がる */
@@ -73,7 +84,7 @@ export const Contact = () => {
           }
 
           /*クリックされたあとの形状の設定*/
-          .btnripple:active::after {
+          .btnripple:hover::after {
             transform: scale(0, 0);
             transition: 0s;
             opacity: 0.3;
