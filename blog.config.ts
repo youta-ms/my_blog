@@ -108,6 +108,10 @@ const blogConfig: BlogConfig = {
       name: "プライバシーボリシー",
       url: "/about/privacy",
     },
+    {
+      name: "お問い合わせ",
+      url: "/contact",
+    },
   ],
   account: {
     name: "Youta",
