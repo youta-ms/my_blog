@@ -2,8 +2,11 @@ import { Layout } from "@/components/layout";
 import { Title } from "@/components/texts";
 import { Wrapper } from "@/components/common/wrapper";
 import { Side } from "@/components/layouts/side";
+import { useState } from "react";
 
 const Contact = () => {
+  const [verify, setVerify] = useState(false);
+
   return (
     <Layout>
       <Wrapper>
@@ -13,11 +16,11 @@ const Contact = () => {
             <form name="contact" method="POST" data-netlify="true">
               <div>
                 <label htmlFor="name">お名前（必須）</label>
-                <input name="name" type="text" required />
+                <input className="input" name="name" type="text" required />
               </div>
               <div>
                 <label htmlFor="email">メールアドレス（必須）</label>
-                <input name="email" type="email" required />
+                <input className="input" name="email" type="email" required />
               </div>
               <div>
                 <label htmlFor="content">お問い合わせ内容</label>
@@ -25,9 +28,22 @@ const Contact = () => {
                   name="content"
                   rows={10}
                   required
+                  className="input"
                 ></textarea>
               </div>
-              <button className="btnripple" type="submit">送信する</button>
+              <div className="verify">
+                { verify ?
+                  <input name="verification" type="checkbox" checked/>
+                  :
+                  <input name="verification" type="checkbox" onClick={() => setVerify(true)}/>
+                }
+                <label htmlFor="verification">スパムメール防止のためこちらにチェックを入れてから送信してください</label>
+              </div>
+              { verify ?
+                <button className="btnripple" type="submit">送信する</button>
+                :
+                <button disabled className="btnripple disabled" type="submit">送信する</button>
+              }
             </form>
           </div>
         </main>
@@ -63,7 +79,7 @@ const Contact = () => {
               margin-bottom: 10px;
             }
 
-            input, textarea {
+            .input {
               width: 100%;
               padding: 10px;
               border: solid 1px #dddddd;
@@ -76,6 +92,15 @@ const Contact = () => {
               appearance: none;
               border-radius: 0;
               resize: none;
+            }
+
+            .verify {
+              display: flex;
+              align-items: center;
+
+              label {
+                margin: 0;
+              }
             }
 
             /* クリックしたら波紋が広がる */
@@ -95,6 +120,11 @@ const Contact = () => {
               text-align: center;
               width: 50%;
               margin: 0 auto;
+
+              &.disabled {
+                pointer-events: none;
+                background-color: gray;
+              }
 
               p {
                 margin: 0;

@@ -100,11 +100,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   });
 
   const slicedPosts = filteredPosts
-    .slice(0, blogConfig.article.articlesPerPage)
     .map((p) => {
       const { content, ...others } = p;
       return others;
-    });
+    })
+    .slice(0, blogConfig.article.articlesPerPage);
 
   return {
     revalidate: 60,
