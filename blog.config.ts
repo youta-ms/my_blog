@@ -209,6 +209,10 @@ const blogConfig: BlogConfig = {
       id: "js",
       title: "JS/Jquery",
     },
+    {
+      id: "wordpress",
+      title: "WordPress",
+    },
   ],
 };
 

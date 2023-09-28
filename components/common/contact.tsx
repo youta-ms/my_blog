@@ -54,7 +54,7 @@ export const Contact = () => {
             border-radius: 10px;
             outline: none;
             text-align: center;
-            margin: 1em auto;
+            margin: 2em auto;
             width: 50%;
 
             p {
