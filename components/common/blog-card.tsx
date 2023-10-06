@@ -14,6 +14,9 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
     const fetchMetaData = async () => {
       try {
         const metaData = await getMetaData(href);
+
+        console.log(metaData);
+
         setMetas(metaData);
       } catch (e) {
         console.error(e);
@@ -32,10 +35,7 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
 
     if(filteredMetas.image == "" || filteredMetas.description == "" || filteredMetas.title == "") {
       return (
-        <iframe
-          className="mx-auto w-full max-w-7xl dark:opacity-80"
-          src={href}
-        />
+        <a href={href}>{ props.children[0] }</a>
       );
     }
 
@@ -125,6 +125,7 @@ const getMetaData = async (url: string): Promise<Meta> => {
     description: '',
     image: '',
   }
+  let retun_metas ={}
   try {
     const res = await fetch(url)
     const text = await res.text()
