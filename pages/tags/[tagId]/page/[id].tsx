@@ -95,39 +95,45 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { tagId, id } = params;
-  const tag = blogConfig.tags.find((c) => c.id === tagId);
-  const current = parseInt(id as string, 10) - 1;
-  const articles = await getArticles();
-  const filteredPosts = articles
-    .filter(({ data }) => {
-      return data.tags.some((t) => t === tag.id);
-    })
-    .sort((articleA, articleB) => {
-      if (articleA.data.date > articleB.data.date) {
-        return -1;
-      }
-      return 1;
-    });
+  try {
+    const { tagId, id } = params;
+    const tag = blogConfig.tags.find((c) => c.id === tagId);
+    const current = parseInt(id as string, 10) - 1;
+    const articles = await getArticles();
+    const filteredPosts = articles
+      .filter(({ data }) => {
+        return data.tags.some((t) => t === tag.id);
+      })
+      .sort((articleA, articleB) => {
+        if (articleA.data.date > articleB.data.date) {
+          return -1;
+        }
+        return 1;
+      });
 
-  const slicedPosts = filteredPosts
-    .map((p) => {
-      const { content, ...others } = p;
-      return others;
-    })
-    .slice(
-      current * blogConfig.article.articlesPerPage,
-      current * blogConfig.article.articlesPerPage +
-        blogConfig.article.articlesPerPage
-    );
+    const slicedPosts = filteredPosts
+      .map((p) => {
+        const { content, ...others } = p;
+        return others;
+      })
+      .slice(
+        current * blogConfig.article.articlesPerPage,
+        current * blogConfig.article.articlesPerPage +
+          blogConfig.article.articlesPerPage
+      );
 
-  return {
-    revalidate: 60,
-    props: {
-      current: current + 1,
-      max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
-      tag,
-      articles: slicedPosts,
-    },
-  };
+    return {
+      revalidate: 60,
+      props: {
+        current: current + 1,
+        max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
+        tag,
+        articles: slicedPosts,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };

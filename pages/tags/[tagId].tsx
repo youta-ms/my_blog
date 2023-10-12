@@ -92,26 +92,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { tagId } = params;
-  const tag = blogConfig.tags.find((c) => c.id === tagId);
-  const articles = await getArticles();
-  const filteredPosts = articles.filter(({ data }) => {
-    return data.tags.some((t) => t === tag.id);
-  });
+  try {
+    const { tagId } = params;
+    const tag = blogConfig.tags.find((c) => c.id === tagId);
+    const articles = await getArticles();
+    const filteredPosts = articles.filter(({ data }) => {
+      return data.tags.some((t) => t === tag.id);
+    });
 
-  const slicedPosts = filteredPosts
-    .map((p) => {
-      const { content, ...others } = p;
-      return others;
-    })
-    .slice(0, blogConfig.article.articlesPerPage);
+    const slicedPosts = filteredPosts
+      .map((p) => {
+        const { content, ...others } = p;
+        return others;
+      })
+      .slice(0, blogConfig.article.articlesPerPage);
 
-  return {
-    revalidate: 60,
-    props: {
-      tag,
-      max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
-      articles: slicedPosts,
-    },
-  };
+    return {
+      revalidate: 60,
+      props: {
+        tag,
+        max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
+        articles: slicedPosts,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };

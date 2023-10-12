@@ -83,16 +83,21 @@ const TopPage = ({
 export default TopPage;
 
 export const getStaticProps = async () => {
-  const articles = await getArticles();
-
-  return {
-    revalidate: 1,
-    props: {
-      current: 0,
-      max: Math.ceil(articles.length / blogConfig.article.articlesPerPage),
-      articles: await getFilteredArticles({
+  try {
+    const articles = await getArticles();
+    return {
+      revalidate: 1,
+      props: {
         current: 0,
-      }),
-    },
-  };
+        max: Math.ceil(articles.length / blogConfig.article.articlesPerPage),
+        articles: await getFilteredArticles({
+          current: 0,
+        }),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };

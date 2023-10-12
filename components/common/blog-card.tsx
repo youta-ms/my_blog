@@ -14,9 +14,6 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
     const fetchMetaData = async () => {
       try {
         const metaData = await getMetaData(href);
-
-        console.log(metaData);
-
         setMetas(metaData);
       } catch (e) {
         console.error(e);

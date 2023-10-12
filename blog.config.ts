@@ -102,11 +102,11 @@ const blogConfig: BlogConfig = {
   subNavigation: [
     {
       name: "免責事項",
-      url: "/about/terms",
+      url: "/terms",
     },
     {
       name: "プライバシーボリシー",
-      url: "/about/privacy",
+      url: "/privacy",
     },
     {
       name: "お問い合わせ",
@@ -138,12 +138,6 @@ const blogConfig: BlogConfig = {
       description: "技術に関する記事です",
     },
     {
-      id: "about",
-      title: "About",
-      imagePath: "/images/london.jpeg",
-      description: "その他に関する記事です",
-    },
-    {
       id: "web3",
       title: "Web3.0",
       imagePath: "/images/web3_thumbnail.jpg",
@@ -165,10 +159,6 @@ const blogConfig: BlogConfig = {
     },
   ],
   tags: [
-    {
-      id: "markdown",
-      title: "MarkDown",
-    },
     {
       id: "coding",
       title: "HTML/CSS",
