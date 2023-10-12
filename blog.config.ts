@@ -102,11 +102,11 @@ const blogConfig: BlogConfig = {
   subNavigation: [
     {
       name: "免責事項",
-      url: "/about/terms",
+      url: "/terms",
     },
     {
       name: "プライバシーボリシー",
-      url: "/about/privacy",
+      url: "/privacy",
     },
     {
       name: "お問い合わせ",
@@ -165,10 +165,6 @@ const blogConfig: BlogConfig = {
     },
   ],
   tags: [
-    {
-      id: "markdown",
-      title: "MarkDown",
-    },
     {
       id: "coding",
       title: "HTML/CSS",

@@ -21,6 +21,7 @@ import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
 import { Contact } from "@/components/common/contact";
 import { useArticles } from "@/hooks/use-articles";
+import { log } from "console";
 
 type DetailProps = {
   article: Article;
@@ -139,19 +140,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { slug, categoryId } = params;
-  const category = blogConfig.categories.find((cat) => cat.id === categoryId);
-  const { article, related } = await getArticle(slug as string);
+  try {
+    const { slug, categoryId } = params;
+    const category = blogConfig.categories.find((cat) => cat.id === categoryId);
+    const { article, related } = await getArticle(slug as string);
+    const articles = await getFilteredArticles({ current: 0 });
 
-  return {
-    revalidate: 60,
-    props: {
-      article,
-      related,
-      category,
-      articles: await getFilteredArticles({
-        current: 0,
-      }),
-    },
-  };
+    return {
+      revalidate: 60,
+      props: {
+        article,
+        related,
+        category,
+        articles,
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };

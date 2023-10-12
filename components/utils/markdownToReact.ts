@@ -23,5 +23,6 @@ export default async function markdownToReact(markdown: string, slug: string) {
       }
     })
     .process(markdown)).result
+
   return result
 }

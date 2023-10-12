@@ -75,17 +75,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  const articles = await getArticles();
-  const { id } = params;
-  const current = parseInt(id, 10) - 1;
-  return {
-    revalidate: 60,
-    props: {
-      current,
-      max: Math.ceil(articles.length / blogConfig.article.articlesPerPage),
-      articles: await getFilteredArticles({
+  try {
+    const articles = await getArticles();
+    const { id } = params;
+    const current = parseInt(id, 10) - 1;
+    return {
+      revalidate: 60,
+      props: {
         current,
-      }),
-    },
-  };
+        max: Math.ceil(articles.length / blogConfig.article.articlesPerPage),
+        articles: await getFilteredArticles({
+          current,
+        }),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };
