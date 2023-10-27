@@ -63,7 +63,6 @@ export function CategoryHero({
             flex-direction: column;
           }
           .category-title {
-            text-transform: uppercase;
             font-size: 24px;
             color: #fff;
           }

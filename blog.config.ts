@@ -91,12 +91,20 @@ const blogConfig: BlogConfig = {
   },
   navigation: [
     {
-      name: "tec",
-      url: `/tec`,
+      name: "HTML/CSS",
+      url: `/markup`,
     },
     {
-      name: "Web3.0",
-      url: `/web3`,
+      name: "PHP",
+      url: `/php`,
+    },
+    {
+      name: "VCS",
+      url: `/vcs`,
+    },
+    {
+      name: "JavaScript",
+      url: `/javascript`,
     },
   ],
   subNavigation: [
@@ -132,10 +140,28 @@ const blogConfig: BlogConfig = {
   ],
   categories: [
     {
-      id: "tec",
-      title: "Tec",
+      id: "markup",
+      title: "HTML/CSS",
       imagePath: "/images/london.jpeg",
-      description: "技術に関する記事です",
+      description: "HTML/CSSに関する記事です",
+    },
+    {
+      id: "php",
+      title: "PHP",
+      imagePath: "/images/london.jpeg",
+      description: "PHPに関する記事です",
+    },
+    {
+      id: "vcs",
+      title: "VCS",
+      imagePath: "/images/london.jpeg",
+      description: "VCSに関する記事です",
+    },
+    {
+      id: "javascript",
+      title: "JavaScript",
+      imagePath: "/images/london.jpeg",
+      description: "JavaScriptに関する記事です",
     },
     {
       id: "web3",
@@ -146,16 +172,28 @@ const blogConfig: BlogConfig = {
   ],
   showCategories: [
     {
-      id: "tec",
-      title: "Tec",
+      id: "markup",
+      title: "HTML/CSS",
       imagePath: "/images/london.jpeg",
-      description: "技術に関する記事です",
+      description: "HTML/CSSに関する記事です",
     },
     {
-      id: "web3",
-      title: "Web3.0",
-      imagePath: "/images/web3_thumbnail.jpg",
-      description: "Web3.0に関する記事です",
+      id: "php",
+      title: "PHP",
+      imagePath: "/images/london.jpeg",
+      description: "PHPに関する記事です",
+    },
+    {
+      id: "vcs",
+      title: "VCS",
+      imagePath: "/images/london.jpeg",
+      description: "VCSに関する記事です",
+    },
+    {
+      id: "javascript",
+      title: "JavaScript",
+      imagePath: "/images/london.jpeg",
+      description: "JavaScriptに関する記事です",
     },
   ],
   tags: [
