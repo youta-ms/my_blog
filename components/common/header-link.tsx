@@ -49,8 +49,6 @@ export const HeaderLink = () => {
                 overflow-x: auto;
               }
               .header-nav li {
-                text-transform: uppercase;
-
                 a {
                   display: block;
                   padding: 15px 25px;

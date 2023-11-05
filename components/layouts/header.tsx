@@ -76,7 +76,6 @@ export function Header() {
             display: flex;
             font-size: var(--text-sm);
             color: var(--c-text);
-            text-transform: uppercase;
             li {
               margin-right: 35px;
               &:last-child {
