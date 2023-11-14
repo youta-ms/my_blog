@@ -59,7 +59,7 @@ config id_ed25519 id_ed25519.pub sub_account_key sub_account_key.pub
 
 最後にGitHubに今作成した公開鍵（sub_account_key.pub）を登録しておきましょう。
 
-## 2.configファイルへ設定の記載
+### 2.configファイルへ設定の記載
 .sshディレクトリに存在するconfigファイルに設定を記述していきます。
 
 無い場合は以下のコマンドで作成を行なってください。
@@ -82,7 +82,7 @@ Host github.com.sub # 追加したアカウント用（任意）
 
 記述し終わったらVScodeであれば`command + s`、Vimであれば`:wq`で保存を行なってください。
 
-## GitHubとの接続を確認
+### 3.GitHubとの接続を確認
 それぞれのアカウントと通信ができているか確認をしましょう。
 
 ```

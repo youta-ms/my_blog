@@ -18,6 +18,7 @@ function PublishdAt({ date }: { date: string }) {
             text-align: right;
             font-size: var(--text-xs);
             color: var(--c-text-gray-lighter);
+            padding: 0 0.5em 12px;
           }
         `}
       </style>
@@ -71,6 +72,7 @@ export function ArticleCard({ article, href }: Props) {
           }
           .tag-list-content {
             margin-top: 12px;
+            padding: 0 0.5em;
           }
           .article-img-wrap {
             position: relative;
@@ -88,6 +90,7 @@ export function ArticleCard({ article, href }: Props) {
             font-size: var(--text-md);
             line-height: 1.7;
             margin: auto 0;
+            padding: 0 0.5em;
           }
           .link_img {
             width: 100%;
