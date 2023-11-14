@@ -1,0 +1,9 @@
+.article_img {
+  border-radius: .5em;
+}
+
+.link_card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
