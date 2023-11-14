@@ -1,0 +1,117 @@
+---
+title: 一台のPCで複数のGitHubアカウントを管理する方法
+date: 2023-11-14
+writtenBy: me
+category: vcs
+tags: [git]
+related: []
+thumbnail: /images/git.jpg
+description: この記事では、一台のPCで複数のGitHubアカウントを管理する方法を詳しく解説します。既存のGitHubアカウントがある状態で、新たに2つ目のアカウントを追加する手順を学べます。秘密鍵・公開鍵の生成からconfigファイルの設定、そしてGitHubとの接続確認まで詳しく説明します。
+---
+
+今回は1つのパソコンで、Gitの複数アカウントに接続する方法についての記事です。
+
+この記事は「すでにGitHubアカウントをPCに登録している状態で、新たに2つ目のGitHubアカウントを追加したい」という場合の解説となります。
+
+## 手順
+手順としては以下のようになります。
+
+1. 秘密鍵・公開鍵の生成
+1. configファイルへ設定の記載
+1. GitHubとの接続を確認
+
+### 1.秘密鍵・公開鍵の生成
+まずは新しく登録するアカウント用の秘密鍵・公開鍵の生成を行います。
+
+以下コマンドで.sshディレクトリに移動したのちに
+
+```
+cd ~/.ssh
+```
+
+秘密鍵・公開鍵を以下のコマンドで生成します。
+
+```
+ssh-keygen -t ed25519
+```
+
+`ssh-keygen -t ed25519`を実行したのちに3つの質問に答えて秘密鍵・公開鍵の作成をするのですが、一つ目の質問で聞かれる鍵の名前は絶対に既存の鍵名と被らないようにしてください。
+
+`sub_account_key`等適当な名前をつけましょう。
+
+パスフレーズはこだわりがなければ特に入力する必要はありません。
+
+```
+$ ssh-keygen -t ed25519
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/Users/username/.ssh/id_ed25519): sub_account_key
+Enter passphrase (empty for no passphrase): #パスワード
+Enter same passphrase again: #パスワードの確認
+```
+
+秘密鍵・公開鍵が作成されているか`.ssh`の中を確認しましょう。
+
+```
+ls
+
+config id_ed25519 id_ed25519.pub sub_account_key sub_account_key.pub
+```
+
+最後にGitHubに今作成した公開鍵（sub_account_key.pub）を登録しておきましょう。
+
+## 2.configファイルへ設定の記載
+.sshディレクトリに存在するconfigファイルに設定を記述していきます。
+
+無い場合は以下のコマンドで作成を行なってください。
+
+```
+touch ~/.ssh/config
+```
+
+configファイルをVScodeやVim等で開き、設定を書いていきます。
+
+```
+Host github.com.sub # 追加したアカウント用（任意）
+  HostName github.com #GitHubなら変更しなくてよい
+  User git
+  Port 22
+  IdentityFile ~/.ssh/sub_account_key # 追加したアカウント用の鍵
+  TCPKeepAlive yes
+  IdentitiesOnly yes
+```
+
+記述し終わったらVScodeであれば`command + s`、Vimであれば`:wq`で保存を行なってください。
+
+## GitHubとの接続を確認
+それぞれのアカウントと通信ができているか確認をしましょう。
+
+```
+#既存カウントの接続を確認する
+% ssh -T github.com
+Hi [既存カウントのユーザー名]! You've successfully authenticated, but GitHub does not provide shell access.
+
+#追加したカウントの接続を確認する
+% ssh -T github.com.sub
+Hi [追加したアカウントのユーザー名]! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+上記のような感じで接続がうまくいっていれば大丈夫です。
+
+## それぞれのアカウントでクローンする方法
+それぞれのアカウントでクローンする時は以下のようになります。
+
+```
+git clone git@github.com:<アカウント名>/<リポジトリ名>.git #既存アカウント
+
+git clone git@github.com.sub:<アカウント名>/<リポジトリ名>.git #追加したアカウント
+```
+
+分かりやすくすると
+
+```
+git clone git@<configで設定したHost>:<アカウント名>/<リポジトリ名>.git
+```
+
+となります。
+
+以上がGitの複数アカウントに接続する方法になります。

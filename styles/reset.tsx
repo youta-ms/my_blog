@@ -201,6 +201,7 @@ export const ResetStyle = () => {
           img {
             border-style: none;
             position: relative!important;
+            vertical-align: top;
           }
           progress {
             vertical-align: baseline;

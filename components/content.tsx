@@ -368,6 +368,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
                 padding: 0;
                 background: transparent;
                 font-size: 0.9em;
+                padding: 0.2em 0.4em;
                 color: #fff;
                 font-family: Menlo, Monaco, Consolas, Meiryo, "Noto Sans JP",
                   sans-serif, "Apple Color Emoji", "Segoe UI Emoji",

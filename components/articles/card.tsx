@@ -6,11 +6,12 @@ import { TagList } from "../common/text-tag-list";
 import { getTagList } from "../utils/get-tag-list";
 import { getCategory } from "../utils/get-category";
 import Image from "next/image";
+import styles from './CardComponent.module.css'
 
 function PublishdAt({ date }: { date: string }) {
   return (
     <div className="published-at">
-      {dayjs(date).format("YYYY.MM.DD")}
+      {dayjs(date).format("YYYY/MM/DD")}
       <style jsx>
         {`
           .published-at {
@@ -30,75 +31,69 @@ type Props = {
   className?: string;
 };
 
-export function ArticleCard({ article, className, href }: Props) {
+export function ArticleCard({ article, href }: Props) {
   return (
-    <div className={className}>
-      <Link href={href} prefetch={false}>
-        <div className="article-img-wrap">
-          <div className="link_img">
-            <Image
-              src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
-              className="article-img"
-              alt=""
-              loading="lazy"
-              fill
-            />
-          </div>
-        </div>
-        <div className="article-content">
-          <TagList
-            tags={getTagList(article.tags)}
-            category={getCategory(article.category)}
+    <Link href={href} prefetch={false} className={styles.link_card}>
+      <div className="article-img-wrap">
+        <div className="link_img">
+          <Image
+            src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
+            className={styles.article_img}
+            alt=""
+            loading="lazy"
+            fill
           />
-          <h2 className="article-title">
-            {article.title}
-          </h2>
-          <PublishdAt date={article.date} />
         </div>
-        <style jsx>
-          {`
-            .category-label-wrap {
-              display: block;
-              margin-bottom: 20px;
-            }
-            .category-label {
-              color: var(--c-primary);
-              border: 1px solid var(--c-primary);
-              font-size: var(--text-sm);
-              border-radius: 10px;
-              padding: 3px 10px;
-              display: inline-block;
-            }
-            .article-content {
-              padding-top: 12px;
-            }
-            .article-img-wrap {
-              position: relative;
-              width: 100%;
-              height: 0;
-              padding-bottom: 50%;
-              border-radius: 20px;
-              overflow: hidden;
-            }
-            .article-img {
-              object-fit: cover;
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
-            }
-            .article-title {
-              font-size: var(--text-md);
-              line-height: 1.7;
-            }
-            .link_img {
-              width: 100%;
-              height: auto;
-            }
-          `}
-        </style>
-      </Link>
-    </div>
+      </div>
+      <div className="tag-list-content">
+        <TagList
+          tags={getTagList(article.tags)}
+          category={getCategory(article.category)}
+        />
+      </div>
+      <h2 className="article-title">
+        {article.title}
+      </h2>
+      <PublishdAt date={article.date} />
+      <style jsx>
+        {`
+          .category-label-wrap {
+            display: block;
+            margin-bottom: 20px;
+          }
+          .category-label {
+            color: var(--c-primary);
+            border: 1px solid var(--c-primary);
+            font-size: var(--text-sm);
+            border-radius: 10px;
+            padding: 3px 10px;
+            display: inline-block;
+          }
+          .tag-list-content {
+            margin-top: 12px;
+          }
+          .article-img-wrap {
+            position: relative;
+            width: 100%;
+          }
+          .article-img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          .article-title {
+            font-size: var(--text-md);
+            line-height: 1.7;
+            margin: auto 0;
+          }
+          .link_img {
+            width: 100%;
+          }
+        `}
+      </style>
+    </Link>
   );
 }
