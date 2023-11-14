@@ -26,6 +26,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "contents/how-to-make-fire/index.mdx"
   ]
 }
