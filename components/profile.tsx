@@ -1,4 +1,3 @@
-import { Layout } from "@/components/layout";
 import { Title } from "@/components/texts";
 import { Wrapper } from "@/components/common/wrapper";
 import { Side } from "@/components/layouts/side";
@@ -6,58 +5,92 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 import blogConfig from "@/blog.config"
 
-const Terms = () => {
+export function ProfileComponent() {
   return (
-    <Layout>
-      <NextSeo
-        title="免責事項"
-        description="Youtaの雑記ブログの免責事項です。"
-        openGraph={{
-          title: "免責事項",
-          description: "Youtaの雑記ブログの免責事項です。",
-          type: "article",
-          images: [
-            {
-              url: `${blogConfig.siteUrl}/images/logo.png`,
-            },
-          ],
-        }}
-      />
-      <Wrapper>
-        <div className="main">
-          <Title>プライバシーポリシー</Title>
-          <div className="container">
-          <p>Youtaの雑記ブログ.(<Link href="https://youta-ms.online">https://youta-ms.online</Link>)(以下、「当サイト」とします。)における免責事項は、下記の通りです。</p>
+    <Wrapper>
+      <div className="main">
+        <Title>プロフィール</Title>
+        <div className="container">
+          <div>
+            <p>こんにちは。<br />当ブログを運用しているYoutaです。<br />今更ですがこのブログを運営している私自身のプロフィールについて記事を投稿します。</p>
+            <p>この記事では</p>
+            <ul>
+              <li>Youtaの経歴</li>
+              <li>当ブログについて</li>
+            </ul>
+            <p>について触れようと思います。</p>
+            <h2>Youtaの経歴</h2>
+            <p>私は2020年に新卒で地元のIT企業に就職してから現在に至るまでずっとWebエンジニアを続けています。</p>
+            <p>転職を4回経験し、内訳で言うと以下のような感じです。</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>期間</th>
+                  <th>会社</th>
+                  <th>使用言語</th>
+                  <th>CMS/フレームワーク</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2020年4月</td>
+                  <td>受託系IT企業</td>
+                  <td>HTML、CSS、JS（JavaScript）、PHP</td>
+                  <td>WordPress、Laravel</td>
+                </tr>
+                <tr>
+                  <td>2021年4月</td>
+                  <td>受託系の子会社</td>
+                  <td>HTML、CSS、JS（JavaScript）、PHP</td>
+                  <td>WordPress、Laravel</td>
+                </tr>
+                <tr>
+                  <td>2022年1月</td>
+                  <td>受託系IT企業</td>
+                  <td>HTML、CSS、JS（JavaScript）、PHP、Vue.js</td>
+                  <td>Laravel</td>
+                </tr>
+                <tr>
+                  <td>2022年11月</td>
+                  <td>受託系＆SES企業</td>
+                  <td>HTML、CSS、JS（JavaScript）、PHP、React、Next.js</td>
+                  <td>Ruby on rails</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>担当したことのある工程は</p>
+            <ul>
+              <li>詳細設計</li>
+              <li>開発</li>
+              <li>保守・運用</li>
+            </ul>
+            <p>の3つになります。</p>
 
-          <h2>1. 転載について</h2>
-          <p>当サイトはリンクフリーです。リンクを貼る際の許可は必要ありません。引用についても、出典元のURLを貼っていただければ問題ありません。</p>
+            <h2>当ブログについて</h2>
 
-          <p>ただし、インラインフレームの使用や画像の直リンクはご遠慮ください。</p>
+            <p>当ブログは</p>
+            <ul>
+              <li>Web制作に関連すること</li>
+              <li>便利と感じたものの紹介</li>
+            </ul>
+            <p>等自分がエンジニアとして生きていく中でみなさんいとって有益になるのではと感じたことをできるだけ分かりやすく発信・紹介しているブログです。</p>
 
-          <h2>2. 当サイトの情報の正確性について</h2>
-          <p>当サイトのコンテンツや情報において、可能な限り正確な情報を掲載するよう努めています。しかし、誤情報が入り込んだり、情報が古くなったりすることもあります。必ずしも正確性を保証するものではありません。また合法性や安全性なども保証しません。</p>
+            <p>ブログのタイトルである「Youtaの雑記ブログ」とは、私がエンジニアとして経験なかでみなさんの有益になるであろう知識を発信・紹介していくという感じです。</p>
 
-          <h2>3. 損害等の責任について</h2>
-          <p>当サイトに掲載された内容によって生じた損害等の一切の責任を負いかねますので、ご了承ください。</p>
+            <p>このブログを読んでいて</p>
+            <ul>
+              <li>ご意見・ご感想</li>
+              <li>Youtaへお問い合わせ</li>
+            </ul>
+            <p>がありましたら、以下のお問い合わせフォームからお問い合わせください。</p>
 
-          <p>また当サイトからリンクやバナーなどによって他のサイトに移動された場合、移動先サイトで提供される情報、サービス等について一切の責任も負いません。</p>
+            <Link href="/contact">お問い合わせ</Link>
 
-          <p>当サイトの保守、火災、停電、その他の自然災害、ウィルスや第三者の妨害等行為による不可抗力によって、当サイトによるサービスが停止したことに起因して利用者に生じた損害についても、何ら責任を負うものではありません。</p>
-
-          <p>当サイトを利用する場合は、自己責任で行う必要があります。</p>
-
-          <h2>4. 当サイトで掲載している画像の著作権や肖像権等について</h2>
-          <p>当サイトで掲載している文章や画像などについて、無断転載を禁止します。</p>
-
-          <p>当サイトで掲載している画像の著作権や肖像権等は、各権利所有者に帰属します。万が一問題がある場合は、お問い合わせよりご連絡いただけますよう宜しくお願い致します。</p>
-
-          <p>令和5年8月8日　策定</p>
-
-          <p>令和5年8月8日　改訂</p>
+            <p>ただ、すべてのお問い合わせのお返事にお応えするお約束はできません。予めご了承ください。</p>
           </div>
         </div>
-        <Side />
-      </Wrapper>
+      </div>
+      <Side />
       <style jsx>
         {`
           .main {
@@ -66,7 +99,6 @@ const Terms = () => {
 
           .container {
             width: 84%;
-            max-width: 640px;
             margin: 0 auto;
 
             :global(a) {
@@ -264,11 +296,27 @@ const Terms = () => {
             :global(h6) {
               font-size: 0.85em;
             }
+            :global(table) {
+              margin: 1.2rem 0;
+              width: auto;
+              border-collapse: collapse;
+              font-size: 0.95em;
+              line-height: 1.7;
+            }
+            :global(th),
+            :global(td) {
+              padding: 0.5rem .5vw;
+              border: solid 1px var(--gray2);
+              font-size: 32px;
+              font-size: clamp(16px, .5vw, 32px);
+            }
+            :global(th) {
+              font-weight: 700;
+              background: var(--gray2);
+            }
           }
         `}
       </style>
-    </Layout>
-  );
-};
-
-export default Terms;
+    </Wrapper>
+  )
+}

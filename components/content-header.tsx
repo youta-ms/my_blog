@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export function ContentHeader({ data }: { data?: ArticleData }) {
   const dateFormatted = data.date
-    ? dayjs(data.date).format("YYYY-MM-DD")
+    ? dayjs(data.date).format("YYYY/MM/DD")
     : null;
   return (
     <header className="content-header">
