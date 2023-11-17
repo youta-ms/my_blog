@@ -24,7 +24,7 @@ const Privacy = () => {
         }}
       />
       <Wrapper>
-        <main className="main">
+        <div className="main">
           <Title>プライバシーポリシー</Title>
           <div className="container">
           <p>本プライバシーポリシーは、Youtaの雑記ブログ（<Link href="https://youta-ms.online">https://youta-ms.online</Link>）（以下、「当サイト」とします。）の各種サービス（当サイトによる情報提供、各種お問合せの受付等）において、当サイトの訪問者（以下、「訪問者」とします。）の個人情報もしくはそれに準ずる情報を取り扱う際に、当サイトが遵守する方針を示したものです。</p>
@@ -164,12 +164,12 @@ const Privacy = () => {
 
           <p>令和5年8月8日　改訂</p>
           </div>
-        </main>
+        </div>
         <Side />
       </Wrapper>
       <style jsx>
         {`
-          main {
+          .main {
             width: 100%;
           }
 
