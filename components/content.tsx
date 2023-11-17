@@ -341,6 +341,8 @@ export function Content({ content, slug }: { content: string, slug:string }) {
             :global(td) {
               padding: 0.5rem 1vw;
               border: solid 1px var(--gray2);
+              font-size: 32px;
+              font-size: clamp(16px, .5vw, 32px);
             }
             :global(th) {
               font-weight: 700;

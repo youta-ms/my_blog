@@ -93,5 +93,5 @@ type DateProps = {
 };
 
 export const Date: React.VFC<DateProps> = ({ date, className }) => (
-  <time className={className}>{dayjs(date).format("YYYY-MM-DD")}</time>
+  <time className={className}>{dayjs(date).format("YYYY/MM/DD")}</time>
 );

@@ -66,6 +66,13 @@ function _PagerLink({
             display: flex;
             align-items: center;
             justify-content: center;
+            transition:box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+
+            &:hover {
+              box-shadow:0 6px 14px rgba(0, 0, 0, 0.24);
+              transform:translate(0, -2px);
+            }
           }
         `}
       </style>
