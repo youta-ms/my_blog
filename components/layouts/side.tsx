@@ -9,11 +9,13 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
   return (
     <div className="side">
       <Profile />
-      <div className="category-list-wrap">
+      <div className="list-wrap">
         <CategoryList />
       </div>
-      <SubTitle>{blogConfig.widgets.tagList.title}</SubTitle>
-      <TagList tags={blogConfig.tags} />
+      <div className="list-wrap">
+        <SubTitle>{blogConfig.widgets.tagList.title}</SubTitle>
+        <TagList tags={blogConfig.tags} />
+      </div>
       <div className="fixed-sidebar">
         {id && <Toc id={id} />}
         <div
@@ -31,9 +33,13 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
               display: none;
             }
           }
-          .category-list-wrap {
+          .list-wrap {
             margin-bottom: 30px;
+            padding: 1em;
+            background: #fff;
+            border-radius: 10px;
           }
+
           .fixed-sidebar {
             position: sticky;
             top: 10px;

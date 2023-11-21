@@ -1,0 +1,74 @@
+---
+title: Next.js等でコピーライト等の年数を自動的に更新する方法
+date: 2023-11-21
+writtenBy: me
+category: nextJs
+tags: [next, js]
+related: []
+thumbnail: /images/next.jpg
+description: ::randomを使用する方法や文字を指定してランダム文字列を生成する方法を解説しています。初心者の方でも分かりやすいように書いているのでぜひ見ていってください！
+---
+
+今回はNext.jsでブログを作成した際に、コピーライト等の年数を自動的に更新できるようにした際に使用した方法について発信します。
+JavaScriptでもほぼ同様の書き方で実装ができるので、JavaScriptで困っている方もぜひ参考にしてみてください！
+
+## Next.jsで年数を自動的に更新するコード
+
+ここではfooterのコピーライトの年数を自動更新することを想定しています。
+
+```javascript
+<p className="copyright">
+  Copyright &copy; {new Date().getFullYear()} Youtaの雑記ブログ All rights reserved.
+</p>
+```
+
+注目して欲しいのは`{new Date().getFullYear()}`の部分です。
+
+`new Date()`でDateオブジェクトを生成し、`getFullYear()`メソッドで現在年数のみを取得してきています。
+
+たったこれだけの記載で、実装できてしまうので便利ですね！
+
+## JavaScriptで年数を自動的に更新するコード
+
+ちなみに、JavaScriptで年数を自動的に更新するコードは以下になります。
+
+まずはHTMLを見てみましょう。
+
+```html,index.html
+<footer>
+  <p>
+    Copyright &copy; <span id="now_year"></span> Youtaの雑記ブログ All rights reserved.
+  </p>
+</footer>
+```
+
+次にJavaScriptです。
+
+```javascript,script.js
+document.getElementById("now_year").innerText = new Date().getFullYear();
+```
+
+やっていることはNext.jsの時と同様で、
+
+1. `new Date()`でDateオブジェクトを生成
+1. `getFullYear()`メソッドで現在年数のみを取得
+1. 取得した現在年数で`id="now_year"`の要素を書き換え
+
+となります。
+
+## Jqueryで年数を自動的に更新するコード
+
+ついでにJqueryの場合も見てみましょう。
+
+HTMLはJavaScriptの時と同様で、Jqueryのコードが下記のようになります。
+
+```javascript,script.js
+$('#now_year').text() = new Date().getFullYear();
+```
+
+Jqueryを使用した分、素のJavaScriptより短くなりましたね！
+
+## まとめ
+以上がNext.js等でコピーライト等の年数を自動的に更新する方法になります。
+
+年数を自動更新したい場合等に利用してみてください！

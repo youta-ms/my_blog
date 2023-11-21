@@ -11,7 +11,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
     ? dayjs(data.date).format("YYYY/MM/DD")
     : null;
   return (
-    <header className="content-header">
+    <div className="content-header">
       <h1 className="title">{data.title}</h1>
       {data.tags && (
         <TagList
@@ -72,6 +72,6 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           }
         `}
       </style>
-    </header>
+    </div>
   );
 }

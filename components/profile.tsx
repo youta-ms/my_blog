@@ -25,7 +25,7 @@ export function ProfileComponent() {
             <table>
               <thead>
                 <tr>
-                  <th>期間</th>
+                  <th>年月</th>
                   <th>会社</th>
                   <th>使用言語</th>
                   <th>CMS/フレームワーク</th>
@@ -94,11 +94,21 @@ export function ProfileComponent() {
       <style jsx>
         {`
           .main {
-            width: 100%;
+            width: calc(100% - (25% + 80px));
+            margin-right: 50px;
+            word-break: break-all;
+            padding: 32px;
+            background: var(--c-white);
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+                .medium}) {
+              margin-right: 0;
+              width: 100%;
+              padding: 32px 0;
+            }
           }
 
           .container {
-            width: 84%;
             margin: 0 auto;
 
             :global(a) {
@@ -155,7 +165,7 @@ export function ProfileComponent() {
               background: #F7F7F7;/*背景色*/
               line-height:2;
               border-radius: 4px;
-              border:1.5px dashed;
+              border:1.5px solid;
               border-color: var(--c-primary); /*枠の色*/
               padding: 1.5em;
               padding-left:3em;
@@ -233,13 +243,11 @@ export function ProfileComponent() {
             }
             :global(h2) {
               line-height: 1.5;
-              background-color: #f6f6f6;
+              background-color: var(--c-primary);
               font-size: 1.7em;
-              color: #333333;
+              color: var(--c-white);
               border-radius: 1px;
-              border-left: solid 14px var(--c-primary);/*H2の色の変更はこちら*/
               padding: 0.5em 1em;
-              margin: 2em 0;
 
               :before {
                 background-image: none;
@@ -306,9 +314,9 @@ export function ProfileComponent() {
             :global(th),
             :global(td) {
               padding: 0.5rem .5vw;
-              border: solid 1px var(--gray2);
-              font-size: 32px;
+              border: solid 1px var(--c-gray);
               font-size: clamp(16px, .5vw, 32px);
+              word-break: keep-all;
             }
             :global(th) {
               font-weight: 700;
