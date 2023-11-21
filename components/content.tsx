@@ -202,7 +202,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               background: #F7F7F7;/*背景色*/
               line-height:2;
               border-radius: 4px;
-              border:1.5px dashed;
+              border:1.5px solid;
               border-color: var(--c-primary); /*枠の色*/
               padding: 1.5em;
               padding-left:3em;
@@ -380,7 +380,6 @@ export function Content({ content, slug }: { content: string, slug:string }) {
                 padding: 0;
                 background: transparent;
                 font-size: 0.9em;
-                padding: 1em 2em;
                 color: #fff;
                 font-family: inherit;
               }

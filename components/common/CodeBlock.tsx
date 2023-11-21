@@ -18,7 +18,7 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   }
   const name = match && match[2] ? match[2].slice(1) : '';
 
-  // const name_start = className ? className.indexOf(",") : 0;
+  // const name_start = className ? className.indexOf(",") + 1 : 0;
   // const name = className ? className.substring(name_start) : '';
 
   return (
