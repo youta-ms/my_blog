@@ -119,6 +119,8 @@ export function Content({ content, slug }: { content: string, slug:string }) {
             }
             :global(p) {
               margin-top: 1.6rem;
+              color: var(--c-text);
+              line-height: 1.6;
             }
             :global(ul),
             :global(ol) {
@@ -164,7 +166,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               background: #F7F7F7;/*背景色*/
               line-height:2;
               border-radius: 4px;
-              border:1.5px dashed;
+              border:1.5px solid;
               border-color: var(--c-primary); /*枠の色*/
               padding: 1.5em;
               padding-left:3em;
@@ -200,7 +202,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               background: #F7F7F7;/*背景色*/
               line-height:2;
               border-radius: 4px;
-              border:1.5px dashed;
+              border:1.5px solid;
               border-color: var(--c-primary); /*枠の色*/
               padding: 1.5em;
               padding-left:3em;
@@ -242,11 +244,10 @@ export function Content({ content, slug }: { content: string, slug:string }) {
             }
             :global(h2) {
               line-height: 1.5;
-              background-color: #f6f6f6;
+              background-color: var(--c-primary);
               font-size: 1.7em;
-              color: #333333;
+              color: var(--c-white);
               border-radius: 1px;
-              border-left: solid 14px var(--c-primary);/*H2の色の変更はこちら*/
               padding: 0.5em 1em;
               margin: 2em 0;
 
@@ -267,6 +268,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               border-left:10px solid var(--c-primary);/*H3の色の変更はこちら*/
               padding: 0.4em 0.8em;
               margin-top: 2em;
+              background-color: var(--c-gray);
 
               :before {
                 width: 0em;
@@ -350,12 +352,20 @@ export function Content({ content, slug }: { content: string, slug:string }) {
             }
             :global(code) {
               color: var(--c-primary);
-              padding: 0.2em 0.4em;
-              margin: 0 0.2em;
-              background: var(--c-gray);
-              vertical-align: middle;
-              font-size: 0.95em;
-              border-radius: 4px;
+              align-items: center;
+              display: inline-flex;
+              font-family: inherit;
+              font-size: 0.9em;
+              letter-spacing: 0px;
+              line-height: 1;
+              background: rgb(247, 247, 247);
+              border-width: 1px;
+              border-style: solid;
+              border-color: rgba(0, 0, 0, 0.1);
+              border-image: initial;
+              border-radius: 2px;
+              margin: 0px 0.5em;
+              padding: 0.25em 0.5em;
             }
             :global(pre) {
               width: 100%;
@@ -370,11 +380,8 @@ export function Content({ content, slug }: { content: string, slug:string }) {
                 padding: 0;
                 background: transparent;
                 font-size: 0.9em;
-                padding: 0.2em 0.4em;
                 color: #fff;
-                font-family: Menlo, Monaco, Consolas, Meiryo, "Noto Sans JP",
-                  sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-                  "Segoe UI Symbol", "Noto Color Emoji";
+                font-family: inherit;
               }
               & > :global(code) {
                 display: block;

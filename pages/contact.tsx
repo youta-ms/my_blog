@@ -3,6 +3,7 @@ import { Title } from "@/components/texts";
 import { Wrapper } from "@/components/common/wrapper";
 import { Side } from "@/components/layouts/side";
 import { useState } from "react";
+import blogConfig from "@/blog.config";
 
 const Contact = () => {
   const [verify, setVerify] = useState(false);
@@ -37,7 +38,7 @@ const Contact = () => {
                   :
                   <input name="verification" type="checkbox" onClick={() => setVerify(true)}/>
                 }
-                <label htmlFor="verification">スパムメール防止のためこちらにチェックを入れてから送信してください</label>
+                <label htmlFor="verification" onClick={() => setVerify(true)}>スパムメール防止のためこちらにチェックを入れてから送信してください</label>
               </div>
               { verify ?
                 <button className="btnripple" type="submit">送信する</button>
@@ -51,8 +52,19 @@ const Contact = () => {
       </Wrapper>
       <style jsx>
         {`
-          main {
-          width: 100%;
+          .main {
+            width: calc(100% - (25% + 80px));
+            margin-right: 50px;
+            word-break: break-all;
+            padding: 32px;
+            background: var(--c-white);
+
+            @media screen and (max-width: ${blogConfig.styles.breakPoints
+              .medium}) {
+              margin-right: 0;
+              width: 100%;
+              padding: 32px 0;
+            }
           }
 
           .container {

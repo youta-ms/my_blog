@@ -55,14 +55,15 @@ const blogConfig: BlogConfig = {
     containerMaxWidth: "1280px",
     colors: {
       primary: "#20B2AB",
-      primarySub: "#FFA500",
+      primarySub: "#FFA17A",
       primaryLighter: "#EFF7F3",
-      primaryGradient: "linear-gradient(to right, #06A9B7, #B0DE87)",
-      base: "#F2F4F3",
+      primaryGradient: "linear-gradient(to right, #00AAA2, #E7FEFC)",
+      base: "#0d4062",
       border: "",
       bg: "#F7F7F7",
       text: "#333333",
       grayLighter: "#A0A0A0",
+      white: "#FFFFFF",
     },
     breakPoints: {
       huge: "1440px",
@@ -123,7 +124,7 @@ const blogConfig: BlogConfig = {
   ],
   account: {
     name: "Youta",
-    description: "■現役のWebエンジニア\n■HTML, CSS(SCSS), PHP, Javascript（Jquery）,Laravel ,他\n■Next.js勉強中",
+    description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
     image: `/images/me.jpeg`,
     social: {
       twitter: "https://twitter.com/youta_ms",
@@ -134,7 +135,7 @@ const blogConfig: BlogConfig = {
     {
       id: "me",
       name: "Youta",
-      description: "■現役のWebエンジニア\n■HTML, CSS(SCSS), PHP, Javascript（Jquery）,Laravel ,他\n■Next.js勉強中",
+      description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
       image: "/images/me.jpeg",
     },
   ],
@@ -162,6 +163,12 @@ const blogConfig: BlogConfig = {
       title: "JavaScript",
       imagePath: "/images/london.jpeg",
       description: "JavaScriptに関する記事です",
+    },
+    {
+      id: "nextJs",
+      title: "Next.js",
+      imagePath: "/images/london.jpeg",
+      description: "Next.jsに関する記事です",
     },
     {
       id: "web3",
@@ -240,6 +247,10 @@ const blogConfig: BlogConfig = {
     {
       id: "wordpress",
       title: "WordPress",
+    },
+    {
+      id: "next",
+      title: "Next.js",
     },
   ],
 };

@@ -45,6 +45,7 @@ export const Comp: FC = () => {
                 animation-fill-mode:forwards;
                 opacity:0;
                 cursor: pointer;
+                color: var(--c-primary);
 
                 &::before {
                   content: "";

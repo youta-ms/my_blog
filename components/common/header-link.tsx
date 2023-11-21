@@ -43,7 +43,6 @@ export const HeaderLink = () => {
                 padding: 0;
                 display: flex;
                 justify-content: center;
-                border-bottom: 3px solid #f0f4f2;
                 max-width: var(--container-width);
                 margin: 0 auto;
                 overflow-x: auto;

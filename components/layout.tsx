@@ -48,6 +48,14 @@ export function Layout(props: { children: React.ReactNode }) {
       <main>{props.children}</main>
       <Footer />
       <Comp />
+      <style jsx>
+        {`
+          main {
+            padding-bottom: 100px;
+            background: #f7f7f7;
+          }
+        `}
+      </style>
     </>
   );
 }

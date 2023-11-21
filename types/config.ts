@@ -79,6 +79,7 @@ interface Colors {
   bg: string;
   text: string;
   grayLighter: string;
+  white: string;
 }
 
 interface Styles {

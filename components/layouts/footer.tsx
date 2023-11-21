@@ -1,6 +1,6 @@
 import blogConfig from "@/blog.config";
 import { CategoryList } from "../common/category-list";
-import { SocialList } from "../common/social-list";
+import { SocialList } from "../common/template-social-list";
 import { TagList } from "../common/common-tag-list";
 import { SubTitle } from "../texts";
 import Image from "next/image";
@@ -39,7 +39,6 @@ export const Footer: React.VFC = () => {
       <style jsx>
         {`
           .footer {
-            margin-top: 100px;
             padding: 50px 10px;
             background-color: var(--c-base);
           }
@@ -65,6 +64,7 @@ export const Footer: React.VFC = () => {
           .footer-column {
             flex: 1;
             padding: 0 10px;
+            color: var(--c-white);
           }
           .social-wrap {
             margin-top: 10px;
@@ -74,6 +74,7 @@ export const Footer: React.VFC = () => {
             font-size: 14px;
             text-align: center;
             margin-top: 2em;
+            color: var(--c-white);
           }
         `}
       </style>

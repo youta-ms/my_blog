@@ -18,6 +18,7 @@ export const GlobalStyle = () => {
             --c-base: ${blogConfig.styles.colors.base};
             --c-text: ${blogConfig.styles.colors.text};
             --c-border: ${blogConfig.styles.colors.border};
+            --c-white: ${blogConfig.styles.colors.white};
             --c-text-gray-lighter: ${blogConfig.styles.colors.grayLighter};
             --c-primary-gradient: ${blogConfig.styles.colors.primaryGradient};
             --container-width: ${blogConfig.styles.containerMaxWidth};
@@ -72,6 +73,7 @@ export const GlobalStyle = () => {
             color: var(--gray0);
             box-sizing: border-box;
             font-family: "Clarkson", Helvetica, sans-serif;
+            background: var(--c-base);
           }
 
           h1,
