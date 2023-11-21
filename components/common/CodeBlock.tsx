@@ -18,6 +18,9 @@ const CodeBlock: CodeComponent = ({ inline, className, children }) => {
   }
   const name = match && match[2] ? match[2].slice(1) : '';
 
+  // const name_start = className ? className.indexOf(",") : 0;
+  // const name = className ? className.substring(name_start) : '';
+
   return (
     <div className="code_box">
       {name && <p className='code_file_name'>{name}</p>}

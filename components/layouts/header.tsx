@@ -1,6 +1,6 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
-import { SocialList } from "../common/social-list";
+import { SocialList } from "../common/template-social-list";
 import { HeaderLink } from "@/components/common/header-link";
 import Image from "next/image";
 
@@ -38,12 +38,11 @@ export function Header() {
       <style jsx>
         {`
           .header-outer {
-            background-color: #fff;
+            background-color: var(--c-base);
           }
           .header-inner {
             padding-top: 33px;
             top: 0;
-            background-color: #fff;
             width: 100%;
             z-index: 10;
           }
@@ -75,7 +74,7 @@ export function Header() {
             list-style-type: none;
             display: flex;
             font-size: var(--text-sm);
-            color: var(--c-text);
+            color: var(--c-white);
             li {
               margin-right: 35px;
               &:last-child {

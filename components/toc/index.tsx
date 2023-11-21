@@ -71,8 +71,8 @@ export const Toc = ({ id }: { id: string }) => {
             font-size: 13.5px;
             line-height: 1.5;
             padding: 20px;
-            background-color: #f0f4f2;
-            border-radius: 20px;
+            background-color: var(--c-white);
+            border-radius: 10px;
             display: none;
             margin-bottom: 20px;
             > :global(ol) {

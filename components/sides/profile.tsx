@@ -1,6 +1,7 @@
 import blogConfig from "@/blog.config";
 import { SocialList } from "../common/social-list";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Profile = () => {
   return (
@@ -24,17 +25,22 @@ export const Profile = () => {
           <SocialList />
         </div>
         <div className="profile-content">{blogConfig.account.description}</div>
+
+        <div className="profile_link">
+          <Link href="/profile">プロフィールはこちら</Link>
+        </div>
       </div>
       <style jsx>
         {`
           .profile {
             margin: 70px 0 2.5em;
-            background: ${blogConfig.styles.colors.bg};
+            background: var(--c-white);
             font-size: 0.98em;
             border-radius: 10px;
           }
           .profile-inner {
-            padding: 30px;
+            padding: 1em;
+            padding-top: 0;
           }
           .profile-img {
             position: relative;
@@ -79,6 +85,11 @@ export const Profile = () => {
             margin-bottom: 30px;
             display: flex;
             justify-content: center;
+          }
+          .profile_link {
+            margin-top: 1em;
+            cursor: pointer;
+            color: var(--c-primary);
           }
         `}
       </style>
