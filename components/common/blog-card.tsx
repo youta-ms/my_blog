@@ -32,7 +32,7 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
 
     if(filteredMetas.image == "" || filteredMetas.description == "" || filteredMetas.title == "") {
       return (
-        <a href={href}>{ props.children[0] }</a>
+        <a href={href} target="_blank">{ props.children[0] }</a>
       );
     }
 
@@ -51,7 +51,7 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
           </span>
           <span className="blog_card_text_box">
             <span className="blog_card_title">{filteredMetas.title}</span>
-            <span className="blog_card_text">{filteredMetas.description}</span>
+            <span className="blog_card_text">{filteredMetas.description}...</span>
           </span>
         </span>
         <style jsx>
