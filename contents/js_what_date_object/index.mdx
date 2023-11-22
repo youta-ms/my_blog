@@ -1,0 +1,226 @@
+---
+title: 【JavaScript】Dateオブジェクトで今日の日付や現在時刻を取得する方法
+date: 2023-11-22
+writtenBy: me
+category: javascript
+tags: [js, coding, next]
+related: []
+thumbnail: /images/js.jpg
+description: この記事ではJavaScriptのDateオブジェクトを使用して現在の日付や時刻を取得する方法を解説しています。Dateオブジェクトの基本的な使い方から、年、月、日、時、分、秒、ミリ秒を取得する方法、さらには世界標準時を基準とした値の取得方法まで、詳しく解説しています。JavaScriptで日付や時刻を扱う際の参考にしてみてください。
+---
+
+この記事では、JavaScriptのDateオブジェクトについて詳しく解説します。
+
+## Dateオブジェクトとは
+
+Dateオブジェクトは、JavaScriptで用意されているオブジェクトの一つです。
+
+JavaScriptにはいろいろなオブジェクトが用意されていますが、その中でもDateオブジェクトは日付や時刻を扱うことを目的としたオブジェクトになります。
+
+`new Date()`を使用して、インスタンス化することで協定世界時(UTC)である1970年1月1日0時0分0秒が基準となるオブジェクトを作成することができます。
+
+`new Date()`で返ってきた値+いろいろなメソッドを使用することで年月等を表示できたりするようになります。
+
+また、`new Date()`が代表的なインスタンス化の書き方ですが、インスタンス化には以下のような種類があります。
+
+- new Date()
+- new Date(日にち)
+- new Date(ミリ秒)
+- new Date(年, 月, 日, 時, 分, 秒, ミリ秒)
+
+それぞれについて見ていきましょう。
+
+### new Date()
+引数を指定しない場合は現在日時でオブジェクトが生成されます。
+
+```javascript
+let now = new Date();
+
+console.log(now); // Wed Nov 22 2023 11:29:04 GMT+0900 (日本標準時)
+```
+
+普通のブラウザでは、タイムゾーンや滞在地域の情報が設定されているため、実行環境のタイムゾーンによって得られる値が異なる場合があります。
+
+### new Date(日にち)
+引数に文字列で日にちを渡すと、渡した日付ののオブジェクトが生成されます。
+渡す日にちのフォーマットは厳密には決まってません。
+
+```javascript
+// 年月日を表す文字列
+let date1 = new Date('2023/11/22');
+let date2 = new Date('11/22/23');
+
+console.log(date1); // Wed Nov 22 2023 00:00:00 GMT+0900 (日本標準時)
+console.log(date2); // Wed Nov 22 2023 00:00:00 GMT+0900 (日本標準時)
+
+
+// 年月日＋時刻を表す文字列
+let date3 = new Date('2023-11-22T13:30:00');
+let date4 = new Date('November 22, 2023 13:30:00');
+
+console.log(date_3); // Wed Nov 22 2023 13:30:00 GMT+0900 (日本標準時)
+console.log(date_4); // Wed Nov 22 2023 13:30:00 GMT+0900 (日本標準時)
+```
+
+### new Date(ミリ秒)
+引数に基準日から経過したミリ秒を渡すと、基準日から渡したミリ秒分経過した日時のオブジェクトが生成されます。
+
+```javascript
+// Thu Jan 01 1970 00:00:00 UTC+0を意味する
+let date = new Date(0);
+
+console.log(date); // Thu Jan 01 1970 09:00:00 GMT+0900 (日本標準時)
+```
+
+### new Date(年, 月, 日, 時, 分, 秒, ミリ秒)
+引数にそれぞれの情報を渡すと、そのブラウザのタイムゾーンにおける時刻を取得します。
+
+それぞれの引数には、以下のような決まりがあります。
+
+- 年：4桁表記で必ず指定
+- 月：0(1月)〜11(12月)で必ず指定
+- 日：指定がなければデフォルトで1となる
+- 時・分・秒・ミリ秒：指定がなければデフォルトで0となる
+
+以下2つは引数が別の内容でインスタンス化されていますが、取得される結果は全く同じものとなります。
+
+```javascript
+let date5 = new Date(2023, 0, 1, 0, 0, 0, 0); // Sun Jan 01 2023 00:00:00 GMT+0900 (日本標準時)
+let date6 = new Date(2023, 0); // Sun Jan 01 2023 00:00:00 GMT+0900 (日本標準時)
+```
+
+例えば、以下のように引数を設定すると2023年11月22日、13時50分10秒を取得することができます。
+
+```javascript
+let date7 = new Date(2023, 10, 22, 13, 50, 10, 0); // Wed Nov 22 2023 13:50:10 GMT+0900 (日本標準時)
+```
+
+## Dateオブジェクトの代表的なメソッド
+次に代表的なメソッドについて見てみましょう。
+
+代表的なメソッドには以下があります。
+
+- getFullYear()
+- getMonth()
+- getDate()
+- getDay()
+- getHours()
+- getMinutes()
+- getSeconds()
+- getMilliseconds()
+
+詳しくみていきましょう。
+
+### getFullYear()
+`getFullYear()`は年の取得をする際に使用します。
+
+```javascript
+let year = new Date().getFullYear();
+
+console.log(year); // 2023
+```
+
+値は4桁の数字で返ってきます。（年数は増えていく一方なので、5桁や6桁が返ってくるようになるかもしれません）
+
+### getMonth()
+`getMonth()`は月の取得をする際に使用します。
+
+```javascript
+let month = new Date().getMonth();
+
+console.log(month); // 10
+```
+
+値は0から11の数値が返ってきます。
+
+2023年11月22日にスクリプトを試していますが、`new Date(年, 月, 日, 時, 分, 秒, ミリ秒)`の説明時の月のルールで返ってくる値は10となります。
+
+### getDate()
+`getDate()`は日にちの取得をする際に使用します。
+
+```javascript
+let day = new Date().getDate();
+
+console.log(day); // 22
+```
+
+値は1から31の数値が返ってきます。
+
+### getDay()
+`getDate()`は曜日の取得をする際に使用します。
+
+```javascript
+let day_of_week = new Date().getDay();
+
+console.log(day_of_week); // 3
+```
+
+値は0から6の数値が返ってきます。
+
+- 0：日曜日
+- 1：月曜日
+- 2：火曜日
+- 3：水曜日
+- 4：木曜日
+- 5：金曜日
+- 6：土曜日
+
+### getHours()
+`getHours()`は時の取得をする際に使用します。
+
+```javascript
+let hour = new Date().getHours();
+
+console.log(hour); // 14
+```
+
+値は0から23の数値が返ってきます。
+
+### getMinutes()
+`getMinutes()`は分の取得をする際に使用します。
+
+```javascript
+let minutes = new Date().getMinutes();
+
+console.log(minutes); // 53
+```
+
+値は0から59の数値が返ってきます。
+
+### getSeconds()
+`getSeconds()`は秒の取得をする際に使用します。
+
+```javascript
+let seconds = new Date().getSeconds();
+
+console.log(seconds); // 7
+```
+
+値は0から59の数値が返ってきます。
+
+### getMilliseconds()
+`getMilliseconds()`は秒の取得をする際に使用します。
+
+```javascript
+let milliseconds = new Date().getMilliseconds();
+
+console.log(milliseconds); // 965
+```
+
+値は0から999の数値が返ってきます。
+
+### 世界標準時を基準として取得したい場合
+
+世界標準時を基準として値を取得したい場合は、下記のようにgetと〇〇の間にUTCをつけるだけです。
+
+```javascript
+let hour = new Date().getHours();
+let utc_hour = new Date().getUTCHours();
+
+console.log(hour); // 14
+console.log(utc_hour); // 5
+```
+
+他にもたくさんあるので、気になる方はこのページを見てみてください。
+
+[https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Date)
