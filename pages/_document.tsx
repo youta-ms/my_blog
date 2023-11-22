@@ -1,13 +1,11 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { googleTagManagerId } from '@/utils/gtm';
-import GoogleTagManager, { GtmId } from '@/components/GoogleTagManager';
 
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="ja">
         <Head>
-          <GoogleTagManager gtmId={googleTagManagerId as GtmId} />
           <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
         </Head>
         <body>

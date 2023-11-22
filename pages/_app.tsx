@@ -8,6 +8,8 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { googleTagManagerId } from '@/utils/gtm';
+import GoogleTagManager, { GtmId } from '@/components/GoogleTagManager';
 
 library.add(faTwitter, faFacebook, faGithub);
 
@@ -17,6 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ResetStyle />
       <GlobalStyle />
+      <GoogleTagManager gtmId={googleTagManagerId as GtmId} />
       <SWRConfig
         value={{
           fetcher: (resource, init) =>
