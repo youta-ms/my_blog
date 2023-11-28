@@ -2,33 +2,34 @@
 title: Laravelのredirectで変数を渡す際ににはまった話
 date: 2023-11-22
 writtenBy: me
-category: php
+category: tec
 tags: [laravel]
 related: []
 thumbnail: /images/laravel.jpg
 description: 今回はLaraveのredirect処理についての記事です。redirectの基本的な書き方から、withやwithInputを使用して変数を渡す方法まで解説しています。初心者の方でも分かりやすいように書いているのでぜひ見ていってください！
 ---
 
-## Laravelとは
+## Laravel とは
 
 ![Laravelとはの画像](image1.png)
 
-Laravelとは、2011年にリリースされた比較的新しいVMCモデルのフレームワークです。比較的新しいながら、PHPにおけるフレームワークの中では、代表的なフレームワークとなっています。
+Laravel とは、2011 年にリリースされた比較的新しい VMC モデルのフレームワークです。比較的新しいながら、PHP におけるフレームワークの中では、代表的なフレームワークとなっています。
 
 ## はまった原因
-更新ページの初期表示時にsessionで初期値を渡していたことが原因でした…
+
+更新ページの初期表示時に session で初期値を渡していたことが原因でした…
 
 ![VScodeの画像](image2.jpg)
 
-sessionを使用する際は初期値が必要と思っていたのですが、そうではなかったみたいです。
+session を使用する際は初期値が必要と思っていたのですが、そうではなかったみたいです。
 
 ![VScodeの画像](image3.jpg)
 
-redirectの処理はミスなく記載していたんですけどね…。
+redirect の処理はミスなく記載していたんですけどね…。
 
-## Laravelでのredirectの基本
+## Laravel での redirect の基本
 
-以下にLaravelでのredirectの基本をまとめておくのでぜひ参考にしてください！
+以下に Laravel での redirect の基本をまとめておくのでぜひ参考にしてください！
 
 ### 基本
 
@@ -54,7 +55,7 @@ return redirect()->action('SampleController@show');
 return redirect()->action('SampleController@edit', ['sample_id' => 99]);    // id情報を含む場合
 ```
 
-### with関数で変数も一緒に
+### with 関数で変数も一緒に
 
 ```php
 return redirect('home')->with('result', '完了');
@@ -65,10 +66,12 @@ return redirect('home')->with([       // 複数データを格納する場合は
 ]);
 ```
 
-blade側では
+blade 側では
+
 ```php
 {{ session('result_1') }}
 ```
+
 で取得可能
 
 ### 登録処理や更新処理失敗時（直前のページに戻す）
@@ -85,9 +88,10 @@ public function back(Request $request) {
 }
 ```
 
-withInput関数を使用すれば前のページから送信されたデータがsession内に格納されます。
+withInput 関数を使用すれば前のページから送信されたデータが session 内に格納されます。
 
 ブレードで使用する際は以下のように記載します。
+
 ```php
 <input name="mail" value="{{ old('mail') }}">
 ```

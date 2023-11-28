@@ -92,20 +92,8 @@ const blogConfig: BlogConfig = {
   },
   navigation: [
     {
-      name: "HTML/CSS",
-      url: `/markup`,
-    },
-    {
-      name: "PHP",
-      url: `/php`,
-    },
-    {
-      name: "VCS",
-      url: `/vcs`,
-    },
-    {
-      name: "JavaScript",
-      url: `/javascript`,
+      name: "Web制作",
+      url: `/tec`,
     },
   ],
   subNavigation: [
@@ -141,34 +129,10 @@ const blogConfig: BlogConfig = {
   ],
   categories: [
     {
-      id: "markup",
-      title: "HTML/CSS",
+      id: "tec",
+      title: "Web制作",
       imagePath: "/images/london.jpeg",
-      description: "HTML/CSSに関する記事です",
-    },
-    {
-      id: "php",
-      title: "PHP",
-      imagePath: "/images/london.jpeg",
-      description: "PHPに関する記事です",
-    },
-    {
-      id: "vcs",
-      title: "VCS",
-      imagePath: "/images/london.jpeg",
-      description: "VCSに関する記事です",
-    },
-    {
-      id: "javascript",
-      title: "JavaScript",
-      imagePath: "/images/london.jpeg",
-      description: "JavaScriptに関する記事です",
-    },
-    {
-      id: "nextJs",
-      title: "Next.js",
-      imagePath: "/images/london.jpeg",
-      description: "Next.jsに関する記事です",
+      description: "Web制作に関する記事です",
     },
     {
       id: "web3",
@@ -179,28 +143,10 @@ const blogConfig: BlogConfig = {
   ],
   showCategories: [
     {
-      id: "markup",
-      title: "HTML/CSS",
+      id: "tec",
+      title: "Web制作",
       imagePath: "/images/london.jpeg",
-      description: "HTML/CSSに関する記事です",
-    },
-    {
-      id: "php",
-      title: "PHP",
-      imagePath: "/images/london.jpeg",
-      description: "PHPに関する記事です",
-    },
-    {
-      id: "vcs",
-      title: "VCS",
-      imagePath: "/images/london.jpeg",
-      description: "VCSに関する記事です",
-    },
-    {
-      id: "javascript",
-      title: "JavaScript",
-      imagePath: "/images/london.jpeg",
-      description: "JavaScriptに関する記事です",
+      description: "Web制作に関する記事です",
     },
   ],
   tags: [
