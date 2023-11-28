@@ -19,6 +19,7 @@ export function Header() {
                   src={blogConfig.siteLogo.url}
                   alt={blogConfig.siteName}
                   fill
+                  loading={"eager"}
                 />
               </div>
             </Link>
