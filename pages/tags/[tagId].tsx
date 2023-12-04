@@ -24,6 +24,9 @@ type Props = {
 const TagIndex: NextPage<Props> = (props) => {
   const { tag, articles: defaultArticles, max } = props;
 
+  console.log("defaultArticles" + defaultArticles);
+
+
   if (!defaultArticles || defaultArticles.length === 0) {
     return <NotFound />;
   }
@@ -92,6 +95,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log(params);
+
   try {
     const { tagId } = params;
     const tag = blogConfig.tags.find((c) => c.id === tagId);
