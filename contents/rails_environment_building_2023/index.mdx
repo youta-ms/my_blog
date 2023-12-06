@@ -1,0 +1,380 @@
+---
+title: 【2023年版】Ruby on Railsの環境構築方法
+date: 2023-12-07
+writtenBy: me
+category: tec
+tags: [rails]
+related: []
+description:
+thumbnail: /images/rails.jpg
+---
+
+この記事では、私が2023年の時点で行なっているRuby on Railsの環境構築方法について解説していきます。
+
+## Homebrew(brewコマンド)をインストール
+まずはHomebrewのインストールを行います。（すでにインストールされている方は読み飛ばしてください。）
+
+最初にvimコマンドで.bash_profileを開いてください。
+
+```bash
+vim ~/.bash_profile
+```
+
+そして以下コードを記載します。
+
+```bash
+export PATH=/usr/local:$PATH
+```
+
+ターミナルを再起動して以下のコマンドを実行し
+
+```bash
+echo $PATH
+```
+
+出力の先頭が以下のように始まっていたらOKです。
+
+```bash
+/usr/local:...
+```
+
+次に、下記コマンドでHomebrewをインストールします。
+
+```bash
+$ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+ここで一旦下記のコマンドを実行して変更をセーブしてください。
+
+```bash
+source ~/.bash_profile
+```
+
+バージョンを確認して
+
+```bash
+brew -v
+```
+
+最新のbrewでなければbrewを最新にしてください。
+
+```bash
+brew update
+```
+
+ここまででHomebrewのインストールが終わりです。
+
+## gitのインストール
+次にgitのインストールを行なっていきます。（先ほど同様すでにインストールされている方は読み飛ばしてください）
+
+### 「git」をインストール
+
+```bash
+brew install git
+```
+
+下記コマンドでバージョンチェックをして、1.9.1以上であればOKです。
+
+```bash
+git --version
+```
+
+### gitignore_globalの作成
+gitがインストールできたら、gitignore_globalの作成をします。
+
+ホームディレクトリに書きコマンドでgitignore_globalを作成してください。
+
+```bash
+touch ~/.gitignore_global
+```
+
+gitignore_globalでは無視したいファイルを追記することができます。
+
+例えば、gitignore_globalに
+
+```bash
+.DS_Store
+```
+
+と記述し
+
+gitignore_globalを有効化するために．ターミナル上で
+
+```bash
+git config --global core.excludesfile ~/.gitignore_global
+```
+
+と実行するとGit管理において.DS_Storeが表示されないようになります。
+
+### コミットのための設定
+最後にコミットする際の設定を行なっていきます。
+初回の１回のみ必要で、その後は不要です。
+
+下記のコマンドを順番に実行してください。
+
+```bash
+git config --global user.email "（登録したMAIL）"
+git config --global user.name "（自分の名前）"
+git config --global core.editor 'code --wait'
+```
+
+ここでは下記コマンドで、デフォルトのエディタをVScodeに設定していますが他のエディターに変更することも可能です。
+
+```bash
+git config --global core.editor 'code --wait'
+```
+
+他のエディタを指定したい方はこちら
+
+[https://dev.classmethod.jp/tool/git/qssociating-text-editors-with-git/](https://dev.classmethod.jp/tool/git/qssociating-text-editors-with-git/)
+
+ここまででgitのインストールが終わりです。
+
+## Rubyの設定
+最後にRuby(Ruby on Rails)の設定をしていきます。
+
+### 「rbenv」と「ruby-build」のインストール
+最初にrubyのバージョンを上げるために、「rbenv」というRubyのバージョンを管理するためのコマンドと、「ruby-build」というRubyのビルド（構築）を支援するためのコマンドをインストールします。
+
+```bash
+brew install rbenv ruby-build
+```
+
+「rbenv」と「ruby-build」のインストールが完了したら、バージョンチェックを行なってください。
+
+```bash
+rbenv --version
+```
+
+バージョンが0.4以上ならOKです。
+
+rbenvを使ってインストール可能なRubyのバージョンを確認しておきましょう。
+
+```bash
+rbenv install -l
+```
+
+上記コマンドだと出力が多いので
+
+```bash
+rbenv install -l | grep 2.3.1
+```
+
+で探してもらうと良いと思います。
+
+また、今後の作業のために「lv」をインストールしておきましょう。
+
+```bash
+brew install lv
+lv -v
+```
+
+エラーが表示されなければOKです。
+
+
+### 「Ruby」のインストール
+そしてキモとなるRubyをインストールします。
+
+```bash
+#「Ruby 2.3.1」をインストール
+
+$ rbenv install 2.3.1
+RUBY_CONFIGURE_OPTS="--with-openssl-dir=/usr/local/opt/openssl" rbenv install 2.3.1
+```
+
+「Ruby」のインストールが終わったら、使用する「Ruby」のバージョンをチェックしましょう。
+
+```bash
+rbenv versions
+```
+
+想定としては以下のようになると思います。
+
+```bash
+rbenv versions
+* system (set by /usr/local/var/rbenv/version)
+  2.3.1
+
+#Rubyが複数ある場合は使用するバージョンを指定
+
+rbenv global 2.3.1
+
+#以下でOK
+
+rbenv versions
+  system (set by /usr/local/var/rbenv/version)
+* 2.3.1
+
+ruby -v
+#2.3.1ならOK
+
+#バージョンが2.3.1になっていなかった時
+
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
+
+#もう一度
+
+ruby -v
+#2.3.1ならOK
+```
+
+## PostgreSQLのインストール
+まずは、PostgreSQLが入っているか確認してください。
+
+```bash
+psql --version
+```
+
+入っていなければbrewでPostgreSQLをインストールします。
+
+```bash
+brew install postgresql
+```
+
+インストールができたら、プロセスが起動しているかを確認してください。
+
+```bash
+ps ax | grep postgres
+
+#以下のような結果なら起動しています。
+1151 ?        S      0:05 /usr/lib/postgresql/9.5/bin/postgres -D /var/lib/postgresql/9.5/main -c config_file=/etc/postgresql/9.5/main/postgresql.conf
+1288 ?        Ss     0:00 postgres: checkpointer process
+1289 ?        Ss     0:00 postgres: writer process
+1290 ?        Ss     0:00 postgres: wal writer process
+1291 ?        Ss     0:03 postgres: autovacuum launcher process
+1292 ?        Ss     0:04 postgres: stats collector process
+```
+
+もし起動していないようであれば、以下コマンドを実行してpostgresを起動してください。
+
+```bash
+brew tap homebrew/services
+
+brew services start postgresql
+```
+
+postgresが起動できたら、停止できるかも確認しておきましょう。（確認ができたら再度起動しておいてくださ）
+
+```bash
+brew services stop postgresql
+```
+
+最後にデータベースの初期化をしておきましょう。
+
+```bash
+initdb /usr/local/var/postgres -E utf8
+```
+
+## プロジェクトのclone
+ここまで来るとRubyが使えるようになっているはずなので、プロジェクトをクローンした後の流れも説明していこうと思います。
+
+まずは対象のプロジェクトをクローンしてください。
+
+```bash
+git clone リポジトリのURL
+```
+
+### データベース接続用ファイルの変更
+データベース接続用ファイルの変更をします。
+
+```bash
+cd クローンしたリポジトリ
+cp config/database.yml.example config/database.yml
+```
+
+### bundleインストール
+次にbundleのインストールを行います。
+
+```bash
+bundle install --path=vendor/bundle
+```
+
+もし、bundle installのpgインストールで止まった場合は、「pg_config」のパスを渡して再実行してください。（9.4などのバージョンは環境によって違います）
+
+```bash
+gem install pg -- --with-pg-config=/Library/PostgreSQL/9.4/bin/pg_config
+```
+
+### Bundle installで詰まった時
+Bundle installで詰まった時があったので解消方法を記載しておきます。
+
+エラーメッセージ
+
+```bash
+⇨Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+—————————————————————
+An error occurred while installing libv8 (3.16.14.19), and Bundler cannot continue.
+Make sure that `gem install libv8 -v '3.16.14.19' --source 'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  therubyracer was resolved to 0.12.3, which depends on
+    libv8
+
+—————————————————————
+```
+
+下記コマンドを実行することでエラーが解消されました。
+
+```bash
+brew install v8-315
+bundle config --local build.libv8 --with-system-v8
+bundle config --local build.therubyracer --with-v8-dir=$(brew --prefix v8-315)
+bundle install --path=vendor/bundle
+```
+
+### bundleインストール後
+bundle install後にgit statusをすると下記のように返ってくることがあります。
+
+```bash
+On branch dev
+Your branch is up to date with 'origin/dev'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	vendor/
+
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+その場合は.git/info/excludeをエディターで開いて最後の行に「vendor」を書き加えて見てください。
+
+その後にgit statusをして消えてたらOKです。
+
+## データベースの設定
+bundle installが正常に終わったら、データベースの設定をします。
+
+### データベースを作成
+
+```bash
+bundle exec rake db:create
+#想定する実行結果
+Created database 'データベース名'
+Created database 'データベース名'
+```
+
+### データベースのマイグレーション（データベース作製後に必要な操作です）
+
+```bash
+bundle exec rake db:migrate
+```
+
+### データベースにSeedを利用してデータを挿入（Seedファイルがあれば）
+
+```bash
+bundle exec rake db:seeds:development
+```
+
+### サービスの起動（ローカルサーバーの起動コマンド）
+ここまでくればローカルの環境でRuby on Railsが動くので、以下コマンドでサーバーを起動して見て下さい。
+
+```bash
+bundle exec rails s -p 4000 -b 0.0.0.0
+```
+
+すると、以下のURLにブラウザでアクセスできるようになると思います。
+
+```bash
+http://localhost:4000/
+```

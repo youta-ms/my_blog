@@ -199,7 +199,7 @@ const blogConfig: BlogConfig = {
       title: "Next.js",
     },
     {
-      id: "rubyOnRails",
+      id: "rails",
       title: "Rails",
     },
   ],
