@@ -25,6 +25,7 @@ type Props = {
 
 const TagPage: NextPage<Props> = (props) => {
   const { tag, articles: defaultArticles, current, max } = props;
+
   if (!defaultArticles || defaultArticles.length === 0) {
     return <NotFound />;
   }
