@@ -198,6 +198,10 @@ const blogConfig: BlogConfig = {
       id: "next",
       title: "Next.js",
     },
+    {
+      id: "rails",
+      title: "Rails",
+    },
   ],
 };
 

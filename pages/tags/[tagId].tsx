@@ -72,7 +72,7 @@ const TagIndex: NextPage<Props> = (props) => {
             margin-top: 30px;
           }
           .tag {
-            margin-top: 50px;
+            padding-top: 50px;
           }
         `}
       </style>
