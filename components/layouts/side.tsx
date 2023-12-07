@@ -9,6 +9,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
   return (
     <div className="side">
       <Profile />
+      <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y" target="_blank" rel="nofollow noopener"><img className="samurai_img" src="https://www.afi-b.com/upload_image/9264-1524726055-3.gif" width="300" height="250" alt="侍エンジニア塾" /></a>
       <div className="list-wrap">
         <CategoryList />
       </div>
@@ -34,7 +35,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
             }
           }
           .list-wrap {
-            margin-bottom: 30px;
+            margin: 2.5em 0 30px;
             padding: 1em;
             background: #fff;
             border-radius: 10px;
@@ -47,6 +48,14 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
               max-width: 100%;
               height: auto;
             }
+          }
+          .samurai_link {
+            width: 100%;
+            display: block;
+          }
+          .samurai_img {
+            width: 100%;
+            height: auto;
           }
         `}
       </style>

@@ -291,7 +291,7 @@ The ``****************`` part is the database ID, so write it down.
 Enter the information you have noted in the .env file
 
 ```html
-NOTION_DATABASE_ID= 
+NOTION_DATABASE_ID=
 NOTION_TOKEN=
 ```
 
@@ -307,3 +307,7 @@ In, `blog.config.ts`, just set `notion` to `use` property
 ## License
 
 MIT License
+
+## markdownでファイル名を表示させたいとき
+```html:index.html
+```
