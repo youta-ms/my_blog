@@ -58,6 +58,7 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
                 <Content content={article.text_data} slug={article.slug} />
+                <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener"><img className="samurai_img" src="https://www.afi-b.com/upload_image/9264-1638547778-3.jpg" width="936" height="120" alt="侍エンジニア塾" /></a><img src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T" width="1" height="1" />
                 <Contact />
                 <TagList
                   category={getCategory(article.data.category)}
@@ -116,6 +117,15 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
             :global(img[width="1"]) {
               width: 1px;
             }
+          }
+          .samurai_link {
+            width: 90%;
+            display: block;
+            margin: 0 auto;
+          }
+          .samurai_img {
+            width: 100%;
+            height: auto;
           }
         `}
       </style>

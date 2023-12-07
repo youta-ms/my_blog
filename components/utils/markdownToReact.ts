@@ -19,7 +19,7 @@ export default async function markdownToReact(markdown: string, slug: string) {
       components: {
         a: BlogCard(markdown),
         img: PostImage(slug),
-        code: CodeBlock
+        pre: CodeBlock
       }
     })
     .process(markdown)).result

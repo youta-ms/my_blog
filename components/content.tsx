@@ -375,6 +375,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               border-radius: 3px;
               word-break: normal;
               word-wrap: normal;
+              position: relative;
               :global(code) {
                 margin: 0;
                 padding: 0;
