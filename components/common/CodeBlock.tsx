@@ -2,52 +2,43 @@ import { CodeComponent } from 'react-markdown/lib/ast-to-react';
 import { PrismAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-const CodeBlock: CodeComponent = ({ inline, className, children }) => {
-  const match = /language-(\w+)(:.+)/.exec(className || '');
-  const match1 = /language-(\w+)/.exec(className || '');
-
-  if (!match && !match1) {
-    return <code className={className}>{children}</code>;
-  }
-
-  let lang;
-  if (match) {
-    lang = match && match[1] ? match[1] : '';
-  } else {
-    lang = match1 && match1[1] ? match1[1] : '';
-  }
-  const name = match && match[2] ? match[2].slice(1) : '';
-
-  // const name_start = className ? className.indexOf(",") + 1 : 0;
-  // const name = className ? className.substring(name_start) : '';
+const CodeBlock: CodeComponent = ({ children }) => {
+  const childProps = typeof children[0] === 'object' && 'props' in children[0] ? children[0].props : {}
+  const { className, children: code } = childProps
+  const classList = className ? className.split(':') : []
+  const language = classList[0]?.replace('language-', '')
+  const fileName = classList[1]
 
   return (
-    <div className="code_box">
-      {name && <p className='code_file_name'>{name}</p>}
-      <SyntaxHighlighter
-        style={ atomDark }
-        language={ lang }
-        children={ String(children).replace(/\n$/, '') }
-        useInlineStyles={true}
-      />
+    <>
+      {fileName && (
+        <div className='code_file_name'>
+          <span>{fileName}</span>
+        </div>
+      )}
+      <SyntaxHighlighter language={language} style={atomDark}>
+        {String(code[0]).replace(/\n$/, '')}
+      </SyntaxHighlighter>
       <style jsx>
         {`
-          .code_box {
-            position: relative;
-          }
-
           .code_file_name {
-            display: inline-block;
-            position: absolute;
-            top: -1.5em;
-            left: 0;
-            background-color: #ccc;
-            padding: 0.2em;
-            color: #000;
+            display: table;
+            max-width: 100%;
+            background: #334155;
+            color: #f8fafc;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            border-radius: 4px 4px 0 0;
+            padding: 6px 12px 20px;
+            padding-top: 6px;
+            padding-right: 12px;
+            padding-bottom: 20px;
+            padding-left: 12px;
+            margin-bottom: -20px;
           }
         `}
       </style>
-    </div>
+    </>
   );
 };
 
