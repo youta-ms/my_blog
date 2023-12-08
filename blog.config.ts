@@ -16,13 +16,13 @@ const blogConfig: BlogConfig = {
   notFoundPage: {
     title: "404",
     subtitle: "お探しのページが見つかりませんでした。",
-    image: "/images/not-found.jpeg",
+    image: "/images/not-found.png",
     description: `申し訳ありません。\nお探しのページは一時的にアクセスが出来ない状況にあるか、もしくは移動、削除され見つけることができません。`,
   },
   notFoundTagId: {
     title: "404",
     subtitle: "タグに関する記事が見つかりませんでした。",
-    image: "/images/not-found.jpeg",
+    image: "/images/not-found.png",
     description: `申し訳ありません。\n現在選択されたタグに関連する記事は見つかりませんでした。\n他のタグをお試しいただくか、もしくは他のカテゴリの記事をご覧いただくことをおすすめいたします。\n新しい情報をお届けできるよう努めてまいりますので、どうぞお楽しみにお待ちください。`,
   },
   topPage: {
