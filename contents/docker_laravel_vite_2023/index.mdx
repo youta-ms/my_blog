@@ -1,0 +1,143 @@
+---
+title: Dockerで立てたLaravelの10系におけるCSS、SCSS、JSの読み込ませかた
+date: 2023-12-11
+writtenBy: me
+category: tec
+tags: [docker, laravel]
+related: []
+thumbnail: /images/docker.jpg
+description: この記事では、Dockerを使用したLaravel 10系でのCSS、SCSS、JSの読み込み方法を詳しく解説しています。環境設定からvite.config.jsの修正、npm run devの実行、docker-compose.ymlとDockerfileの修正、最後にpackage.jsonの更新までの手順が記載してあります。
+---
+
+この記事ではDockerで立てたバージョン10系のLaravelでのCSS、SCSS、JSの読み込ませかたの解説を行っています。
+
+## 環境
+以下のような環境で利用してます。
+
+- Laravel v10.29.0
+- npm v9.8.0
+- node.js v20.5.1
+
+## 手順
+順番としては以下になります。
+
+1. CSS、SCSS、JSファイルの配置
+1. vite.config.jsファイルの修正
+1. npm run devの実行
+1. docker-compose.yml（compose.yml）とDockerfileの修正
+1. package.jsonの更新
+
+### CSS、SCSS、JSファイルの配置
+まずは、インストールしたLaravelの直下にあるresourcesフォルダに適用させたいCSSファイル、SCSSファイル、JSファイルを配置してください。
+
+今回は例として「test.scss」と「test.js」を読み込ませる想定で記載します。
+
+### vite.config.jsファイルの修正
+
+vite.config.jsを以下のように修正してください。
+
+```javascript:vite.config.js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/sass/app.scss',
+                'resources/js/app.js',
+                'resources/sass/test.scss',
+                'resources/js/test.js',
+            ],
+            refresh: true,
+        }),
+    ],
+    server: {
+      host: true,
+      hmr: {
+          host: 'localhost',
+      },
+      watch: {
+          usePolling: true,
+      },
+    },
+});
+```
+
+### npm run devの実行
+Dockerを使っている場合は、対象のディレクトリに入って以下コマンドを実行
+
+```
+docker-compose exec 対象サービス名 bash
+```
+
+### docker-compose.yml（compose.yml）とDockerfileの修正
+このままだとviteでコンパイルされたcss等はポートが5173になるので、見に行くことができず検証ツールのコンソールでエラーを吐いてしまいます。
+
+そこでdocker-compose.yml(compose.yml)とphpのDockerfileを変更します。
+
+```yml:./docker-compose.yml
+...
+app:
+    build:
+      context: .
+      dockerfile: ./infra/docker/php/Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - 5173:5173
+    environment:
+...
+```
+
+```dockerfile:./infra/docker/php/Dockerfile/Dockerfile
+FROM php:8.1-fpm
+EXPOSE 5173
+RUN apt-get update \
+...
+```
+
+Dockerfileへの変更を反映するには、Dockerコンテナを再起動する必要があります。
+この時、composerとnpmのinstallコマンドを再実行することに注意してください。理由はこの記事の下部に書きます。
+
+```bash
+> docker compose down
+> docker compose up -d --build
+> docker compose exec l9vitedev-app bash
+$ composer install
+$ npm install
+```
+
+### package.jsonの更新
+最後に`npm run dev`コマンドを変更します。
+
+```json:./package.json
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite --host",
+        "build": "vite build"
+    },
+    ...
+}
+```
+
+## [sass] Top-level selectors may not contain the parent selector "&".エラーが出た場合
+
+`[sass] Top-level selectors may not contain the parent selector "&".`というエラーは`"&"`が通常はネストされたセレクタ内でのみ使用されるのに対し、ネストされていない時に`"&"`利用すると起こるエラーとなっています。
+
+```scss:問題のあるコード
+&.hogehoge {
+  // some styles here
+}
+```
+
+以下のように修正してみてください。
+
+```scss:修正後
+.fugafuga {
+  &.hogehoge {
+    // some styles here
+  }
+}
+```

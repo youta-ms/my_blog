@@ -202,6 +202,10 @@ const blogConfig: BlogConfig = {
       id: "rails",
       title: "Rails",
     },
+    {
+      id: "docker",
+      title: "Docker",
+    },
   ],
 };
 
