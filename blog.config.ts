@@ -134,12 +134,12 @@ const blogConfig: BlogConfig = {
       imagePath: "/images/london.jpeg",
       description: "Web制作に関する記事です",
     },
-    {
-      id: "web3",
-      title: "Web3.0",
-      imagePath: "/images/web3_thumbnail.jpg",
-      description: "Web3.0に関する記事です",
-    },
+    // {
+    //   id: "web3",
+    //   title: "Web3.0",
+    //   imagePath: "/images/web3_thumbnail.jpg",
+    //   description: "Web3.0に関する記事です",
+    // },
   ],
   showCategories: [
     {
@@ -162,30 +162,30 @@ const blogConfig: BlogConfig = {
       id: "git",
       title: "Git",
     },
-    {
-      id: "dao",
-      title: "DAO",
-    },
-    {
-      id: "web3",
-      title: "Web3.0",
-    },
-    {
-      id: "blockchain",
-      title: "Blockchain",
-    },
-    {
-      id: "digital_token",
-      title: "Digital Token",
-    },
-    {
-      id: "nft",
-      title: "NFT",
-    },
-    {
-      id: "metaverse",
-      title: "MetaVerse",
-    },
+    // {
+    //   id: "dao",
+    //   title: "DAO",
+    // },
+    // {
+    //   id: "web3",
+    //   title: "Web3.0",
+    // },
+    // {
+    //   id: "blockchain",
+    //   title: "Blockchain",
+    // },
+    // {
+    //   id: "digital_token",
+    //   title: "Digital Token",
+    // },
+    // {
+    //   id: "nft",
+    //   title: "NFT",
+    // },
+    // {
+    //   id: "metaverse",
+    //   title: "MetaVerse",
+    // },
     {
       id: "js",
       title: "JS/Jquery",
@@ -201,6 +201,10 @@ const blogConfig: BlogConfig = {
     {
       id: "rails",
       title: "Rails",
+    },
+    {
+      id: "docker",
+      title: "Docker",
     },
   ],
 };
