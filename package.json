@@ -111,5 +111,8 @@
     "fs": false,
     "net": false,
     "tls": false
+  },
+  "volta": {
+    "node": "18.12.1"
   }
 }
