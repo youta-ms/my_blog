@@ -1,0 +1,166 @@
+---
+title: Next.jsのマークダウンを用いたブログでRSSを簡単に設定する方法
+date: 2024-02-15
+writtenBy: me
+category: tec
+tags: [next]
+related: []
+thumbnail: /images/next.jpg
+description: Next.js、JavaScript、およびJqueryを使用してコピーライトの年数を自動的に更新する方法についての記事です。この記事では、Next.js・JavaScript・Jqueryで、コピーライト等の年数を自動的に更新する方法を詳しく説明しています。
+---
+
+Next.jsのマークダウンを利用したブログでのRSSの設定方法について解説します。
+
+## RSSとは
+RSS（Really Simple Syndication）とは、ウェブサイトの更新情報を一覧で知ることができるデータ形式の一つになります。
+
+これを利用してユーザーがRSSリーダーにウェブサイトのRSSフィードを登録することで、新規記事や更新記事の情報を一元的に取得で切るようになります。
+
+ユーザーエンゲージメントを高め、定期的な訪問者を増やすためのツールとして大活躍します。
+
+## RSSの設定方法
+Next.jsでRSSを作成するには、サーバーサイドで動作するAPIエンドポイントを作成してそこからRSSを提供するのが一般的な方法となっています。
+
+まずは、必要なライブラリをインストールします。
+
+### rssのインストール
+RSSフィードを生成するためにはrssという名前のパッケージを使うことができます。
+
+以下のコマンドでインストールできます。
+
+```shell
+yarn add rss
+```
+
+### APIを利用する設定
+pages/apiディレクトリ内に新しいファイルを作成します。
+
+例えば、rss.tsxという名前にすることができます。
+
+このファイル内でrssライブラリを使用して RSS フィードを生成します。一般的には、次のようなコードになります。
+
+Next/プロジェクト名/src/pages/api/feed.txs
+
+```javascript
+import { NextApiRequest, NextApiResponse } from 'next'
+import RSS from 'rss'
+
+const fetchYourData = async () => {
+  return [
+    {
+      title: '記事のタイトル',
+      description: '記事のディスクリプション',
+      slug: '記事のスラグ',
+      author: '執筆者',
+      date: new Date(),
+    },
+    // More items...
+  ]
+}
+
+const handler = async (_: NextApiRequest, res: NextApiResponse) => {
+  const feed = new RSS({
+    title: 'あなたのブログのタイトル',
+    description: 'あなたのブログの説明',
+    feed_url: 'https://site.com/api/rss',
+    site_url: 'https://site.com',
+    image_url: 'https://site.com/icon.png',
+    managingEditor: 'あなたの名前',
+    webMaster: 'あなたの名前',
+    copyright: 'ブログのコピーライト',
+    language: 'ja',
+    pubDate: new Date().toString(),
+    ttl: 60,
+  })
+
+  const data = await fetchYourData()
+
+  data.forEach((item: { title: string; description: string; slug: string; author: string; date: Date }) => {
+    feed.item({
+      title: item.title,
+      description: item.description,
+      url: `https://site.com/${item.slug}`,
+      author: item.author,
+      date: item.date,
+    })
+  })
+
+  res.setHeader('Content-Type', 'application/rss+xml')
+  res.write(feed.xml())
+  res.end()
+}
+
+export default handler
+```
+
+このスクリプトはデータソースから記事をフェッチしてそれをRSSフィードに追加しています。
+
+fetchYourData関数はダミーデータの例であり、ここを自分のデータソースからデータを取得するように変更してください。
+
+最後にRSS XMLをレスポンスとして返しています。
+
+このエンドポイントはhttps://site.com/api/rssでアクセスできます。
+
+RSSリーダーは上記URLからRSSフィードを取得することができます。
+
+注意点としては、サイトのタイトル、説明、URL、記事データなどを正しく設定することが重要です。また、フィード生成に時間がかかる場合は、キャッシュを使用することを検討してください。
+
+### ローカルで開発する場合
+ローカルで開発中でも RSSフィードを確認することは可能です。
+Next.jsのAPIルーティングはローカル開発サーバでも動作します。
+
+まず、`yarn dev`などを使用して Next.js のローカル開発サーバを起動します。
+次に、ブラウザを開き、作成したAPIエンドポイントのURLを指定します。
+
+例えば、APIエンドポイントをpages/api/rss.tsに作成した場合、そのURLはhttp://localhost:3000/api/rssとなります（3000 は Next.js のデフォルトのポートです。別のポートを設定した場合はそのポートを使用してください）。
+
+このURLにアクセスすると、作成したRSSフィードがXML形式で表示されます。
+RSSフィードをパースして人間が読みやすい形式で表示するためには、専用のRSSリーダーを使用することをおすすめします。
+
+多くのブラウザは XMLを構造化して表示しますが、RSSリーダーはフィードの各エントリーに対応する情報を適切に表示します。
+
+### Markdown からの設定
+マークダウンファイルからのデータをフィードに反映させるには、まずマークダウンファイルを解析してデータを取得する必要があります。
+
+`getArticles()`でマークダウンファイルのデータを取得し、それをforEachで回してそれぞれの情報をフィードに反映させています。
+
+```javascript
+import { GetServerSideProps } from "next";
+import Rss from "rss";
+import { getArticles } from "aaa"; // 記事を全部取得する処理
+import blogConfig from "bbb"; // ブログの情報が記載してあるファイル
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { res } = ctx;
+
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/rss+xml;charset=utf-8");
+
+  const url = 'ブログのURL';
+  const articles = await getArticles();
+
+  const rss = new Rss({
+    title: 'ブログのタイトル',
+    site_url: url,
+    feed_url: `${url}/rss`,
+    language: "ja",
+    description: 'ブログの説明',
+    copyright: 'ブログのコピーライト',
+  });
+
+  articles.forEach((article) => {
+    rss.item({
+      title: '記事のタイトル',
+      url: '記事のURL',
+      description: '記事の説明',
+      date: new Date(article.data.date),
+    });
+  });
+
+  res.end(rss.xml());
+
+  return { props: {} };
+};
+
+export default () => {};
+```
