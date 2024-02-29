@@ -21,7 +21,7 @@ import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
 import { Contact } from "@/components/common/contact";
 import { useArticles } from "@/hooks/use-articles";
-import { log } from "console";
+import Image from "next/image";
 
 type DetailProps = {
   article: Article;
@@ -58,7 +58,20 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
                 <Content content={article.text_data} slug={article.slug} />
-                <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener"><img className="samurai_img" src="https://www.afi-b.com/upload_image/9264-1638547778-3.jpg" width="936" height="120" alt="侍エンジニア塾" /></a><img src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T" width="1" height="1" />
+                <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener">
+                  <Image
+                    src="https://www.afi-b.com/upload_image/9264-1638547778-3.jpg"
+                    className="samurai_img"
+                    alt="侍エンジニア塾"
+                    fill
+                  />
+                </a>
+                <div className="lead_img">
+                  <Image
+                    src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T"
+                    fill
+                  />
+                </div>
                 <Contact />
                 <TagList
                   category={getCategory(article.data.category)}
@@ -122,6 +135,10 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
             width: 90%;
             display: block;
             margin: 0 auto;
+          }
+          .lead_img {
+            width: 1px;
+            height: 1px;
           }
           .samurai_img {
             width: 100%;
