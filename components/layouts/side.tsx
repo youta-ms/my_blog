@@ -4,12 +4,20 @@ import { Profile } from "../sides/profile";
 import { CategoryList } from "../common/category-list";
 import { TagList } from "../common/common-tag-list";
 import { Toc } from "../toc";
+import Image from "next/image";
 
 export const Side: React.VFC<{ id?: string }> = ({ id }) => {
   return (
     <div className="side">
       <Profile />
-      <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y" target="_blank" rel="nofollow noopener"><img className="samurai_img" src="https://www.afi-b.com/upload_image/9264-1524726055-3.gif" width="300" height="250" alt="侍エンジニア塾" /></a>
+      <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y" target="_blank" rel="nofollow noopener">
+        <Image
+          src="https://www.afi-b.com/upload_image/9264-1524726055-3.gif"
+          className="samurai_img"
+          alt="侍エンジニア塾"
+          fill
+        />
+      </a>
       <div className="list-wrap">
         <CategoryList />
       </div>
