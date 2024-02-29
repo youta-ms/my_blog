@@ -69,6 +69,7 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                 <div className="lead_img">
                   <Image
                     src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T"
+                    alt="侍エンジニア塾"
                     fill
                   />
                 </div>
