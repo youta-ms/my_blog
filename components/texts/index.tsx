@@ -12,7 +12,7 @@ export function Title({ children }: { children: React.ReactNode }) {
             font-weight: 600;
             padding: 12px 0;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             @media screen and (max-width: ${blogConfig.styles.breakPoints
                 .medium}) {
               margin-bottom: 20px;
