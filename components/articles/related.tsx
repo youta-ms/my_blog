@@ -8,11 +8,12 @@ export function Related({ related }: { related: Article[] }) {
     <ArticleList>
       <Title>RELATED ARTICLES</Title>
       <LatestArticle>
-        {related.map((post) => (
+        {related.map((post, index) => (
           <AritcleColumn key={post.slug} column={2}>
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
+              {...index <= 3 && { eagerFlg: true }}
             />
           </AritcleColumn>
         ))}

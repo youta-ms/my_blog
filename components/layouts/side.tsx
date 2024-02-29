@@ -15,6 +15,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
           src="https://www.afi-b.com/upload_image/9264-1524726055-3.gif"
           className="samurai_img"
           alt="侍エンジニア塾"
+          loading="eager"
           fill
         />
       </a>

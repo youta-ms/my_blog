@@ -8,11 +8,12 @@ export function Other({ other }: { other: Article[] }) {
     <ArticleList>
       <Title>OTHER ARTICLES</Title>
       <LatestArticle>
-        {other.map((post) => (
+        {other.map((post, index) => (
           <AritcleColumn key={post.slug} column={2}>
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
+              {...index <= 3 && { eagerFlg: true }}
             />
           </AritcleColumn>
         ))}

@@ -38,11 +38,12 @@ const PageDetail = ({
         <Main>
           <ArticleList>
             <LatestArticle>
-              {articles.map((article) => (
+              {articles.map((article, index) => (
                 <AritcleColumn key={article.slug} column={2}>
                   <ArticleCard
                     article={article.data}
                     href={`/${article.data.category}/${article.slug}`}
+                    {...index <= 3 && { eagerFlg: true }}
                   />
                 </AritcleColumn>
               ))}

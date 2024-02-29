@@ -44,11 +44,12 @@ const TagPage: NextPage<Props> = (props) => {
       <Wrapper>
         <ArticleList>
           <LatestArticle>
-            {articles.map((article) => (
+            {articles.map((article, index) => (
               <AritcleColumn key={article.slug} column={3}>
                 <ArticleCard
                   article={article.data}
                   href={`/${article.data.category}/${article.slug}`}
+                  {...index <= 3 && { eagerFlg: true }}
                 />
               </AritcleColumn>
             ))}
