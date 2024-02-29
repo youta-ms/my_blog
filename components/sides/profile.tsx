@@ -11,7 +11,8 @@ export const Profile = () => {
           <div className="profile-img">
             <div className="netx_img_box">
               <Image
-                loading="lazy"
+                priority
+                loading="eager"
                 src={blogConfig.account.image}
                 fill
                 alt="avatar"
