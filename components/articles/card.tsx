@@ -30,9 +30,10 @@ type Props = {
   article: ArticleData;
   href: string;
   className?: string;
+  eagerFlg: boolean;
 };
 
-export function ArticleCard({ article, href }: Props) {
+export function ArticleCard({ article, href, eagerFlg = false }: Props) {
   return (
     <Link href={href} prefetch={false} className={styles.link_card}>
       <div className="article-img-wrap">
@@ -41,7 +42,7 @@ export function ArticleCard({ article, href }: Props) {
             src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
             className={styles.article_img}
             alt=""
-            loading="lazy"
+            loading={eagerFlg ? "eager" : "lazy"}
             fill
           />
         </div>
