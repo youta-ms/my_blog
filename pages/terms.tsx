@@ -25,7 +25,7 @@ const Terms = () => {
       />
       <Wrapper>
         <div className="main">
-          <Title>プライバシーポリシー</Title>
+          <Title>免責事項</Title>
           <div className="container">
           <p>Youtaの雑記ブログ.(<Link href="https://youta-ms.online">https://youta-ms.online</Link>)(以下、「当サイト」とします。)における免責事項は、下記の通りです。</p>
 

@@ -4,6 +4,7 @@ import { Wrapper } from "@/components/common/wrapper";
 import { Side } from "@/components/layouts/side";
 import { useState } from "react";
 import blogConfig from "@/blog.config";
+import Link from "next/link";
 
 const Contact = () => {
   const [verify, setVerify] = useState(false);
@@ -38,7 +39,7 @@ const Contact = () => {
                   :
                   <input name="verification" type="checkbox" onClick={() => setVerify(true)}/>
                 }
-                <label htmlFor="verification" onClick={() => setVerify(true)}>スパムメール防止のためこちらにチェックを入れてから送信してください</label>
+                <label htmlFor="verification"><Link rel="noopener noreferrer" target="_blank" href="https://youta-ms.online/privacy">プライバシーポリシー</Link>の内容に同意する</label>
               </div>
               { verify ?
                 <button className="btnripple" type="submit">送信する</button>
@@ -72,6 +73,14 @@ const Contact = () => {
             max-width: 640px;
             margin: 0 auto;
             padding: 30px 0;
+
+            :global(a) {
+              color: var(--c-primary);
+              text-decoration: underline;
+              &:hover {
+                color: var(--c-primary-hover);
+              }
+            }
           }
 
           h1 {
