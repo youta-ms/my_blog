@@ -1,0 +1,58 @@
+---
+title: Next.jsでの開発中にMapsJavaScriptAPIのv3.52.2に出たエラーの解決方法
+date: 2024-03-04
+writtenBy: me
+category: tec
+tags: [next]
+related: []
+thumbnail: /images/next.jpg
+description: Next.jsで@react-google-maps/apiを利用していた際に急にデプロイが通らなくなった際のエラー解決方法についてまとめました。
+---
+
+## 結論
+以下の方法で対応
+
+1.`@react-google-maps/api`のバージョンを下げる
+1.'LoadScriptNext'コンポーネントのlocalContextライブラリを利用しない様にする
+
+## 概要
+Next.jsで開発していると急にAWS Amplifyでデプロイが失敗する様になりました。
+
+ローカルで`yarn build`を実行してみると以下の様なエラーが...
+
+```zsh
+./src/components/対象のファイル
+Type error: Type '("drawing" | "geometry" | "localContext" | "places" | "visualization")[]' is not assignable to type 'Library[]'.
+  Type '"drawing" | "geometry" | "localContext" | "places" | "visualization"' is not assignable to type 'Library'.
+    Type '"localContext"' is not assignable to type 'Library'.
+
+  175 |             googleMapsApiKey='googleMapsApiKey'
+  176 |             region='JP'
+> 177 |             libraries={MAP_lIBRARIES}
+      |             ^
+  178 |           >
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+
+`MAP_lIBRARIES`の定義は以下の様にしており、どうやら`'localContext'`が関係ありそうでした。
+
+```
+export const MAP_lIBRARIES: (
+  | 'drawing'
+  | 'geometry'
+  | 'localContext'
+  | 'places'
+  | 'visualization'
+)[] = ['geometry']
+```
+
+そこで調査をしてみるとMaps JavaScript APIのドキュメントに答えが書いてありました。
+
+> Maps JavaScript API の「ローカル コンテキスト ライブラリ」は、ベータ版機能として提供してまいりましたが、導入数が限られていたため、v3.52.2 より非推奨となります。ローカル コンテキスト ライブラリの機能は別途お知らせがあるまでご利用いただけますが、新しいプロジェクトへの追加は推奨されません。
+
+[引用:Maps JavaScript APIドキュメント](https://developers.google.com/maps/documentation/javascript/local-context?hl=ja)
+
+2024年02月22日にリリースされたv3.52.2が原因のようです。
+
+私は`@react-google-maps/api`のバージョンを下げることで対応しましたが、皆さんの状況に合わせて解決してもらえたらと思います。
