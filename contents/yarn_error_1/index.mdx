@@ -1,0 +1,96 @@
+---
+title: Yarnでの"Unable to deserialize cloned data"エラーの解決方法
+date: 2024-03-01
+writtenBy: me
+category: tec
+tags: [yarn]
+related: []
+thumbnail: /images/yarn.jpg
+description: この記事では、Yarnを使用してGatsbyのプロジェクトに開発した"Unable to deserialize cloned data"エラーの解決方法について解説しています。この記事を参考にして、"Unable to deserialize cloned data"エラーを解消してもらえると幸いです。
+---
+
+Yarnを使用してGatsbyプロジェクトを開発していると、以下のようなエラーメッセージが表示されました。
+
+```zsh
+$ yarn develop
+yarn run v1.22.19
+warning ../../../package.json: No license field
+$ gatsby develop
+
+ ERROR #11903  COMPILATION
+
+There was an unhandled error during compilation for 〇〇. Please run the command with the
+--verbose flag again.
+Unable to deserialize cloned data due to invalid or unsupported version.
+
+  Error: Unable to deserialize cloned data due to invalid or unsupported version.
+
+  - node:v8:380 deserialize
+    node:v8:380:7
+
+  - serializer.js:249 deserialize
+    [〇〇]/[@parcel]/core/lib/serializer.js:249:48
+
+  - RequestTracker.js:854 loadRequestGraph
+    [〇〇]/[@parcel]/core/lib/RequestTracker.js:854:52
+
+  - RequestTracker.js:821 Function.init
+    [〇〇]/[@parcel]/core/lib/RequestTracker.js:821:17
+
+  - Parcel.js:256 Parcel._init
+    [〇〇]/[@parcel]/core/lib/Parcel.js:256:28
+
+  - Parcel.js:273 Parcel.run
+    [〇〇]/[@parcel]/core/lib/Parcel.js:273:7
+
+  - compile-gatsby-files.ts:109 compileGatsbyFiles
+    [〇〇]/[gatsby]/src/utils/parcel/compile-gatsby-files.ts:109:29
+
+  - initialize.ts:176 initialize
+    [〇〇]/[gatsby]/src/services/initialize.ts:176:3
+
+
+not finished compile gatsby files - 0.138s
+
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+```
+
+このエラーは、Gatsbyのビルド中に「Unable to deserialize cloned data」エラーが発生したことを示しているようです。
+
+## エラーの原因
+このエラーが発生する主な原因は、プロジェクトの一時ファイルやキャッシュが破損している場合やnodeのパッケージで依存関係のバージョンが互換性のないものがある場合が主な原因です。
+
+## 解決方法
+以下の手順を実行すると、"Unable to deserialize cloned data"エラーが解決できました。
+
+### 1. 不要なフォルダの削除
+まず、以下のフォルダを削除します。
+
+- .parcel-cache
+- dist
+- node_modules
+
+これらのフォルダは、ビルド中に一時ファイルやキャッシュが格納されている場所になります。
+
+ターミナルで下記のコマンドを実行して、これらのフォルダを削除してください。
+
+```zsh
+rm -rf .parcel-cache dist node_modules
+```
+
+### 2. パッケージの再インストール
+次に、依存関係を保つために再度パッケージをインストールします。
+
+```zsh
+yarn
+```
+
+### 3. プロジェクトの再ビルド
+最後に、プロジェクトの再度ビルドを行います。
+
+```zsh
+yarn develop
+```
+
+以上の手順を実行することで、エラーが解消されるはずです。
