@@ -1,0 +1,4 @@
+This is a Brave Creators publisher verification file.
+
+Domain: youta-ms.online
+Token: c06ec619c584e8851baefa0237cc15417a79799a5142e2574218384f864a1cdd
