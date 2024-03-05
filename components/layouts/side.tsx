@@ -5,6 +5,7 @@ import { CategoryList } from "../common/category-list";
 import { TagList } from "../common/common-tag-list";
 import { Toc } from "../toc";
 import Image from "next/image";
+import { AdSense } from "../common/adsense";
 
 export const Side: React.VFC<{ id?: string }> = ({ id }) => {
   return (
@@ -22,6 +23,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
       <div className="list-wrap">
         <CategoryList />
       </div>
+      <AdSense/>
       <div className="list-wrap">
         <SubTitle>{blogConfig.widgets.tagList.title}</SubTitle>
         <TagList tags={blogConfig.tags} />
