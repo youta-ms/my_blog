@@ -60,7 +60,7 @@ export function SubTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function  HamburgerSubTitle({ children }: { children: React.ReactNode }) {
+export function HamburgerSubTitle({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="subtitle">
       {children}
