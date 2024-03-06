@@ -109,6 +109,10 @@ const blogConfig: BlogConfig = {
       name: "お問い合わせ",
       url: "/contact",
     },
+    {
+      name: "プロフィール",
+      url: "/profile",
+    },
   ],
   account: {
     name: "Youta",
