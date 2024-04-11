@@ -13,7 +13,7 @@ export function Related({ related }: { related: Article[] }) {
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
-              {...index <= 3 && { eagerFlg: true }}
+              {...index <= 4 && { eagerFlg: true }}
             />
           </AritcleColumn>
         ))}

@@ -1,0 +1,56 @@
+---
+title: textareaでの改行をさせないようにする方法
+date: 2024-04-10
+writtenBy: me
+category: tec
+tags: [js, coding]
+related: []
+thumbnail: /images/coding.jpg
+description: この記事ではCompositionEventを利用せずにtextareaでの改行を禁止、させないようにする方法を紹介しています。htmlとJqueryで完結するので試してみてください。
+---
+この記事ではCompositionEventを利用せずにtextareaでの改行をさせないようにする方法を紹介します。
+
+## 結論
+下記のコードで実現可能です。
+
+```js
+$("#hoge").on("keydown", function(event) {
+  // エンターキーが押された場合に無効にする
+  if (event.key === "Enter") {
+    event.preventDefault(); // デフォルトのエンターキーの挙動をキャンセル
+  }
+});
+```
+
+`#hoge`はtextarea要素に指定したidになります。（idじゃなくてclass属性等でも大丈夫です）
+
+前提として、改行させたくないなら`<input type="text">`を使えば良いと思ってます。
+
+が、`<input type="text">`だと入力している文字が入力欄より多くなると、折り返し表示されずに文字が流れていってしまいます。
+
+改行をさせないようにしたいけど、文字は折り返し表示したいという場合にこの方法が使えます。
+
+## 別の方法
+下記のようにCompositionEventを利用して改行を制御する方法もありますが、コードが長くなるので基本的には上記で紹介している方法で良いと思います。
+
+```javascript
+let isComposing = false;
+
+// IMEの入力開始を検知
+$("#note-field").on("compositionstart", function() {
+  isComposing = true;
+});
+
+// IMEの入力完了を検知
+$("#note-field").on("compositionend", function() {
+  isComposing = false;
+});
+
+// キー入力を検知
+$("#note-field").on("keydown", function(event) {
+  // エンターキーが押されたかつIME入力中でない場合にフォーカスを外す
+  if (event.key === "Enter" && !isComposing) {
+    event.preventDefault(); // デフォルトのエンターキーの挙動をキャンセル
+  }
+});
+```

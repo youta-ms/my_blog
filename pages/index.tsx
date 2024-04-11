@@ -42,7 +42,7 @@ const TopPage = ({
                   <ArticleCard
                     article={article.data}
                     href={`/${article.data.category}/${article.slug}`}
-                    {...index <= 3 && { eagerFlg: true }}
+                    {...index <= 4 && { eagerFlg: true }}
                   />
                 </AritcleColumn>
               ))}
