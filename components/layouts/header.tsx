@@ -28,7 +28,12 @@ export function Header() {
             <ul className="header-sub-nav">
               {blogConfig.subNavigation.map((n) => (
                 <li key={n.url}>
-                  <Link href={n.url}>{n.name}</Link>
+                  <Link
+                    href={n.url}
+                    prefetch={false}
+                  >
+                    {n.name}
+                  </Link>
                 </li>
               ))}
             </ul>
