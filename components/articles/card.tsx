@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArticleData } from "@/types";
 import blogConfig from "@/blog.config";
 import dayjs from "dayjs";
@@ -7,6 +8,8 @@ import { getTagList } from "../utils/get-tag-list";
 import { getCategory } from "../utils/get-category";
 import Image from "next/image";
 import styles from './CardComponent.module.css'
+
+type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
 function PublishdAt({ date }: { date: string }) {
   return (
@@ -34,16 +37,28 @@ type Props = {
 };
 
 export function ArticleCard({ article, href, eagerFlg = false }: Props) {
+  const [aspectRatio, setAspectRatio] = useState(0);
+  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
+    setAspectRatio(e.naturalWidth / e.naturalHeight);
+  };
   return (
     <Link href={href} prefetch={false} className={styles.link_card}>
-      <div className="article-img-wrap">
+      <div
+        className="article-img-wrap"
+        style={{
+          aspectRatio: `${aspectRatio || '126 / 71'}`,
+          position: 'relative',
+        }}
+      >
         <div className="link_img">
           <Image
             src={article.thumbnail ?? blogConfig.article.defaultThumbnail}
             className={styles.article_img}
-            alt=""
+            alt={getCategory(article.category).toString()}
             loading={eagerFlg ? "eager" : "lazy"}
             fill
+            placeholder="blur"
+            onLoadingComplete={(e) => onLoadingComplete(e)}
           />
         </div>
       </div>
