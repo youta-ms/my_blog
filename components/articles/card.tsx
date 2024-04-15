@@ -41,7 +41,6 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
   const onLoadingComplete = (e: OnLoadingCompleteResult) => {
     setAspectRatio(e.naturalWidth / e.naturalHeight);
   };
-  console.log(getCategory(article.category));
   return (
     <Link href={href} prefetch={false} className={styles.link_card}>
       <div
