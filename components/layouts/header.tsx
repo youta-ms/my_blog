@@ -1,10 +1,17 @@
+import { useState } from 'react';
 import blogConfig from "@/blog.config";
 import Link from "next/link";
 import { SocialList } from "../common/template-social-list";
 import { HeaderLink } from "@/components/common/header-link";
 import Image from "next/image";
 
+type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
+
 export function Header() {
+  const [aspectRatio, setAspectRatio] = useState(0);
+  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
+    setAspectRatio(e.naturalWidth / e.naturalHeight);
+  };
   return (
     <header className="header-outer">
       <div className="header-inner">
@@ -14,12 +21,20 @@ export function Header() {
           </div>
           <div className="logo-wrap">
             <Link href="/">
-              <div className="netx_img_box">
+              <div
+                className="netx_img_box"
+                style={{
+                aspectRatio: `${aspectRatio || '340 / 283'}`,
+                position: 'relative',
+              }}>
                 <Image
                   src={blogConfig.siteLogo.url}
                   alt={blogConfig.siteName}
                   fill
-                  loading={"eager"}
+                  loading="eager"
+                  blurDataURL={blogConfig.article.defaultThumbnail}
+                  placeholder="blur"
+                  onLoadingComplete={(e) => onLoadingComplete(e)}
                 />
               </div>
             </Link>
