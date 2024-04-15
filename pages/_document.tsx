@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { googleTagManagerId, publisherId } from '@/blog.config';
 import Script from "next/script";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 class MyDocument extends Document {
   render() {
@@ -15,12 +16,6 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
         </Head>
         <body>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}`}
-            height="0"
-            width="0"
-            className="google_tag"
-          />
           <Main />
           <NextScript />
           <style>
@@ -28,13 +23,10 @@ class MyDocument extends Document {
               body {
                 position: relative;
               }
-              .google_tag {
-                display:none;
-                visibility:hidden
-              }
             `}
           </style>
         </body>
+        <GoogleTagManager gtmId={googleTagManagerId} />
       </Html>
     )
   }
