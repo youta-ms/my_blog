@@ -57,6 +57,7 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
             alt={getCategory(article.category).toString()}
             loading={eagerFlg ? "eager" : "lazy"}
             fill
+            blurDataURL={blogConfig.article.defaultThumbnail}
             placeholder="blur"
             onLoadingComplete={(e) => onLoadingComplete(e)}
           />
