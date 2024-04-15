@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { SubTitle } from "@/components/texts";
 import blogConfig from "@/blog.config";
 import { Profile } from "../sides/profile";
@@ -7,17 +8,35 @@ import { Toc } from "../toc";
 import Image from "next/image";
 import { AdSense } from "../common/adsense";
 
+type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
+
 export const Side: React.VFC<{ id?: string }> = ({ id }) => {
+  const [aspectRatio, setAspectRatio] = useState(0);
+  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
+    setAspectRatio(e.naturalWidth / e.naturalHeight);
+  };
   return (
     <div className="side">
       <Profile />
-      <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y" target="_blank" rel="nofollow noopener">
+      <a
+        className="samurai_link"
+        href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y"
+        target="_blank"
+        rel="nofollow noopener"
+        style={{
+          aspectRatio: `${aspectRatio || '340 / 283'}`,
+          position: 'relative',
+        }}
+      >
         <Image
           src="https://www.afi-b.com/upload_image/9264-1524726055-3.gif"
           className="samurai_img"
           alt="侍エンジニア塾"
           loading="eager"
           fill
+          blurDataURL={blogConfig.article.defaultThumbnail}
+          placeholder="blur"
+          onLoadingComplete={(e) => onLoadingComplete(e)}
         />
       </a>
       <div className="list-wrap">
