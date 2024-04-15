@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo, ArticleJsonLd, ArticleJsonLdProps } from "next-seo";
 import { getArticle, getArticles, getFilteredArticles } from "@/utils/get-articles";
@@ -30,6 +31,8 @@ type DetailProps = {
   current: number;
 };
 
+type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
+
 export default ({ article: defaultArticle, related, articles: defaultArticles, current, }: DetailProps) => {
   if (!defaultArticle) {
     return <NotFound />;
@@ -48,6 +51,11 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
     publisherName: "",
     publisherLogo: "",
   };
+
+  const [aspectRatio, setAspectRatio] = useState(0);
+  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
+    setAspectRatio(e.naturalWidth / e.naturalHeight);
+  };
   return (
     <Layout>
       {article && (
@@ -58,19 +66,40 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
                 <Content content={article.text_data} slug={article.slug} />
-                <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener">
+                <a
+                  className="samurai_link"
+                  href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y"
+                  target="_blank"
+                  rel="nofollow noopener"
+                  style={{
+                    aspectRatio: `${aspectRatio || '367 / 47'}`,
+                    position: 'relative',
+                  }}
+                >
                   <Image
                     src="https://www.afi-b.com/upload_image/9264-1638547778-3.jpg"
                     className="samurai_img"
                     alt="侍エンジニア塾"
                     fill
+                    blurDataURL={blogConfig.article.defaultThumbnail}
+                    placeholder="blur"
+                    onLoadingComplete={(e) => onLoadingComplete(e)}
                   />
                 </a>
-                <div className="lead_img">
+                <div
+                  className="lead_img"
+                  style={{
+                    aspectRatio: `${aspectRatio || '367 / 47'}`,
+                    position: 'relative',
+                  }}
+                >
                   <Image
                     src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T"
                     alt="侍エンジニア塾"
                     fill
+                    blurDataURL={blogConfig.article.defaultThumbnail}
+                    placeholder="blur"
+                    onLoadingComplete={(e) => onLoadingComplete(e)}
                   />
                 </div>
                 <Contact />
