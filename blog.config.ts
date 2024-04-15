@@ -1,5 +1,8 @@
 import { BlogConfig } from "./types/config";
 
+export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || ''
+export const publisherId = process.env.PUBLISHER_ID || ''
+
 const blogConfig: BlogConfig = {
   use: "mdx", // mdx or notion
   siteLogo: {
@@ -11,7 +14,6 @@ const blogConfig: BlogConfig = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
   title: "Youtaの雑記ブログ",
   description: "現役Webエンジニアが主にプログラミング・興味のあることについて書くブログです。",
-  googleAnalyticsCode: "", // G-**********
   googleAdsenseCode: "", // ca-pub-****************
   notFoundPage: {
     title: "404",

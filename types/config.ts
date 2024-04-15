@@ -121,7 +121,6 @@ export interface BlogConfig {
   siteName: string;
   title: string;
   description: string;
-  googleAnalyticsCode: string;
   googleAdsenseCode: string;
   notFoundPage: Hero;
   notFoundTagId: Hero;

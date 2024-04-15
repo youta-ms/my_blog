@@ -1,13 +1,17 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { googleTagManagerId } from '@/utils/gtm';
+import { googleTagManagerId, publisherId } from '@/blog.config';
+import Script from "next/script";
 
 class MyDocument extends Document {
   render() {
     return (
       <Html lang="ja">
         <Head>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3991778860579469"
-          crossOrigin="anonymous"></script>
+          <Script
+            async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${publisherId}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
           <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" />
         </Head>
         <body>
