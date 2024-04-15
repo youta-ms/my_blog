@@ -6,7 +6,7 @@ import { CategoryList } from "../common/category-list";
 import { TagList } from "../common/common-tag-list";
 import { Toc } from "../toc";
 import Image from "next/image";
-import { AdSense } from "../common/adsense";
+// import { AdSense } from "../common/adsense";
 
 type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
@@ -42,7 +42,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
       <div className="list-wrap">
         <CategoryList />
       </div>
-      <AdSense/>
+      {/* <AdSense/> */}
       <div className="list-wrap">
         <SubTitle>{blogConfig.widgets.tagList.title}</SubTitle>
         <TagList tags={blogConfig.tags} />
