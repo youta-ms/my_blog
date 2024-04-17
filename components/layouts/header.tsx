@@ -24,9 +24,10 @@ export function Header() {
               <div
                 className="netx_img_box"
                 style={{
-                aspectRatio: `${aspectRatio || '340 / 283'}`,
-                position: 'relative',
-              }}>
+                  aspectRatio: `${aspectRatio || '340 / 283'}`,
+                  position: 'relative',
+                }}
+              >
                 <Image
                   src={blogConfig.siteLogo.url}
                   alt={blogConfig.siteName}

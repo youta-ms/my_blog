@@ -56,11 +56,17 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
             className={styles.article_img}
             alt={article.title + "のサムネイル画像"}
             loading={eagerFlg ? "eager" : "lazy"}
-            fill
+            width={1200}
+            height={700}
             priority={eagerFlg ? true : false}
             blurDataURL={blogConfig.article.defaultThumbnail}
             placeholder="blur"
             onLoadingComplete={(e) => onLoadingComplete(e)}
+            sizes="100vw"
+            style={{
+              width: '100%',
+              height: 'auto',
+            }}
           />
         </div>
       </div>
@@ -112,6 +118,7 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
           }
           .link_img {
             width: 100%;
+            height: 100%;
           }
         `}
       </style>

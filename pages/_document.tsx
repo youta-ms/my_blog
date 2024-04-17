@@ -23,8 +23,8 @@ class MyDocument extends Document {
           <link rel='preload' as='image' href="/images/git.jpg" fetchPriority='high'></link>
           <link rel='preload' as='image' href="/images/js.jpg" fetchPriority='high'></link>
           <link rel='preload' as='image' href="/images/laravel.jpg" fetchPriority='high'></link>
-          <link rel='preload' as='image' href="/images/logo.jpg" fetchPriority='high'></link>
-          <link rel='preload' as='image' href="/images/me.jpg" fetchPriority='high'></link>
+          <link rel='preload' as='image' href="/images/logo.png" fetchPriority='high'></link>
+          <link rel='preload' as='image' href="/images/me.jpeg" fetchPriority='high'></link>
           <link rel='preload' as='image' href="/images/next.jpg" fetchPriority='high'></link>
           <link rel='preload' as='image' href="/images/rails.jpg" fetchPriority='high'></link>
           <link rel='preload' as='image' href="/images/wordpress.jpg" fetchPriority='high'></link>
