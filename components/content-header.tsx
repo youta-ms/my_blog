@@ -27,6 +27,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
               alt="thumbnail"
               className="thumbnail"
               fill
+              priority
             />
           </div>
         </div>
@@ -38,6 +39,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           className="samurai_img"
           alt="侍エンジニア塾"
           fill
+          priority
         />
       </a>
       <div className="lead_img">
@@ -45,6 +47,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           src="https://t.afi-b.com/lead/Q9264Q/H866104Y/r433259T"
           alt="侍エンジニア塾"
           fill
+          priority
         />
       </div>
       <style jsx>

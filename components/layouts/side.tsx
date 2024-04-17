@@ -37,6 +37,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
           blurDataURL={blogConfig.article.defaultThumbnail}
           placeholder="blur"
           onLoadingComplete={(e) => onLoadingComplete(e)}
+          priority
         />
       </a>
       <div className="list-wrap">

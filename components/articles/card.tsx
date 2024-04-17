@@ -57,6 +57,7 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
             alt={article.title + "のサムネイル画像"}
             loading={eagerFlg ? "eager" : "lazy"}
             fill
+            priority={eagerFlg ? true : false}
             blurDataURL={blogConfig.article.defaultThumbnail}
             placeholder="blur"
             onLoadingComplete={(e) => onLoadingComplete(e)}
