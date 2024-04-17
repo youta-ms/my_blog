@@ -32,7 +32,7 @@ export function Header() {
                   alt={blogConfig.siteName}
                   fill
                   loading="eager"
-                  blurDataURL={blogConfig.article.defaultThumbnail}
+                  blurDataURL="/images/logo.png"
                   placeholder="blur"
                   onLoadingComplete={(e) => onLoadingComplete(e)}
                 />
