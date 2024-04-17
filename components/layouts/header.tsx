@@ -35,6 +35,7 @@ export function Header() {
                   blurDataURL="/images/logo.png"
                   placeholder="blur"
                   onLoadingComplete={(e) => onLoadingComplete(e)}
+                  priority
                 />
               </div>
             </Link>

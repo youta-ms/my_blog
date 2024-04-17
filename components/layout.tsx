@@ -38,11 +38,7 @@ export function Layout(props: { children: React.ReactNode }) {
     <>
       <DefaultSeo {...nextSeoConfig} />
       <Head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        />
-        <link rel="icon" href={blogConfig.siteUrl + "/images/favicon.ico"} sizes="any" />
+        <link rel="icon" href="/images/favicon.ico" sizes="any" />
       </Head>
       <Header />
       <main>{props.children}</main>
