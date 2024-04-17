@@ -2,7 +2,6 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { googleTagManagerId, publisherId } from '@/blog.config';
 import Script from "next/script";
 import { GoogleTagManager } from '@next/third-parties/google'
-import blogConfig from "@/blog.config";
 
 class MyDocument extends Document {
   render() {
