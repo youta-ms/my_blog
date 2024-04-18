@@ -1,7 +1,6 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { googleTagManagerId, publisherId } from '@/blog.config';
+import { publisherId } from '@/blog.config';
 import Script from "next/script";
-import { GoogleTagManager } from '@next/third-parties/google'
 
 class MyDocument extends Document {
   render() {
@@ -27,7 +26,6 @@ class MyDocument extends Document {
             `}
           </style>
         </body>
-        <GoogleTagManager gtmId={googleTagManagerId} />
       </Html>
     )
   }
