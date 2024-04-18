@@ -10,6 +10,8 @@ import { Header } from "@/components/layouts/header";
 import { Footer } from "@/components/layouts/footer";
 import { Comp } from "@/components/layouts/comp";
 import blogConfig from "@/blog.config";
+import { GoogleTagManager } from '@next/third-parties/google'
+import { googleTagManagerId } from '@/blog.config';
 
 const nextSeoConfig: NextSeoProps = {
   openGraph: {
@@ -44,6 +46,7 @@ export function Layout(props: { children: React.ReactNode }) {
       <main>{props.children}</main>
       <Footer />
       <Comp />
+      <GoogleTagManager gtmId={googleTagManagerId} />
       <style jsx>
         {`
           main {
