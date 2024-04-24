@@ -8,7 +8,10 @@ class MyDocument extends Document {
       <Html lang="ja">
         <Head>
           <Script
+            async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${publisherId}`}
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
           />
           {/* <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet" /> */}
         </Head>
