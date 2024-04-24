@@ -61,7 +61,7 @@ const CategoryIndex: NextPage<Props> = (props) => {
       </ArticleWrapper>
       <div className="link-button-wrap">
         {max > 1 && (
-          <LinkButton href={`/${category.id}/page/2`}>
+          <LinkButton href={`/${category.id}/index_page/2`}>
             {blogConfig.categoryPage.readMoreLabel}
           </LinkButton>
         )}

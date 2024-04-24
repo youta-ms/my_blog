@@ -109,14 +109,14 @@ export function Pager({ max, current, className, append = "" }: Props) {
       } else if (Math.abs(i - current) < 4) {
         list.push(
           <_ListItem key={i}>
-            <_PagerLink href={`${append}/page/${i}`}>
+            <_PagerLink href={`${append}/index_page/${i}`}>
               <span>{i}</span>
             </_PagerLink>
           </_ListItem>
         );
       } else if (i === max && i !== current) {
         list.push(
-          <_PagerLink href={`${append}/page/${max}`} key={i}>
+          <_PagerLink href={`${append}/index_page/${max}`} key={i}>
             <span>{max}</span>
           </_PagerLink>
         );
