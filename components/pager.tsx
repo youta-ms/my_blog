@@ -66,12 +66,12 @@ function _PagerLink({
             display: flex;
             align-items: center;
             justify-content: center;
-            transition:box-shadow 0.3s, transform 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 
             &:hover {
-              box-shadow:0 6px 14px rgba(0, 0, 0, 0.24);
-              transform:translate(0, -2px);
+              box-shadow: 0 6px 14px rgba(0, 0, 0, 0.24);
+              transform: translate(0, -2px);
             }
           }
         `}
@@ -109,14 +109,14 @@ export function Pager({ max, current, className, append = "" }: Props) {
       } else if (Math.abs(i - current) < 4) {
         list.push(
           <_ListItem key={i}>
-            <_PagerLink href={`${append}/index_page/${i}`}>
+            <_PagerLink href={`${append}/page/${i}`}>
               <span>{i}</span>
             </_PagerLink>
           </_ListItem>
         );
       } else if (i === max && i !== current) {
         list.push(
-          <_PagerLink href={`${append}/index_page/${max}`} key={i}>
+          <_PagerLink href={`${append}/page/${max}`} key={i}>
             <span>{max}</span>
           </_PagerLink>
         );

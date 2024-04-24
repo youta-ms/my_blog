@@ -42,14 +42,14 @@ const TopPage = ({
                   <ArticleCard
                     article={article.data}
                     href={`/${article.data.category}/${article.slug}`}
-                    {...index <= 4 && { eagerFlg: true }}
+                    {...(index <= 4 && { eagerFlg: true })}
                   />
                 </AritcleColumn>
               ))}
             </LatestArticle>
             <div className="link-button-wrap">
               {max > 1 && (
-                <LinkButton href="/index_page/2">
+                <LinkButton href="/page/2">
                   {blogConfig.topPage.readMoreLabel}
                 </LinkButton>
               )}
@@ -68,7 +68,7 @@ const TopPage = ({
             background: var(--c-white);
 
             @media screen and (max-width: ${blogConfig.styles.breakPoints
-              .medium}) {
+                .medium}) {
               margin-right: 0;
               width: 100%;
               padding: 32px 0;

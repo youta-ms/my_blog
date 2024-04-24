@@ -3,8 +3,8 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://youta-ms.online
+Host: http://localhost:3300
 
 # Sitemaps
-Sitemap: https://youta-ms.online/sitemap.xml
-Sitemap: https://youta-ms.online/dynamic-sitemap.xml
+Sitemap: http://localhost:3300/sitemap.xml
+Sitemap: http://localhost:3300/dynamic-sitemap.xml
