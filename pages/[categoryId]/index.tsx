@@ -53,7 +53,7 @@ const CategoryIndex: NextPage<Props> = (props) => {
               <ArticleCard
                 article={article.data}
                 href={`/${article.data.category}/${article.slug}`}
-                {...index <= 4 && { eagerFlg: true }}
+                {...(index <= 4 && { eagerFlg: true })}
               />
             </AritcleColumn>
           ))}
@@ -61,7 +61,7 @@ const CategoryIndex: NextPage<Props> = (props) => {
       </ArticleWrapper>
       <div className="link-button-wrap">
         {max > 1 && (
-          <LinkButton href={`/${category.id}/index_page/2`}>
+          <LinkButton href={`/${category.id}/page/2`}>
             {blogConfig.categoryPage.readMoreLabel}
           </LinkButton>
         )}
@@ -131,7 +131,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 60,
       props: {
         category,
-        max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
+        max: Math.ceil(
+          filteredPosts.length / blogConfig.article.articlesPerPage
+        ),
         articles: slicedPosts,
       },
     };
