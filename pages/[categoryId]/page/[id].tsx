@@ -48,7 +48,7 @@ const CategoryDeteil: NextPage<Props> = (props) => {
                 <ArticleCard
                   article={article.data}
                   href={`/${article.data.category}/${article.slug}`}
-                  {...(index <= 4 && { eagerFlg: true })}
+                  {...(index <= 4 ? { eagerFlg: true } : { eagerFlg: false })}
                 />
               </ArticleColumn>
             ))}
