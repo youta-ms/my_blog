@@ -18,7 +18,6 @@ import { Share } from "@/components/share";
 import { TagList } from "@/components/common/tag-list";
 import { getCategory } from "@/components/utils/get-category";
 import { getTagList } from "@/components/utils/get-tag-list";
-import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
 import { Contact } from "@/components/common/contact";
 import Image from "next/image";
@@ -32,12 +31,10 @@ type DetailProps = {
 
 // type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
-export default ({ article: defaultArticle, related, articles, current, }: DetailProps) => {
-  if (!defaultArticle) {
+export default ({ article, related, articles, current, }: DetailProps) => {
+  if (!article) {
     return <NotFound />;
   }
-
-  const { article } = useArticle(defaultArticle.slug, defaultArticle);
 
   const jsonLd: ArticleJsonLdProps = {
     url: process.env.NEXT_PUBLIC_SITE_URL,
