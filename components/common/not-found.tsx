@@ -18,8 +18,15 @@ export const NotFound = () => {
             <Image
               className="notfound-image"
               src={blogConfig.notFoundPage.image}
-              fill
               alt="404"
+              priority
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
+              height={300}
             />
           </div>
         </div>
