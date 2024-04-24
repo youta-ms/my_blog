@@ -49,7 +49,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
         </div>
       )}
       {!data.hideThumbnail && <time className="time">{dateFormatted}</time>}
-      <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener">
+      {/* <a className="samurai_link" href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y" target="_blank" rel="nofollow noopener">
         <Image
           src="https://www.afi-b.com/upload_image/9264-1638547778-3.jpg"
           className="samurai_img"
@@ -65,7 +65,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
           fill
           priority
         />
-      </div>
+      </div> */}
       <style jsx>
         {`
           .time {

@@ -281,7 +281,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               font-weight:bold;
               color:#333333;
               border-radius:1px;
-              padding:1em;
+              padding:0.5em 1em;
               margin-top:1.5em;
               margin-bottom:1.5em;
             }

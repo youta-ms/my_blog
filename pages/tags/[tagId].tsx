@@ -54,7 +54,7 @@ const TagIndex: NextPage<Props> = (props) => {
       </ArticleWrapper>
       <div className="link-button-wrap">
         {max > 1 && (
-          <LinkButton href={`/tags/${tag.id}/page/2`}>Read More</LinkButton>
+          <LinkButton href={`/tags/${tag.id}/index_page/2`}>Read More</LinkButton>
         )}
       </div>
       <NextSeo

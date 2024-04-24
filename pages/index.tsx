@@ -49,7 +49,7 @@ const TopPage = ({
             </LatestArticle>
             <div className="link-button-wrap">
               {max > 1 && (
-                <LinkButton href="/page/2">
+                <LinkButton href="/index_page/2">
                   {blogConfig.topPage.readMoreLabel}
                 </LinkButton>
               )}
