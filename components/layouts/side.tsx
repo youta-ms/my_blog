@@ -18,7 +18,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
   return (
     <div className="side">
       <Profile />
-      {/* <a
+      <a
         className="samurai_link"
         href="https://t.afi-b.com/visit.php?a=Q9264Q-S317894F&p=H866104Y"
         target="_blank"
@@ -39,7 +39,7 @@ export const Side: React.VFC<{ id?: string }> = ({ id }) => {
           onLoadingComplete={(e) => onLoadingComplete(e)}
           priority
         />
-      </a> */}
+      </a>
       <div className="list-wrap">
         <CategoryList />
       </div>
