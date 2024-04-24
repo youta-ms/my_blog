@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 import { Layout } from "@/components/layout";
 import {
   LatestArticle,
-  AritcleColumn,
+  ArticleColumn,
   ArticleList,
 } from "@/components/articles";
 import { ArticleCard } from "@/components/articles/card";
@@ -14,7 +14,6 @@ import blogConfig from "@/blog.config";
 import { CategoryHero } from "@/components/common/category-hero";
 import { Wrapper } from "@/components/common/wrapper";
 import { Pager } from "@/components/pager";
-import { useArticles } from "@/hooks/use-articles";
 import { NotFound } from "@/components/common/not-found";
 
 type Props = {
@@ -25,17 +24,11 @@ type Props = {
 };
 
 const CategoryDeteil: NextPage<Props> = (props) => {
-  const { category, articles: defaultArticles, current, max } = props;
+  const { category, articles, current, max } = props;
 
-  if (!defaultArticles || defaultArticles.length === 0) {
+  if (!articles || articles.length === 0) {
     return <NotFound />;
   }
-
-  const { articles } = useArticles({
-    defaultArticles,
-    current,
-    categoryId: category.id,
-  });
 
   return (
     <Layout>
@@ -51,13 +44,13 @@ const CategoryDeteil: NextPage<Props> = (props) => {
         <ArticleList>
           <LatestArticle>
             {articles.map((article, index) => (
-              <AritcleColumn key={article.slug} column={3}>
+              <ArticleColumn key={article.slug} column={3}>
                 <ArticleCard
                   article={article.data}
                   href={`/${article.data.category}/${article.slug}`}
-                  {...index <= 4 && { eagerFlg: true }}
+                  {...(index <= 4 && { eagerFlg: true })}
                 />
-              </AritcleColumn>
+              </ArticleColumn>
             ))}
           </LatestArticle>
           <Pager current={current} max={max} append={`/${category.id}`} />
@@ -123,7 +116,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 60,
       props: {
         current: current + 1,
-        max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
+        max: Math.ceil(
+          filteredPosts.length / blogConfig.article.articlesPerPage
+        ),
         category,
         articles: slicedPosts,
       },

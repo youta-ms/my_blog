@@ -51,7 +51,7 @@ export function ArticleList({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function AritcleColumn({
+export function ArticleColumn({
   children,
   column = 3,
 }: {
