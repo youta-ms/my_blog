@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import { getArticles, getFilteredArticles } from "@/utils/get-articles";
 import { Layout } from "@/components/layout";
 import { Article } from "@/types";
 import {
   ArticleList,
   LatestArticle,
-  AritcleColumn,
+  ArticleColumn,
 } from "@/components/articles";
 import { ArticleCard } from "@/components/articles/card";
 import { Title } from "@/components/texts";
@@ -13,20 +13,9 @@ import { Wrapper } from "@/components/common/wrapper";
 import blogConfig from "@/blog.config";
 import { Hero } from "@/components/common/hero";
 import { LinkButton } from "@/components/buttons";
-import { useArticles } from "@/hooks/use-articles";
 import { Side } from "@/components/layouts/side";
 
-const TopPage = ({
-  articles: defaultArticles,
-  max,
-  current,
-}: {
-  articles: Article[];
-  max: number;
-  current: number;
-}) => {
-  const { articles } = useArticles({ defaultArticles, current });
-
+const TopPage = ({ articles, max }: { articles: Article[]; max: number }) => {
   return (
     <Layout>
       {/* <Hero
@@ -39,13 +28,13 @@ const TopPage = ({
             <Title>{blogConfig.topPage.title}</Title>
             <LatestArticle>
               {articles.map((article, index) => (
-                <AritcleColumn key={article.slug} column={2}>
+                <ArticleColumn key={article.slug} column={2}>
                   <ArticleCard
                     article={article.data}
                     href={`/${article.data.category}/${article.slug}`}
                     {...(index <= 4 && { eagerFlg: true })}
                   />
-                </AritcleColumn>
+                </ArticleColumn>
               ))}
             </LatestArticle>
             <div className="link-button-wrap">

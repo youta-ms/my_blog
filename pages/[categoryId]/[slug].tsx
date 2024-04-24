@@ -21,7 +21,6 @@ import { getTagList } from "@/components/utils/get-tag-list";
 import { useArticle } from "@/hooks/use-article";
 import { NotFound } from "@/components/common/not-found";
 import { Contact } from "@/components/common/contact";
-import { useArticles } from "@/hooks/use-articles";
 import Image from "next/image";
 
 type DetailProps = {
@@ -33,13 +32,12 @@ type DetailProps = {
 
 // type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
-export default ({ article: defaultArticle, related, articles: defaultArticles, current, }: DetailProps) => {
+export default ({ article: defaultArticle, related, articles, current, }: DetailProps) => {
   if (!defaultArticle) {
     return <NotFound />;
   }
 
   const { article } = useArticle(defaultArticle.slug, defaultArticle);
-  const { articles } = useArticles({ defaultArticles, current });
 
   const jsonLd: ArticleJsonLdProps = {
     url: process.env.NEXT_PUBLIC_SITE_URL,

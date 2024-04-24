@@ -6,7 +6,7 @@ import { Article } from "@/types";
 import {
   ArticleList,
   LatestArticle,
-  AritcleColumn,
+  ArticleColumn,
 } from "@/components/articles";
 import { ArticleCard } from "@/components/articles/card";
 import { Pager } from "@/components/pager";
@@ -14,11 +14,10 @@ import blogConfig from "@/blog.config";
 import { Side } from "@/components/layouts/side";
 import { Wrapper } from "@/components/common/wrapper";
 import { Main } from "@/components/layouts/main";
-import { useArticles } from "@/hooks/use-articles";
 import { NotFound } from "@/components/common/not-found";
 
 const PageDetail = ({
-  articles: defaultArticles,
+  articles,
   current,
   max,
 }: {
@@ -26,11 +25,9 @@ const PageDetail = ({
   current: number;
   max: number;
 }) => {
-  if (!defaultArticles || defaultArticles.length === 0) {
+  if (!articles || articles.length === 0) {
     return <NotFound />;
   }
-
-  const { articles } = useArticles({ defaultArticles, current });
 
   return (
     <Layout>
@@ -39,13 +36,13 @@ const PageDetail = ({
           <ArticleList>
             <LatestArticle>
               {articles.map((article, index) => (
-                <AritcleColumn key={article.slug} column={2}>
+                <ArticleColumn key={article.slug} column={2}>
                   <ArticleCard
                     article={article.data}
                     href={`/${article.data.category}/${article.slug}`}
-                    {...index <= 4 && { eagerFlg: true }}
+                    {...(index <= 4 && { eagerFlg: true })}
                   />
-                </AritcleColumn>
+                </ArticleColumn>
               ))}
             </LatestArticle>
             <Pager current={current + 1} max={max} />
