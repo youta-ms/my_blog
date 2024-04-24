@@ -1,6 +1,6 @@
 import blogConfig from "@/blog.config";
 import Image from "next/image";
-import styles from './common.module.css'
+import styles from "./common.module.css";
 
 export function CategoryHero({
   title,
@@ -13,12 +13,18 @@ export function CategoryHero({
 }) {
   return (
     <div className="category-hero">
-      <div className="netx_img_box">
+      <div className="next_img_box">
         <Image
           src={image}
-          alt=""
+          alt="カテゴリのサムネイル"
           className={styles.next_img}
-          fill
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
+          width={500}
+          height={300}
         />
       </div>
       <div className="category-content">
@@ -45,7 +51,7 @@ export function CategoryHero({
               margin-top: -32px;
             }
 
-            .netx_img_box {
+            .next_img_box {
               width: 100%;
               height: 100%;
             }

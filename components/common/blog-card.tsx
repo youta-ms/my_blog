@@ -45,7 +45,13 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
               <Image
                 src={filteredMetas.image}
                 alt={filteredMetas.title}
-                fill
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+                width={500}
+                height={300}
               />
             </span>
           </span>

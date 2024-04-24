@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { GetStaticProps, GetStaticPaths } from "next";
 import { NextSeo, ArticleJsonLd, ArticleJsonLdProps } from "next-seo";
 import { getArticle, getArticles, getFilteredArticles } from "@/utils/get-articles";
@@ -31,7 +31,7 @@ type DetailProps = {
   current: number;
 };
 
-type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
+// type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
 export default ({ article: defaultArticle, related, articles: defaultArticles, current, }: DetailProps) => {
   if (!defaultArticle) {
@@ -52,10 +52,10 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
     publisherLogo: "",
   };
 
-  const [aspectRatio, setAspectRatio] = useState(0);
-  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
-    setAspectRatio(e.naturalWidth / e.naturalHeight);
-  };
+  // const [aspectRatio, setAspectRatio] = useState(0);
+  // const onLoadingComplete = (e: OnLoadingCompleteResult) => {
+  //   setAspectRatio(e.naturalWidth / e.naturalHeight);
+  // };
   return (
     <Layout>
       {article && (
@@ -66,7 +66,7 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                 <TopicPath items={[{ label: article.data.title }]} />
                 <ContentHeader data={article.data} />
                 <Content content={article.text_data} slug={article.slug} />
-                <a
+                {/* <a
                   className="samurai_link"
                   href="https://t.afi-b.com/visit.php?a=Q9264Q-r433259T&p=H866104Y"
                   target="_blank"
@@ -101,7 +101,7 @@ export default ({ article: defaultArticle, related, articles: defaultArticles, c
                     placeholder="blur"
                     onLoadingComplete={(e) => onLoadingComplete(e)}
                   />
-                </div>
+                </div> */}
                 <Contact />
                 <TagList
                   category={getCategory(article.data.category)}

@@ -12,11 +12,17 @@ export function ArticleAuthor({ writtenBy }: { writtenBy: string }) {
       <div className="article-author-image-wrap">
         <div className="next_img_box">
           <Image
-            alt=""
+            alt="筆者のイメージ画像"
             loading="lazy"
             src={writer.image}
             className="article-author-image"
-            fill
+            sizes="100vw"
+            style={{
+              width: "100%",
+              height: "auto",
+            }}
+            width={500}
+            height={300}
           />
         </div>
       </div>

@@ -9,13 +9,19 @@ export const Profile = () => {
       <div className="profile-inner">
         <div className="profile-img-wrap">
           <div className="profile-img">
-            <div className="netx_img_box">
+            <div className="next_img_box">
               <Image
                 priority
                 loading="eager"
                 src={blogConfig.account.image}
-                fill
-                alt="avatar"
+                alt="管理者のイメージ画像"
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+                width={500}
+                height={300}
               />
             </div>
           </div>
@@ -49,7 +55,7 @@ export const Profile = () => {
             height: 130px;
             margin: 0 auto;
 
-            .netx_img_box {
+            .next_img_box {
               width: 100%;
               height: auto;
             }

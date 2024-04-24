@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import dayjs from "dayjs";
 import { ArticleData } from "@/types";
 import blogConfig from "@/blog.config";
@@ -7,16 +6,10 @@ import { getTagList } from "./utils/get-tag-list";
 import { getCategory } from "./utils/get-category";
 import Image from "next/image";
 
-type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
-
 export function ContentHeader({ data }: { data?: ArticleData }) {
   const dateFormatted = data.date
     ? dayjs(data.date).format("YYYY/MM/DD")
     : null;
-  const [aspectRatio, setAspectRatio] = useState(0);
-  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
-    setAspectRatio(e.naturalWidth / e.naturalHeight);
-  };
   return (
     <div className="content-header">
       <h1 className="title">{data.title}</h1>
@@ -30,20 +23,19 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
         <div className="thumbnail-wrap fadein">
           <div
             className="next_img_box"
-            style={{
-              aspectRatio: `${aspectRatio || '16 / 9'}`,
-              position: 'relative',
-            }}
           >
             <Image
               src={data.thumbnail || blogConfig.article.defaultThumbnail}
-              alt="thumbnail"
+              alt="記事のサムネイル"
               className="thumbnail"
-              fill
-              blurDataURL="/images/logo.png"
-              placeholder="blur"
-              onLoadingComplete={(e) => onLoadingComplete(e)}
               priority
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
+              height={300}
             />
           </div>
         </div>
