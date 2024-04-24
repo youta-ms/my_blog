@@ -46,7 +46,7 @@ const TagIndex: NextPage<Props> = (props) => {
               <ArticleCard
                 article={article.data}
                 href={`/${article.data.category}/${article.slug}`}
-                {...index <= 4 && { eagerFlg: true }}
+                {...(index <= 4 && { eagerFlg: true })}
               />
             </AritcleColumn>
           ))}
@@ -54,7 +54,7 @@ const TagIndex: NextPage<Props> = (props) => {
       </ArticleWrapper>
       <div className="link-button-wrap">
         {max > 1 && (
-          <LinkButton href={`/tags/${tag.id}/index_page/2`}>Read More</LinkButton>
+          <LinkButton href={`/tags/${tag.id}/page/2`}>Read More</LinkButton>
         )}
       </div>
       <NextSeo
@@ -112,7 +112,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: 60,
       props: {
         tag,
-        max: Math.ceil(filteredPosts.length / blogConfig.article.articlesPerPage),
+        max: Math.ceil(
+          filteredPosts.length / blogConfig.article.articlesPerPage
+        ),
         articles: slicedPosts,
       },
     };
