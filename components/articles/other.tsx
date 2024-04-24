@@ -1,5 +1,5 @@
 import { Article } from "@/types";
-import { AritcleColumn, ArticleList, LatestArticle } from ".";
+import { ArticleColumn, ArticleList, LatestArticle } from ".";
 import { Title } from "../texts";
 import { ArticleCard } from "./card";
 
@@ -9,13 +9,13 @@ export function Other({ other }: { other: Article[] }) {
       <Title>OTHER ARTICLES</Title>
       <LatestArticle>
         {other.map((post, index) => (
-          <AritcleColumn key={post.slug} column={2}>
+          <ArticleColumn key={post.slug} column={2}>
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
-              {...index <= 4 && { eagerFlg: true }}
+              {...(index <= 4 && { eagerFlg: true })}
             />
-          </AritcleColumn>
+          </ArticleColumn>
         ))}
       </LatestArticle>
     </ArticleList>

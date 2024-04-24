@@ -3,7 +3,7 @@ import { Layout } from "@/components/layout";
 import {
   ArticleWrapper,
   LatestArticle,
-  AritcleColumn,
+  ArticleColumn,
 } from "@/components/articles";
 import { ArticleCard } from "@/components/articles/card";
 import { Title } from "@/components/texts";
@@ -12,7 +12,6 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Article, Tag } from "@/types";
 import blogConfig from "@/blog.config";
 import { LinkButton } from "@/components/buttons";
-import { useArticles } from "@/hooks/use-articles";
 import { NotFound } from "@/components/common/not-tagId";
 
 type Props = {
@@ -22,17 +21,11 @@ type Props = {
 };
 
 const TagIndex: NextPage<Props> = (props) => {
-  const { tag, articles: defaultArticles, max } = props;
+  const { tag, articles, max } = props;
 
-  if (!defaultArticles || defaultArticles.length === 0) {
+  if (!articles || articles.length === 0) {
     return <NotFound />;
   }
-
-  const { articles } = useArticles({
-    defaultArticles,
-    current: 0,
-    tagId: tag.id,
-  });
 
   return (
     <Layout>
@@ -42,13 +35,13 @@ const TagIndex: NextPage<Props> = (props) => {
       <ArticleWrapper>
         <LatestArticle>
           {articles.map((article, index) => (
-            <AritcleColumn key={article.slug} column={3}>
+            <ArticleColumn key={article.slug} column={3}>
               <ArticleCard
                 article={article.data}
                 href={`/${article.data.category}/${article.slug}`}
                 {...(index <= 4 && { eagerFlg: true })}
               />
-            </AritcleColumn>
+            </ArticleColumn>
           ))}
         </LatestArticle>
       </ArticleWrapper>

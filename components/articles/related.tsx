@@ -1,5 +1,5 @@
 import { Article } from "@/types";
-import { AritcleColumn, ArticleList, LatestArticle } from ".";
+import { ArticleColumn, ArticleList, LatestArticle } from ".";
 import { Title } from "../texts";
 import { ArticleCard } from "./card";
 
@@ -9,13 +9,13 @@ export function Related({ related }: { related: Article[] }) {
       <Title>RELATED ARTICLES</Title>
       <LatestArticle>
         {related.map((post, index) => (
-          <AritcleColumn key={post.slug} column={2}>
+          <ArticleColumn key={post.slug} column={2}>
             <ArticleCard
               article={post.data}
               href={`/${post.data.category}/${post.slug}`}
-              {...index <= 4 && { eagerFlg: true }}
+              {...(index <= 4 && { eagerFlg: true })}
             />
-          </AritcleColumn>
+          </ArticleColumn>
         ))}
       </LatestArticle>
     </ArticleList>

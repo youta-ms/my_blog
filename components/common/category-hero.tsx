@@ -25,6 +25,7 @@ export function CategoryHero({
           }}
           width={500}
           height={300}
+          priority
         />
       </div>
       <div className="category-content">
