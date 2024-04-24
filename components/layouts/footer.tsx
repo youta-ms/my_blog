@@ -10,13 +10,19 @@ export const Footer: React.VFC = () => {
     <footer className="footer">
       <div className="footer-columns">
         <div className="footer-column">
-          <div className="netx_img_box">
+          <div className="next_img_box">
             <Image
               loading="lazy"
               src={blogConfig.siteLogo.url}
               className="footer-logo"
               alt="logo"
-              fill
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
+              height={300}
             />
           </div>
           <p className="footer-description">{blogConfig.footer.title}</p>
@@ -51,13 +57,13 @@ export const Footer: React.VFC = () => {
               display: block;
             }
 
-            .netx_img_box {
+            .next_img_box {
               position: relative;
               width: 100%;
               height: auto;
 
               .footer-logo {
-                position: relative!important;
+                position: relative !important;
               }
             }
           }

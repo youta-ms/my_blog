@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import blogConfig from "@/blog.config";
 import Link from "next/link";
 import { SocialList } from "../common/template-social-list";
@@ -21,22 +21,19 @@ export function Header() {
           </div>
           <div className="logo-wrap">
             <Link href="/">
-              <div
-                className="netx_img_box"
-                style={{
-                  aspectRatio: `${aspectRatio || '340 / 283'}`,
-                  position: 'relative',
-                }}
-              >
+              <div className="next_img_box">
                 <Image
                   src={blogConfig.siteLogo.url}
                   alt={blogConfig.siteName}
-                  fill
                   loading="eager"
-                  blurDataURL="/images/logo.png"
-                  placeholder="blur"
-                  onLoadingComplete={(e) => onLoadingComplete(e)}
                   priority
+                  sizes="100vw"
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                  }}
+                  width={500}
+                  height={300}
                 />
               </div>
             </Link>
@@ -45,10 +42,7 @@ export function Header() {
             <ul className="header-sub-nav">
               {blogConfig.subNavigation.map((n) => (
                 <li key={n.url}>
-                  <Link
-                    href={n.url}
-                    prefetch={false}
-                  >
+                  <Link href={n.url} prefetch={false}>
                     {n.name}
                   </Link>
                 </li>
@@ -75,8 +69,8 @@ export function Header() {
             position: relative;
 
             @media screen and (max-width: ${blogConfig.styles.breakPoints
-              .medium}) {
-                margin: 0 10px 0;
+                .medium}) {
+              margin: 0 10px 0;
             }
           }
           .logo-wrap {
@@ -85,7 +79,7 @@ export function Header() {
             align-items: center;
             justify-content: center;
 
-            .netx_img_box {
+            .next_img_box {
               width: ${blogConfig.siteLogo.width}px;
               height: ${blogConfig.siteLogo.height}px;
             }

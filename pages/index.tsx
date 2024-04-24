@@ -1,3 +1,4 @@
+"use client"
 import { getArticles, getFilteredArticles } from "@/utils/get-articles";
 import { Layout } from "@/components/layout";
 import { Article } from "@/types";

@@ -19,7 +19,14 @@ export const NotFound = () => {
               className="notfound-image"
               src={blogConfig.notFoundTagId.image}
               alt="404"
-              fill
+              priority
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              width={500}
+              height={300}
             />
           </div>
         </div>

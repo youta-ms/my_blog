@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ArticleData } from "@/types";
 import blogConfig from "@/blog.config";
 import dayjs from "dayjs";
@@ -8,8 +7,6 @@ import { getTagList } from "../utils/get-tag-list";
 import { getCategory } from "../utils/get-category";
 import Image from "next/image";
 import styles from './CardComponent.module.css'
-
-type OnLoadingCompleteResult = { naturalHeight: number; naturalWidth: number };
 
 function PublishdAt({ date }: { date: string }) {
   return (
@@ -37,18 +34,10 @@ type Props = {
 };
 
 export function ArticleCard({ article, href, eagerFlg = false }: Props) {
-  const [aspectRatio, setAspectRatio] = useState(0);
-  const onLoadingComplete = (e: OnLoadingCompleteResult) => {
-    setAspectRatio(e.naturalWidth / e.naturalHeight);
-  };
   return (
     <Link href={href} prefetch={false} className={styles.link_card}>
       <div
         className="article-img-wrap"
-        style={{
-          aspectRatio: `${aspectRatio || '126 / 71'}`,
-          position: 'relative',
-        }}
       >
         <div className="link_img">
           <Image
@@ -56,17 +45,14 @@ export function ArticleCard({ article, href, eagerFlg = false }: Props) {
             className={styles.article_img}
             alt={article.title + "のサムネイル画像"}
             loading={eagerFlg ? "eager" : "lazy"}
-            width={1200}
-            height={700}
             priority={eagerFlg ? true : false}
-            blurDataURL={blogConfig.article.defaultThumbnail}
-            placeholder="blur"
-            onLoadingComplete={(e) => onLoadingComplete(e)}
             sizes="100vw"
             style={{
               width: '100%',
               height: 'auto',
             }}
+            width={500}
+            height={300}
           />
         </div>
       </div>

@@ -16,7 +16,14 @@ const PostImage: PostImageFunc = (slug) => (props) => {
           alt={alt}
           title={title}
           className={styles.next_img}
-          fill
+          priority
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
+          width={500}
+          height={300}
         />
         <style jsx>
           {`
