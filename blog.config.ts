@@ -1,7 +1,7 @@
 import { BlogConfig } from "./types/config";
 
-export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || ''
-export const publisherId = process.env.PUBLISHER_ID || ''
+export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || "";
+export const publisherId = process.env.PUBLISHER_ID || "";
 
 const blogConfig: BlogConfig = {
   use: "mdx", // mdx or notion
@@ -18,13 +18,13 @@ const blogConfig: BlogConfig = {
   notFoundPage: {
     title: "404",
     subtitle: "お探しのページが見つかりませんでした。",
-    image: "/images/not-found.jpeg",
+    image: "/images/not-found.jpg",
     description: `申し訳ありません。\nお探しのページは一時的にアクセスが出来ない状況にあるか、もしくは移動、削除され見つけることができません。`,
   },
   notFoundTagId: {
     title: "404",
     subtitle: "タグに関する記事が見つかりませんでした。",
-    image: "/images/not-found.jpeg",
+    image: "/images/not-found.jpg",
     description: `申し訳ありません。\n現在選択されたタグに関連する記事は見つかりませんでした。\n他のタグをお試しいただくか、もしくは他のカテゴリの記事をご覧いただくことをおすすめいたします。\n新しい情報をお届けできるよう努めてまいりますので、どうぞお楽しみにお待ちください。`,
   },
   topPage: {
@@ -82,14 +82,14 @@ const blogConfig: BlogConfig = {
   },
   hero: {
     title: "HOME",
-    image: "/images/plane.jpeg",
+    image: "/images/plane.jpg",
     description: "Webの世界を駆ける20代エンジニアの、日常とアイデアの記録",
   },
   footer: {
     title: "Webの世界を駆ける20代エンジニアの、日常とアイデアの記録",
   },
   article: {
-    defaultThumbnail: "/images/plane.jpeg",
+    defaultThumbnail: "/images/plane.jpg",
     articlesPerPage: 6,
   },
   navigation: [
@@ -119,7 +119,7 @@ const blogConfig: BlogConfig = {
   account: {
     name: "Youta",
     description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
-    image: `/images/me.jpeg`,
+    image: `/images/me.jpg`,
     social: {
       twitter: "https://twitter.com/youta_ms",
       github: "https://github.com/youta-ms",
@@ -130,14 +130,14 @@ const blogConfig: BlogConfig = {
       id: "me",
       name: "Youta",
       description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
-      image: "/images/me.jpeg",
+      image: "/images/me.jpg",
     },
   ],
   categories: [
     {
       id: "tec",
       title: "Web制作",
-      imagePath: "/images/london.jpeg",
+      imagePath: "/images/london.jpg",
       description: "Web制作に関する記事です",
     },
     // {
@@ -151,7 +151,7 @@ const blogConfig: BlogConfig = {
     {
       id: "tec",
       title: "Web制作",
-      imagePath: "/images/london.jpeg",
+      imagePath: "/images/london.jpg",
       description: "Web制作に関する記事です",
     },
   ],

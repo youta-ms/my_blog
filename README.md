@@ -22,35 +22,35 @@ Node.js and npm
 
 ```md
 .
-├── README.md                # README file
-├── next.config.js           # Next JS configuration
-├── blog.config.ts           # The theme's original configuration
-├── next-sitemap.js          # Sitemap configuration
-├── public                   # Public folder
-│   └── assets
-│       └── images           # Image used by the theme
+├── README.md # README file
+├── next.config.js # Next JS configuration
+├── blog.config.ts # The theme's original configuration
+├── next-sitemap.js # Sitemap configuration
+├── public # Public folder
+│ └── assets
+│ └── images # Image used by the theme
 ├── components
-│   ├── articles             # The components related to article
-│   ├── buttons              # The components related to article
-│   ├── common               # The common components
-│   ├── layouts              # Layout components of the theme
-│   ├── sides                # The components related to side column
-│   ├── texts                # The components related to texts
-│   └── utils                # The utility components
-├── contents                 # Markdown files for each contents
-├── pages                    # Next JS pages
-├── hooks                    # React hooks functions
-├── styles                   # Global css directory
-├── types                    # Type utilities
-├── utils                    # Utility functions
-├── .babelrc                 # Babel configuration to extends Next.js
-├── .editorconfig            # Editor configuration
-├── .eslint                  # JavaScript coding rule configuration
-├── tsconfig.json            # TypeScript configuration
-├── tsconfig.json            # TypeScript configuration
-├── package.json             # Package configuration to install dependencies
-├── yarn.lock                # Package configuration to install dependencies
-└── vercel.json              # Vercel configuration to deploy the theme
+│ ├── articles # The components related to article
+│ ├── buttons # The components related to article
+│ ├── common # The common components
+│ ├── layouts # Layout components of the theme
+│ ├── sides # The components related to side column
+│ ├── texts # The components related to texts
+│ └── utils # The utility components
+├── contents # Markdown files for each contents
+├── pages # Next JS pages
+├── hooks # React hooks functions
+├── styles # Global css directory
+├── types # Type utilities
+├── utils # Utility functions
+├── .babelrc # Babel configuration to extends Next.js
+├── .editorconfig # Editor configuration
+├── .eslint # JavaScript coding rule configuration
+├── tsconfig.json # TypeScript configuration
+├── tsconfig.json # TypeScript configuration
+├── package.json # Package configuration to install dependencies
+├── yarn.lock # Package configuration to install dependencies
+└── vercel.json # Vercel configuration to deploy the theme
 ```
 
 ## Getting Started
@@ -83,7 +83,6 @@ https://github.com/
 Second, Using the vercel is the easiest way to deploy the site.
 
 https://vercel.com/
-
 
 ## Blog Configuration
 
@@ -132,7 +131,7 @@ export default {
   },
   hero: {
     title: "My awesome life",
-    image: "/images/plane.jpeg",
+    image: "/images/plane.jpg",
     description: "AWESOME Next.js TypeScript MDX Blog Theme",
   },
   navigation: [
@@ -159,7 +158,7 @@ export default {
     {
       id: "travel",
       title: "Travel",
-      imagePath: "/images/london.jpeg",
+      imagePath: "/images/london.jpg",
       description: "Look at my awesome travel life",
     },
   ],
@@ -244,7 +243,6 @@ thumbnail: /images/awesome.png
 - `thumbnail` the thumbnail image of the article
 - `description` the description of this article
 
-
 ## Use Notion API Instead of mdx files
 
 ### **Create a database in Notion**.
@@ -284,15 +282,14 @@ The table page has the following URL
 
 ```html
 https://www.notion.so/*****************?v=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-````
+```
 
-The ``****************`` part is the database ID, so write it down.
+The `****************` part is the database ID, so write it down.
 
 Enter the information you have noted in the .env file
 
 ```html
-NOTION_DATABASE_ID=
-NOTION_TOKEN=
+NOTION_DATABASE_ID= NOTION_TOKEN=
 ```
 
 ### Update Blog Config
@@ -303,11 +300,12 @@ In, `blog.config.ts`, just set `notion` to `use` property
   use: "notion", // mdx or notion
 ```
 
-
 ## License
 
 MIT License
 
-## markdownでファイル名を表示させたいとき
+## markdown でファイル名を表示させたいとき
+
 ```html:index.html
+
 ```
