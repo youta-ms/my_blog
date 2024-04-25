@@ -9,7 +9,7 @@ export const TagList: React.VFC<{ category?: Category; tags: Tag[] }> = ({
   return (
     <ul className="taglist">
       {category && (
-        <li className="category">
+        <li>
           <Link
             href={`/${category.id}`}
             prefetch={false}
@@ -40,6 +40,12 @@ export const TagList: React.VFC<{ category?: Category; tags: Tag[] }> = ({
             flex-wrap: wrap;
             white-space: nowrap;
             list-style: none;
+            margin-bottom: 10px;
+
+            li {
+              margin-right: 0.5em;
+              vertical-align: middle;
+            }
           }
         `}
       </style>
