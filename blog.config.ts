@@ -1,7 +1,6 @@
 import { BlogConfig } from "./types/config";
 
-export const googleTagManagerId =
-  process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || "";
+export const googleTagManagerId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || "";
 export const publisherId = process.env.PUBLISHER_ID || "";
 
 const blogConfig: BlogConfig = {
@@ -14,8 +13,7 @@ const blogConfig: BlogConfig = {
   siteName: "Youtaの雑記ブログ",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
   title: "Youtaの雑記ブログ",
-  description:
-    "現役Webエンジニアが主にプログラミング・興味のあることについて書くブログです。",
+  description: "現役Webエンジニアが主にプログラミング・興味のあることについて書くブログです。",
   googleAdsenseCode: "", // ca-pub-****************
   notFoundPage: {
     title: "404",
@@ -120,8 +118,7 @@ const blogConfig: BlogConfig = {
   ],
   account: {
     name: "Youta",
-    description:
-      "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
+    description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
     image: `/images/me.jpg`,
     social: {
       twitter: "https://twitter.com/youta_ms",
@@ -132,8 +129,7 @@ const blogConfig: BlogConfig = {
     {
       id: "me",
       name: "Youta",
-      description:
-        "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
+      description: "山口県出身の現役のWebエンジニアです。仕事を通して学んだことや、生活していく中で学んだことを発信していきます。",
       image: "/images/me.jpg",
     },
   ],
