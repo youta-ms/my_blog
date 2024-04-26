@@ -15,7 +15,7 @@ const ProfilePage = () => {
           type: "article",
           images: [
             {
-              url: `${blogConfig.siteUrl}/images/logo.png`,
+              url: `${blogConfig.siteUrl}/images/profile.jpg`,
             },
           ],
         }}
