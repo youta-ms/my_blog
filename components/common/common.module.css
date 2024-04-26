@@ -8,18 +8,18 @@
   border: 1px solid var(--c-primary-sub);
   color: var(--c-primary-sub);
   border-radius: 0;
+  font-size: var(--text-sm);
   padding: 0.3em;
-  margin-right: 0.5em;
+  display: block;
+  height: 100%;
 }
 
 .tag {
-  list-style-type: none;
-  display: inline-block;
-  margin-right: 0.5em;
-  margin-bottom: 10px;
   border: 1px solid var(--c-primary);
   color: var(--c-primary);
   border-radius: 5px;
   font-size: var(--text-sm);
-  padding: 0.3em;
+  padding: 0.5em;
+  display: block;
+  height: 100%;
 }
