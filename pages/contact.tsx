@@ -3,6 +3,7 @@ import { Title } from "@/components/texts";
 import { Wrapper } from "@/components/common/wrapper";
 import { Side } from "@/components/layouts/side";
 import { useState } from "react";
+import { NextSeo } from "next-seo";
 import blogConfig from "@/blog.config";
 import Link from "next/link";
 
@@ -11,6 +12,20 @@ const Contact = () => {
 
   return (
     <Layout>
+      <NextSeo
+        title="お問い合わせフォーム"
+        description="Youtaの雑記ブログのお問い合わせフォームです。"
+        openGraph={{
+          title: "お問い合わせフォーム",
+          description: "Youtaの雑記ブログのお問い合わせフォームです。",
+          type: "article",
+          images: [
+            {
+              url: `${blogConfig.siteUrl}/images/logo.png`,
+            },
+          ],
+        }}
+      />
       <Wrapper>
         <main className="main">
           <Title>お問い合わせ</Title>
