@@ -21,7 +21,7 @@ const Contact = () => {
           type: "article",
           images: [
             {
-              url: `${blogConfig.siteUrl}/images/logo.png`,
+              url: `${blogConfig.siteUrl}/images/contact.jpg`,
             },
           ],
         }}
