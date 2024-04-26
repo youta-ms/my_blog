@@ -30,7 +30,7 @@ const BlogCard: BlogCardFunc = (slug) => (props) => {
       image: metas.image || '',
     };
 
-    if(filteredMetas.image == "" || filteredMetas.description == "" || filteredMetas.title == "") {
+    if((filteredMetas.image == "" || filteredMetas.image.indexOf("/") === -1) || filteredMetas.description == "" || filteredMetas.title == "") {
       return (
         <a href={href} target="_blank">{ props.children[0] }</a>
       );

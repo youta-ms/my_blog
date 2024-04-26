@@ -216,6 +216,10 @@ const blogConfig: BlogConfig = {
       id: "yarn",
       title: "Yarn",
     },
+    {
+      id: "blog",
+      title: "BLOG",
+    },
   ],
 };
 

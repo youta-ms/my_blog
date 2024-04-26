@@ -293,7 +293,7 @@ export function Content({ content, slug }: { content: string, slug:string }) {
               color:#333333;
               border-bottom: none;
               border-radius: 4px;
-              padding: 1.5em;
+              padding:0.5em 1em;
               margin-left:0 auto;
               border:1.5px dashed;
               border-color:#93b69c;/*H5枠色の変更はこちら*/
