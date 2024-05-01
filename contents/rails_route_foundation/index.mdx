@@ -1,0 +1,103 @@
+---
+title: RailsのルーティングとRESTfulルート
+date: 2024-05-01
+writtenBy: me
+category: tec
+tags: [rails]
+related: []
+description: RailsのルーティングとRESTfulルートについて解説している記事です。ユースケース等詳しくまとめています。
+thumbnail: /images/rails.jpg
+---
+Railsでは、アプリケーション内の異なるURLにリクエストをマッピングするためにルーティングが使われています。
+
+その中でも、RESTfulなルーティングはRailsの中核的な概念であり、効率的でシンプルなURL構造を提供しています。
+
+この記事では、RailsのルーティングとRESTfulなルートについて詳しく解説します。
+
+## ルーティングの基本
+Railsのルーティングは`config/routes.rb`ファイルに記載します。
+
+記載する内容としては、HTTPメソッドとURLパス、そしてそれに対応するコントローラーのアクションを記載します。
+
+例えば、下記のように書くことで特定のURLにリクエストをルーティングすることができます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  get '/products', to: 'products#index'
+  post '/products', to: 'products#create'
+  get '/products/:id', to: 'products#show'
+  put '/products/:id', to: 'products#update'
+  delete '/products/:id', to: 'products#destroy'
+end
+```
+
+上記の例では/productsに対して、GETリクエストがProductsControllerのindexアクションに、POSTリクエストがcreateアクションにマッピングされています。
+
+また、/products/:idのようなパスは動的セグメントと呼ばれ、:idには異なる値を入れることができます。
+
+## RESTfulルーティング
+RESTの性質を持っているルート設計のことをRESTfulと言います。Railsのルート設計はこのRESTfulとなります。
+※ RESTfulでないルート設計も可能にはなります。しかしRailsにはRESTfulなルート設計が前提の機能も存在するため、注意が必要となります。
+
+RESTfulなルーティングでは、リソース指向のURLを定義することが一般的となっています。
+
+これにより、CRUD操作（Create, Read, Update, Delete）に対応する標準的なHTTPメソッドであるGET・POST・PATCH・PUT・DELETEを使用できます。
+
+例えば下記のようにresourcesメソッドを使用すると
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+end
+```
+
+以下のようなRESTfulなルーティングが自動的に定義されます
+
+```bash
+     articles GET    /articles(.:format)           articles#index
+              POST   /articles(.:format)           articles#create
+  new_article GET    /articles/new(.:format)       articles#new
+ edit_article GET    /articles/:id/edit(.:format)  articles#edit
+      article GET    /articles/:id(.:format)       articles#show
+              PATCH  /articles/:id(.:format)       articles#update
+              PUT    /articles/:id(.:format)       articles#update
+              DELETE /articles/:id(.:format)       articles#destroy
+```
+
+## ルートヘルパー
+RESTfulなルーティングでは、ルートヘルパーメソッドも自動的に生成されます。これらのヘルパーメソッドを使うと、コントローラー内やビューで簡潔にURLを生成することができます。
+
+```ruby
+<!-- products/index.html.erb -->
+<%= link_to 'Show Product', product_path(@product) %>
+<%= link_to 'Edit Product', edit_product_path(@product) %>
+<%= link_to 'Delete Product', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %>
+```
+
+## ルートの名前付け
+ルーティングに名前を付けることで、ルートヘルパーのメソッド名が変わります。これにより、ルートをより意味のある名前で参照することができます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :products, path: 'items', as: 'items'
+end
+```
+
+これにより、以下のようなルートヘルパーが使えるようになります。
+
+```bash
+    items GET    /items(.:format)              products#index
+          POST   /items(.:format)              products#create
+ new_item GET    /items/new(.:format)          products#new
+edit_item GET    /items/:id/edit(.:format)     products#edit
+     item GET    /items/:id(.:format)          products#show
+          PATCH  /items/:id(.:format)          products#update
+          PUT    /items/:id(.:format)          products#update
+          DELETE /items/:id(.:format)          products#destroy
+```
+
+- items_path
+- item_path(@item)
