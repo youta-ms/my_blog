@@ -66,15 +66,52 @@ end
               DELETE /articles/:id(.:format)       articles#destroy
 ```
 
-## ルートヘルパー
+## ヘルパーメソッド
 RESTfulなルーティングでは、ルートヘルパーメソッドも自動的に生成されます。これらのヘルパーメソッドを使うと、コントローラー内やビューで簡潔にURLを生成することができます。
 
+### ルートヘルパーメソッド
+ルートヘルパーメソッドは、ルートURLへのパスを生成するためのメソッドになります。
+
+これにより、URLを直接記述する代わりに、ルート名を使用してリンクを作成することができます。
+
+例えば、下記でrouteを生成した場合は
+
 ```ruby
-<!-- products/index.html.erb -->
-<%= link_to 'Show Product', product_path(@product) %>
-<%= link_to 'Edit Product', edit_product_path(@product) %>
-<%= link_to 'Delete Product', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %>
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+end
 ```
+
+`articles_path`や`new_article_path`等のルートヘルパーメソッドが自動的に生成されます。
+
+#### _pathと_urlについて
+ルートヘルパーメソッドを使うにあたって`Prefix+_path`と`Prefix+_url`があります。
+
+違いとしては_pathがルート以下の文字列を返すのに対して、_urlはドメインを含む完全なURLを返すという違いがあります。
+
+```
+  root_path => '/' ※ルート以下の文字列を返す
+  root_url  => 'https://example.com/' ※完全なURLの文字列を返す
+
+  articles_path => '/articles'
+  articles_url  => 'https://example.com/articles'
+```
+
+_pathと_urlの使い分けですが、「リダイレクトするときは_urlを使用する。それ以外は_pathを使う」とするとよさそうです。
+
+### リンクヘルパーメソッド
+リンクヘルパーメソッドは、指定したURLやルート名に基づいてリンクを作成するためのメソッドになります。
+
+これにより、簡単にリンクを生成することができます。
+
+```ruby
+<%= link_to 'Show Articles', articles_path(@article) %>
+<%= link_to 'Edit Article', edit_article_path(@article) %>
+<%= link_to 'Delete Article', articles_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+```
+
+そのほか、フォームヘルパーメソッドやテキストヘルパーメソッド等ありますが、今回の趣旨とは異なるので説明省略します。
 
 ## ルートの名前付け
 ルーティングに名前を付けることで、ルートヘルパーのメソッド名が変わります。これにより、ルートをより意味のある名前で参照することができます。
