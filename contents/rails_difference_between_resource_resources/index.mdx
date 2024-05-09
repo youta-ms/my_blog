@@ -1,0 +1,133 @@
+---
+title: Ruby on Railsにおけるresourceとresourcesの違い
+date: 2024-05-01
+writtenBy: me
+category: tec
+tags: [rails]
+related: []
+description: Ruby on Railsにおけるresourceとresourcesの違いについて解説している記事です。ユースケース等詳しくまとめています。
+thumbnail: /images/rails.jpg
+---
+この記事ではRuby on Railsにおけるresourceとresourcesの違いについてまとめています。
+
+業務でrailsを利用している私ですが、resourceを利用した際に詰まってしまったことがあるのでresourceについて詳しく調べていくうちにresourceとresourcesがあることに気づきました。
+
+そこで、resourceとresourcesについて備忘録としてまとめておきます。
+
+## resourceとは
+resourceはidパラメータを必要としないルートを生成してくれます。
+
+例えば、自分のプロフィール等リソースが1つしか存在しない場合などのルーティングに使用されています。
+
+下記のように記載することで
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resource :profile
+end
+```
+
+以下の6ルートを自動的に生成してくれます。
+
+```bash
+  new_profile GET    /profile/new(.:format)        profiles#new
+ edit_profile GET    /profile/edit(.:format)       profiles#edit
+      profile GET    /profile(.:format)            profiles#show
+              PATCH  /profile(.:format)            profiles#update
+              PUT    /profile(.:format)            profiles#update
+              DELETE /profile(.:format)            profiles#destroy
+              POST   /profile(.:format)            profiles#create
+```
+
+## resourcesとは
+resourcesは、一連のRESTfulルートを一度に生成してくれます。
+
+例えば、ブログの投稿等複数のリソースが存在する場合に使用されています。
+
+下記のように記載することで
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+end
+```
+
+以下の8ルートを自動的に生成してくれます。
+
+```bash
+     articles GET    /articles(.:format)           articles#index
+              POST   /articles(.:format)           articles#create
+  new_article GET    /articles/new(.:format)       articles#new
+ edit_article GET    /articles/:id/edit(.:format)  articles#edit
+      article GET    /articles/:id(.:format)       articles#show
+              PATCH  /articles/:id(.:format)       articles#update
+              PUT    /articles/:id(.:format)       articles#update
+              DELETE /articles/:id(.:format)       articles#destroy
+```
+
+### RESTfulルートとは
+coming soon...
+
+## resourceとresourcesの大きな違い
+上記の説明で気づいた方もいらっしゃるかもしれませんが、resourceとresourcesには下記の大きな違いが2つあります。
+
+1. indexアクションがあるか無いか
+1. ルートに:idが含まれているかどうか
+
+例えばブログサイトで説明しますが、ブログの投稿には一覧機能が必要なのでresourcesを使ってルートを定義する方がよいでしょう。
+
+複数人で記事を書いている場合は話が変わりますが、記事を書いているのが自分一人の場合でプロフィール等一覧にまとめる必要がない場合はresourceを使ってルートを定義するとよさそうです。
+
+まとめると、
+
+- ブログの投稿やSNSの投稿等一覧が必要な場合はresourcesを使う
+- プロフィールや利用規約等一覧が必要でない場合はresourceを使う
+
+という感じになりそうです。
+
+## memberとcollection
+resourceとresourcesの使い分けについては大体分かって来たかと思いますが、例えば「SNSでいいね機能をつけたい...」とか「ブログで記事検索機能をつけたい...」と言ったresourcesで定義される7のアクション外の要望も出てくるかと思います。
+
+そんな時に役に立つのがmemberやcollectionになります。
+
+memberでは個別のリソースに対してアクションを設定できるのに対し、collectionではリソース全体に対するアクションを設定することができます。
+
+### member
+例えば、SNSのいいね機能を実装することを想像してみて下さい。
+
+下記のようにUserモデルをresourcesを利用してルーティング定義し(複数のユーザーが存在するため)、ユーザーのidを識別しつつそれらを関連付けて、idで指定した個々のリソースに対するアクションを設定できます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :users, only: [:index, :show, :edit, :create, :destroy, :update] do
+    get :like, on: :member
+    get :likes, on: :member
+  end
+end
+```
+
+```bash
+  like_user GET    /users/:id/like(.:format)          users#like
+ likes_user GET    /users/:id/likes(.:format)         users#likes
+```
+
+### collection
+例えば、ブログに記事検索機能を実装することを想像してみてください。
+
+下記のようにPostモデルをresourcesを利用してルーティング定義すると本来であればrouteに:idが付与されますが、collectionを利用することでリソース全体に対してのアクションが設定できます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :posts do
+    get :search, on: :collection
+  end
+end
+```
+
+```bash
+  search_posts GET    /posts/search(.:format)         posts#search
+```

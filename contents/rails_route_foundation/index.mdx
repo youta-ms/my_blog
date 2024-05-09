@@ -1,0 +1,141 @@
+---
+title: Ruby on RailsのルーティングとRESTfulルート
+date: 2024-05-09
+writtenBy: me
+category: tec
+tags: [rails]
+related: []
+description: RailsのルーティングとRESTfulルートについて解説している記事です。ユースケース等詳しくまとめています。
+thumbnail: /images/rails.jpg
+---
+Railsでは、アプリケーション内の異なるURLにリクエストをマッピングするためにルーティングが使われています。
+
+その中でも、RESTfulなルーティングはRailsの中核的な概念であり、効率的でシンプルなURL構造を提供しています。
+
+この記事では、RailsのルーティングとRESTfulなルートについて詳しく解説します。
+
+## ルーティングの基本
+Railsのルーティングは`config/routes.rb`ファイルに記載します。
+
+記載する内容としては、HTTPメソッドとURLパス、そしてそれに対応するコントローラーのアクションを記載します。
+
+例えば、下記のように書くことで特定のURLにリクエストをルーティングすることができます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  get '/products', to: 'products#index'
+  post '/products', to: 'products#create'
+  get '/products/:id', to: 'products#show'
+  put '/products/:id', to: 'products#update'
+  delete '/products/:id', to: 'products#destroy'
+end
+```
+
+上記の例では/productsに対して、GETリクエストがProductsControllerのindexアクションに、POSTリクエストがcreateアクションにマッピングされています。
+
+また、/products/:idのようなパスは動的セグメントと呼ばれ、:idには異なる値を入れることができます。
+
+## RESTfulルーティング
+RESTの性質を持っているルート設計のことをRESTfulと言います。Railsのルート設計はこのRESTfulとなります。
+※ RESTfulでないルート設計も可能にはなります。しかしRailsにはRESTfulなルート設計が前提の機能も存在するため、注意が必要となります。
+
+RESTfulなルーティングでは、リソース指向のURLを定義することが一般的となっています。
+
+これにより、CRUD操作（Create, Read, Update, Delete）に対応する標準的なHTTPメソッドであるGET・POST・PATCH・PUT・DELETEを使用できます。
+
+例えば下記のようにresourcesメソッドを使用すると
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+end
+```
+
+以下のようなRESTfulなルーティングが自動的に定義されます
+
+```bash
+     articles GET    /articles(.:format)           articles#index
+              POST   /articles(.:format)           articles#create
+  new_article GET    /articles/new(.:format)       articles#new
+ edit_article GET    /articles/:id/edit(.:format)  articles#edit
+      article GET    /articles/:id(.:format)       articles#show
+              PATCH  /articles/:id(.:format)       articles#update
+              PUT    /articles/:id(.:format)       articles#update
+              DELETE /articles/:id(.:format)       articles#destroy
+```
+
+## ヘルパーメソッド
+RESTfulなルーティングでは、ルートヘルパーメソッドも自動的に生成されます。これらのヘルパーメソッドを使うと、コントローラー内やビューで簡潔にURLを生成することができます。
+
+### ルートヘルパーメソッド
+ルートヘルパーメソッドは、ルートURLへのパスを生成するためのメソッドになります。
+
+これにより、URLを直接記述する代わりに、ルート名を使用してリンクを作成することができます。
+
+例えば、下記でrouteを生成した場合は
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :articles
+end
+```
+
+`articles_path`や`new_article_path`等のルートヘルパーメソッドが自動的に生成されます。
+
+#### _pathと_urlについて
+ルートヘルパーメソッドを使うにあたって`Prefix+_path`と`Prefix+_url`があります。
+
+違いとしては_pathがルート以下の文字列を返すのに対して、_urlはドメインを含む完全なURLを返すという違いがあります。
+
+```
+  root_path => '/' ※ルート以下の文字列を返す
+  root_url  => 'https://example.com/' ※完全なURLの文字列を返す
+
+  articles_path => '/articles'
+  articles_url  => 'https://example.com/articles'
+```
+
+_pathと_urlの使い分けですが、「リダイレクトするときは_urlを使用する。それ以外は_pathを使う」とするとよさそうです。
+
+### リンクヘルパーメソッド
+リンクヘルパーメソッドは、指定したURLやルート名に基づいてリンクを作成するためのメソッドになります。
+
+これにより、簡単にリンクを生成することができます。
+
+```ruby
+<%= link_to 'Show Articles', articles_path(@article) %>
+<%= link_to 'Edit Article', edit_article_path(@article) %>
+<%= link_to 'Delete Article', articles_path(@article), method: :delete, data: { confirm: 'Are you sure?' } %>
+```
+
+そのほか、フォームヘルパーメソッドやテキストヘルパーメソッド等ありますが、今回の趣旨とは異なるので説明省略します。
+
+## ルートの名前付け
+ルーティングに名前を付けることで、ルートヘルパーのメソッド名が変わります。これにより、ルートをより意味のある名前で参照することができます。
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  resources :products, path: 'items', as: 'items'
+end
+```
+
+これにより、以下のようなルートヘルパーが使えるようになります。
+
+- items_path
+- items_url
+- item_path(@item)
+
+```bash
+    items GET    /items(.:format)              products#index
+          POST   /items(.:format)              products#create
+ new_item GET    /items/new(.:format)          products#new
+edit_item GET    /items/:id/edit(.:format)     products#edit
+     item GET    /items/:id(.:format)          products#show
+          PATCH  /items/:id(.:format)          products#update
+          PUT    /items/:id(.:format)          products#update
+          DELETE /items/:id(.:format)          products#destroy
+```
