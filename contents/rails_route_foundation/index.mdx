@@ -1,6 +1,6 @@
 ---
-title: RailsのルーティングとRESTfulルート
-date: 2024-05-01
+title: Ruby on RailsのルーティングとRESTfulルート
+date: 2024-05-09
 writtenBy: me
 category: tec
 tags: [rails]
@@ -125,6 +125,10 @@ end
 
 これにより、以下のようなルートヘルパーが使えるようになります。
 
+- items_path
+- items_url
+- item_path(@item)
+
 ```bash
     items GET    /items(.:format)              products#index
           POST   /items(.:format)              products#create
@@ -135,6 +139,3 @@ edit_item GET    /items/:id/edit(.:format)     products#edit
           PUT    /items/:id(.:format)          products#update
           DELETE /items/:id(.:format)          products#destroy
 ```
-
-- items_path
-- item_path(@item)
