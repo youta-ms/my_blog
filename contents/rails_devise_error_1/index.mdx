@@ -1,0 +1,83 @@
+---
+title: Dockerで建てたrails7環境で「undefined method `devise' for 〜」が発生した話
+date: 2024-05-16
+writtenBy: me
+category: tec
+tags: [rails, docker]
+related: []
+description: Dockerで建てたRuby on rails v7環境で「undefined method `devise' for 〜」が発生した際の解決方法の備忘録です。
+thumbnail: /images/rails.jpg
+---
+## 解決策
+解決策としては、「サーバーを一回立ち上げ直す」になります。
+
+詳しくみていきましょう。
+
+## 環境
+下記記事の手順で環境構築してました。
+
+[](/tec/docker_rails_v7)
+
+## 経緯
+### Gemfileの編集
+
+```gemfile
+gem 'devise'
+```
+
+### bundle install実行
+
+```
+docker compose run web bundle install
+```
+
+### deviseの設定ファイルを作成
+
+```
+docker compose run web rails g devise:install
+```
+
+### コマンドを利用してUserモデルを作成する
+
+```
+docker compose run web rails g devise user
+```
+
+### migrateの実行
+
+```
+docker compose run web rake db:migrate
+```
+
+### controllerの作成
+
+```
+docker-compose exec web rails g devise:controllers users
+```
+
+### viewファイルの作成
+
+```
+docker-compose exec web rails g devise:views users
+```
+
+上記の手順を行い、いざアカウント作成ページにアクセスしてみると下記のエラーが発生していました。
+
+「undefined method `devise' for 〜」
+
+deviseメソッドが未定義ですって...
+
+## 解決策
+一回dockerを落として
+
+```
+docker-compose down
+```
+
+もう一回立ち上げ直すとエラーが解消してアクセスできるようになっていました。
+
+```
+docker-compose up -d
+```
+
+rails単体の場合は`rails s`でサーバーの再起動をすると良いようです。
