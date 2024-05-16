@@ -1,0 +1,197 @@
+---
+title: Dockerでrails7、PostgreSQLの環境を構築する方法
+date: 2024-05-16
+writtenBy: me
+category: tec
+tags: [docker, rails]
+related: []
+thumbnail: /images/docker.jpg
+description: この記事では、Dockerを使用してRuby on rails、PostgreSQLの環境構築の方法を解説しています。
+---
+この記事では、Dockerを使用してRuby on rails、PostgreSQLの環境構築の方法を解説しています。
+
+## 環境
+以下のような環境で利用してます。
+
+- MacBookPro（M1）
+- docker desktop
+
+## 手順
+順番としては以下になります。
+
+1. Dockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成
+1. `docker-compose build`の実行
+1. `docker-compose run api rails new . --force --database=postgresql`の実行
+1. `config/database.yml`の編集
+1. DBの作成
+
+## Dockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成
+まず、今回作成するフォルダの内容としては下記のようになります。
+```
+任意のフォルダ名（今回はmy_appとします）
+├── // ここにRailsの各ディレクトリが生成されます（appなど）
+├── Dockerfile
+├── docker-compose.yml
+├── entrypoint.sh
+├── Gemfile
+└── Gemfile.lock
+
+```
+
+最初に下記コマンドで大元のフォルダを作成してください。
+
+```
+mkdir my_app
+```
+
+次に下記コマンドで上記で作成したフォルダに移動します。
+
+```
+cd my_app
+```
+
+次に下記コマンドでDockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成をします。
+
+```
+touch Dockerfile Gemfile Gemfile.lock docker-compose.yml entrypoint.sh
+```
+
+作成できたらそれぞれのファイルに下記内容を記載してください。
+
+### Dockerfile
+Dockerfileには下記を記載してください。
+
+```dockerfile
+FROM ruby:3.1.2
+
+ENV TZ Asia/Tokyo
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+
+# コンテナの作業ディレクトリを指定
+RUN mkdir /myapp
+WORKDIR /myapp
+ADD Gemfile /myapp/Gemfile
+ADD Gemfile.lock /myapp/Gemfile.lock
+RUN bundle install
+COPY . /myapp
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
+
+```
+
+### Gemfile
+Gemfileには下記を記載してください。
+
+```gemfile
+source "https://rubygems.org"
+gem "rails"
+```
+
+### Gemfile.lock
+Gemfile.lockはなにも記載しないでください。
+
+### docker-compose.yml
+docker-compose.ymlには下記を記載してください。
+
+```yml
+version: '3'
+services:
+  db: #dbコンテナの設定について記述
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data #/dataまでpathを指定しないとdbの永続化できない。永続化しないとdocker downするたびにdbを作成しないといけない。毎回するのは手間なのでここで永続化しておく。
+    ports:
+      - '3306:3306'
+
+　#rails側のコンテナの設定について記述。docker-compose exec(run)の後にはここで指定した名前を記述して、コマンドを叩いています。
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/myapp
+    ports:
+      - 3000:3000
+    stdin_open: true #dockerコンテナを起動したままにできる。コンテナ内に入ってコマンドを打ち込める
+    tty: true          #コンテナを起動させたまま、bashで入れたりできる
+    depends_on:
+      - db
+volumes: #永続化するvolumeの名前を指定してあげる
+  postgres_volume:
+```
+
+### entrypoint.sh
+entrypoint.shには下記を記載してください。
+
+```shell
+#!/bin/bash
+set -e
+
+# Remove a potentially pre-existing server.pid for Rails.
+rm -f /myapp/tmp/pids/server.pid
+
+# Then exec the container's main process (what's set as CMD in the Dockerfile).
+exec "$@"
+```
+
+## docker-compose buildの実行
+上記で記載した環境を構築するため一度`docker-compose build`を実行してください。
+
+
+## docker-compose run web rails new . --force --database=postgresqlの実行
+下記コマンドを実行して、rails関係のファイルを作成してください。
+
+```
+docker-compose run web rails new . --force --database=postgresql
+```
+
+そして下記コマンドを実行して、rails newをした際にgemfileに追記されたgemをインストールしてください。
+
+```
+docker compose run web bundle install
+```
+
+## config/database.ymlの編集
+rails関係のファイルが作り終わったら`my_app/config/database.yml`を下記のように修正します。（それぞれの項目を上書きしてください）
+
+```yml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: postgres
+  password: password #これは、docker-compose.ymlで指定したパスワード
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: myapp_development
+
+test:
+  <<: *default
+  database: myapp_test
+```
+
+ここまで来れたらbundle installするために下記コマンドを実行して一度リビルドして、立ち上げ直しましょう
+
+```
+docker-compose build
+```
+
+```
+docker-compose up -d
+```
+
+## DBの作成
+リビルドが終わって立ち上がったら`docker compose run web bundle exec rails db:create`をしてDBを作成してください。
+
+ここまで来たら[http://localhost:3000](http://localhost:3000)にアクセスしてみましょう。
+
+Railsのアイコンが表示されたら完了です！お疲れ様でした。
