@@ -97,6 +97,10 @@ const blogConfig: BlogConfig = {
       name: "Web制作",
       url: `/tec`,
     },
+    {
+      name: "育児",
+      url: `/childcare`,
+    },
   ],
   subNavigation: [
     {
@@ -140,6 +144,12 @@ const blogConfig: BlogConfig = {
       imagePath: "/images/london.jpg",
       description: "Web制作に関する記事です",
     },
+    {
+      id: "childcare",
+      title: "育児",
+      imagePath: "/images/london.jpg",
+      description: "育児に関する記事です",
+    },
     // {
     //   id: "web3",
     //   title: "Web3.0",
@@ -153,6 +163,12 @@ const blogConfig: BlogConfig = {
       title: "Web制作",
       imagePath: "/images/london.jpg",
       description: "Web制作に関する記事です",
+    },
+    {
+      id: "childcare",
+      title: "育児",
+      imagePath: "/images/london.jpg",
+      description: "育児に関する記事です",
     },
   ],
   tags: [
@@ -219,6 +235,10 @@ const blogConfig: BlogConfig = {
     {
       id: "blog",
       title: "BLOG",
+    },
+    {
+      id: "childcare_items",
+      title: "育児アイテム",
     },
   ],
 };
