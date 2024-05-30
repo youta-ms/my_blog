@@ -1,0 +1,249 @@
+---
+title: Railsにおけるクラスメソッドとインスタンスメソッドの違いについて
+date: 2024-05-30
+writtenBy: me
+category: tec
+tags: [rails]
+related: []
+description: Railsのクラスメソッドとインスタンスメソッドについて調べた際のまとめです。それぞれの違いから使い方まで幅広くまとめています。
+thumbnail: /images/rails.jpg
+---
+
+Railsで制作をしているときにクラスメソッドとインスタンスメソッドという言葉が出てきて、あれ？ってなったので調べてみました。
+
+同じようにクラスメソッドとインスタンスメソッドってなんだっけ？何が違うんだっけ？ってなっている方の理解につながれば嬉しいです！
+
+## クラスメソッド
+クラスメソッドは、クラスそのものに定義されているメソッドになります。
+
+例
+```ruby
+class MyClass < ApplicationRecord
+  def self.class_method # MyClass.class_methodとしても可
+    puts "これはクラスメソッドです"
+  end
+end
+
+MyClass.class_method # => "これはクラスメソッドです"
+```
+
+上記のようにクラスメソッドは、インスタンス化されていないクラス（MyClass）から直接呼び出すことができます。
+
+また、特定のインスタンスに関連しない操作や、データを扱う際に使用されていることが多いです。
+
+クラスメソッドの定義には、self.プレフィックスかクラス名をメソッド名の前に付けます。
+
+## インスタンスメソッド
+インスタンスメソッドは、クラスのインスタンスに対して定義されたメソッドになります。
+
+例
+```ruby
+class BikeClass < ApplicationRecord
+  def initialize(name, company)
+    @name    = name
+    @company = company
+  end
+
+  def description
+    "このバイクは#{@name}という名前で、#{@company}が作っています"
+  end
+end
+
+bike1 = Bike.new("CBR650R", "Honda")
+bike2 = Bike.new("NINJA ZX-10R", "Kawasaki")
+
+# インスタンスメソッドを呼び出す
+puts bike1.description # => "このバイクはCBR650Rという名前で、Hondaが作っています"
+puts bike2.description # => "このバイクはNINJA ZX-10Rという名前で、Kawasakiが作っています"
+```
+
+上記のようにインスタンスメソッドは、特定のインスタンスに関連する操作やデータを扱うために使用されます。
+また、インスタンスメソッドはクラスをインスタンス化した後に、そのインスタンスに対して呼び出されます。
+
+## クラスメソッドの使い方
+実際のユースケースを考えてみました。
+
+### クラスメソッドの実例①：検索や集計等
+クラスメソッドは、上記でも説明した通り検索や集計等、特定のインスタンスに依存しない操作を行う場合に有用です。
+
+以下に、クラスメソッドを用いた検索や集計の実例を書いてみます。
+
+```ruby
+class BikeClass < ApplicationRecord
+  # 特定の排気量以上のバイクを検索するクラスメソッド
+  def self.displacement_over(displacement)
+    Bike.where("displacement >= ?", displacement)
+  end
+
+  # 会社ごとのバイクの種類を集計するクラスメソッド
+  def self.count_by_company
+    Bike.group(:company_id).count
+  end
+end
+```
+
+上記の例では、Bikeクラスにdisplacement_over、count_by_companyという2つのクラスメソッドを定義しています。
+
+- displacement_over: 引数で指定された排気量以上のバイクを検索するクラスメソッドになります。Bike.displacement_over(650)のように使うことで、排気量が650cc以上のバイクを検索できます。
+- count_by_company: 会社ごとのバイクの種類を集計するメソッドになります。このメソッドを使うことで、各会社が出しているバイクの種類数を取得できます。
+
+### クラスメソッドの実例②：期間内の売上を集計する
+
+次に、指定された期間内の売上を集計する方法を見てみましょう。
+
+```ruby
+class OrderClass < ApplicationRecord
+  # 期間内の売上を集計するクラスメソッド
+  def self.sales_between(start_date, end_date)
+    Order.where(created_at: start_date..end_date).sum(:price)
+  end
+end
+
+Order.sales_between(1.week.ago, Date.today) # 今日から1週間前までの売り上げ取得
+```
+
+このクラスメソッドを使うことで、例えば直近1週間の売上を簡単に集計できるようになります。
+
+### クラスメソッドの実例③： 新規登録ユーザー数を集計する
+
+次に、 新規登録ユーザー数を集計する方法を見てみましょう。
+
+```ruby
+class UserClass < ApplicationRecord
+  # 期間内の新規登録ユーザー数を集計するクラスメソッド
+  def self.new_registrations(start_date, end_date)
+    User.where(created_at: start_date..end_date).count
+  end
+end
+
+User.new_registrations(1.week.ago, Date.today) # 今日から1週間前までの新規登録数取得
+```
+
+このクラスメソッドを使うことで、例えば直近1週間のユーザー新規登録数を簡単に集計できるようになります。
+
+上記で紹介したクラスメソッドは、インスタンスを生成せずに呼び出すことができるようになっており、特定のインスタンスに依存しない操作を行っています。
+
+こうした特定のインスタンスに依存しない操作を行う処理は、クラスメソッドを使うことで簡潔かつ効率的に実装できます。
+
+## インスタンスメソッドの使い方
+まずは、クラスメソッドとの関連をみていきましょう。
+
+以下の例では、Bikeモデルクラスが定義しており、インスタンスメソッドを使用して各バイクの名前と制作会社を取得する処理を実装しています。
+
+クラスメソッドとインスタンスメソッドがどのように連携しているかを確認してみましょう。
+
+```ruby
+class BikeClass < ApplicationRecord
+  attr_accessor :name, :company
+
+  def initialize(name, company)
+    @name = name
+    @company = company
+  end
+
+  # クラスメソッド: バイクのデータを作成
+  def self.create_bikes(bike_data)
+    bike_data.map { |data| Bike.new(data[:name], data[:company]) }
+  end
+
+  # インスタンスメソッド: バイクの名前と制作会社を取得
+  def description
+    "このバイクは#{name}という名前で、#{company}が作っています"
+  end
+end
+
+# サンプルデータ
+bike_data = [
+  { name: 'CBR650R', company: 'Honda' },
+  { name: 'NINJA ZX-10R', company: 'Kawasaki' }
+]
+
+# クラスメソッドを使ってバイクオブジェクトを作成
+bikes = Bike.create_bikes(bike_data)
+
+# インスタンスメソッドを使って各ユーザーのフルネームを表示
+bikes.each { |bike| puts bike.description }
+```
+
+この例では、Bikeクラスにnameとcompany属性が定義されており、initializeメソッドでインスタンスを生成します。
+
+また、create_bikesクラスメソッドを使って、バイクデータをもとにBikeオブジェクトの配列を作成しています。
+
+最後に、descriptionインスタンスメソッドを使って、各バイクの名前と制作会社を表示しています。
+
+ここで、クラスメソッドcreate_bikesがBikeオブジェクトを生成し、インスタンスメソッドdescriptionがオブジェクトごとのデータ（nameとcompany）にアクセスして処理を行っていることがわかると思います。
+
+このように、クラスメソッドとインスタンスメソッドは連携して、オブジェクト指向プログラミングの機能を実現します。
+
+こちらも実際のユースケースを考えてみました。
+
+### インスタンスメソッドの実例①：オブジェクトの状態を変更する
+以下に、インスタンスメソッドを用いたオブジェクトの状態を変更する実例を書いてみます。
+
+```ruby < ApplicationRecord
+class ShoppingCartItemClass
+  attr_reader :item, :item_quantity
+
+  # 商品とその数量を初期化する
+  def initialize(item, item_quantity)
+    @item = item
+    @item_quantity = item_quantity
+  end
+
+  # 商品の数量を更新する
+  def update_item_quantity(updated_quantity)
+    @item_quantity = updated_quantity
+  end
+
+  # カート内の商品の合計金額を計算する
+  def total_item_price
+    item.price * item_quantity
+  end
+end
+
+# 商品を作成する (商品名: "Laptop", 価格: 80000)
+laptop = Product.new("Laptop", 80000)
+# カート内の商品を作成し、数量を1に設定する
+shopping_cart_item = ShoppingCartItem.new(laptop, 1)
+# カート内の商品数量を2に更新する
+shopping_cart_item.update_item_quantity(2)
+# カート内の商品の合計金額を出力する (価格: 80000 * 数量: 2 = 160000)
+puts shopping_cart_item.total_item_price #=> 160000
+```
+
+### インスタンスメソッドの実例②：オブジェクトの情報を表示する
+以下に、インスタンスメソッドを用いたオブジェクトの情報を表示する実例を書いてみます。
+
+```ruby
+class BikeClass < ApplicationRecord
+  attr_reader :name, :company, :date_of_sale
+
+  def initialize(name, company, date_of_sale)
+    @name = name
+    @company = company
+    @date_of_sale = date_of_sale
+  end
+
+  def display_description
+    "このバイクは#{name}という名前で、#{date_of_sale}に#{company}から発売されました"
+  end
+end
+
+bike = Bike.new("CBR650R", "Honda", Date.new(2024, 6, 13))
+puts user.display_description #=> "このバイクはCBR650Rという名前で、2024−06-13にHondaから発売されました"
+```
+
+display_descriptionメソッドは、インスタンスメソッドとして定義しており、Bikeオブジェクトの詳細情報が表示されるようにしています。
+
+上記ユースケースではインスタンスメソッドを使用して、オブジェクトの状態を変更したり情報を表示したりしています。
+
+インスタンスメソッドは、オブジェクト指向プログラミングの基本で、実務で頻繁に利用されている機能になります。
+
+## まとめ
+クラスメソッドは、クラス全体で共有される操作を提供する場合に適していました。
+
+具体的にいうと、オブジェクトの生成や検索、集計等、個々のインスタンスに依存しない処理を行う場合に使用します。
+
+一方、インスタンスメソッドは、個々のオブジェクトに固有の操作を提供する場合に適しています。
+
+具体的には、オブジェクトの状態を変更したり、状態に基づいて処理を行ったりする場合に使用します。
