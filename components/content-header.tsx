@@ -20,7 +20,7 @@ export function ContentHeader({ data }: { data?: ArticleData }) {
         />
       )}
       {!data.hideThumbnail && (
-        <div className="thumbnail-wrap fadein">
+        <div className="thumbnail-wrap">
           <div
             className="next_img_box"
           >
