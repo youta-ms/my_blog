@@ -1,14 +1,14 @@
 ---
-title: Dockerでrails7、PostgreSQLの環境を構築する方法
+title: DockerでRails7 + PostgreSQL + esbuildの環境を構築する方法
 date: 2024-05-16
 writtenBy: me
 category: tec
 tags: [docker, rails]
 related: []
 thumbnail: /images/docker.jpg
-description: この記事では、Dockerを使用してRuby on rails、PostgreSQLの環境構築の方法を解説しています。
+description: この記事では、Dockerを使用してRails7 + PostgreSQL + esbuildの環境構築の方法を解説しています。
 ---
-この記事では、Dockerを使用してRuby on rails、PostgreSQLの環境構築の方法を解説しています。
+この記事では、Dockerを使用してRails7 + PostgreSQL + esbuildの環境構築の方法を解説しています。
 
 ## 環境
 以下のような環境で利用してます。
@@ -19,22 +19,20 @@ description: この記事では、Dockerを使用してRuby on rails、PostgreSQ
 ## 手順
 順番としては以下になります。
 
-1. Dockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成
+1. Dockerfile.dev、docker-compose.ymlの作成
 1. `docker-compose build`の実行
-1. `docker-compose run api rails new . --force --database=postgresql`の実行
-1. `config/database.yml`の編集
+1. `docker compose run --rm app gem install rails`の実行
+1. `docker compose run --rm app rails new . -d postgresql -j esbuild`の実行
+1. `config/database.yml`、`package.json`、`Procfile.dev`の編集
 1. DBの作成
 
-## Dockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成
+## Dockerfile.dev、docker-compose.ymlの作成
 まず、今回作成するフォルダの内容としては下記のようになります。
 ```
 任意のフォルダ名（今回はmy_appとします）
 ├── // ここにRailsの各ディレクトリが生成されます（appなど）
-├── Dockerfile
-├── docker-compose.yml
-├── entrypoint.sh
-├── Gemfile
-└── Gemfile.lock
+├── Dockerfile.dev
+└── docker-compose.yml
 
 ```
 
@@ -50,50 +48,57 @@ mkdir my_app
 cd my_app
 ```
 
-次に下記コマンドでDockerfile、Gemfile、Gemfile.lock、docker-compose.yml、entrypoint.shの作成をします。
+次に下記コマンドでDockerfile.dev、docker-compose.ymlの作成をします。
 
 ```
-touch Dockerfile Gemfile Gemfile.lock docker-compose.yml entrypoint.sh
+touch Dockerfile.dev docker-compose.yml
 ```
 
 作成できたらそれぞれのファイルに下記内容を記載してください。
 
-### Dockerfile
-Dockerfileには下記を記載してください。
+### Dockerfile.dev
+Rails7.1から`rails new`で新規プロジェクトを立ち上げると、`Dockerfile`が自動的に作成されるようになりました。
+他の方の記事を参考にさせてもらい環境を構築しようとしていたのですが、ファイル名を`Dockerfile`のまま行っていると`rails new`したタイミングでファイルが上書きされてしまっていたので、`Dockerfile.dev`として上書きされないようにしています。
+
+`Dockerfile.dev`には下記を記載してください。
 
 ```dockerfile
-FROM ruby:3.1.2
+FROM node:20.12.0-alpine as node
 
-ENV TZ Asia/Tokyo
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
+RUN apk add --no-cache bash curl && \
+    curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.22.19
 
-# コンテナの作業ディレクトリを指定
-RUN mkdir /myapp
-WORKDIR /myapp
-ADD Gemfile /myapp/Gemfile
-ADD Gemfile.lock /myapp/Gemfile.lock
-RUN bundle install
-COPY . /myapp
+FROM ruby:3.3.0-alpine
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
+COPY --from=node /usr/local/bin/node /usr/local/bin/node
+COPY --from=node /usr/local/bin/npm /usr/local/bin/npm
+COPY --from=node /usr/local/bin/npx /usr/local/bin/npx
+COPY --from=node /opt/yarn-* /opt/yarn
+RUN ln -fs /opt/yarn/bin/yarn /usr/local/bin/yarn
+RUN apk add --no-cache git build-base libxml2-dev libxslt-dev postgresql-dev postgresql-client tzdata bash vim && \
+    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENV APP_ROOT /app
+RUN mkdir $APP_ROOT
+WORKDIR $APP_ROOT
 
+ENV LANG=ja_JP.UTF-8 \
+    BUNDLE_JOBS=4 \
+    BUNDLE_RETRY=3 \
+    EDITOR=vim
+RUN gem update --system && \
+    gem install --no-document bundler:2.5.7
+
+RUN bundle config set force_ruby_platform true
 ```
 
-### Gemfile
-Gemfileには下記を記載してください。
+#### ポイント1
+`Dockerfile.dev`ではRailsをインストールしていません。
 
-```gemfile
-source "https://rubygems.org"
-gem "rails"
-```
+Railsプロジェクト内には`Gemfile`と`Gemfile.lock`があるはずで、そちらを参照して正しいバージョンのRailsをインストールするべきだからです。
 
-### Gemfile.lock
-Gemfile.lockはなにも記載しないでください。
+#### ポイント2
+`esbuild`の環境には`node`と`yarn`が必要になっており、`node`のイメージをセットアップした後に、Rubyのイメージへ必要なファイルをコピーしています。
 
 ### docker-compose.yml
 docker-compose.ymlには下記を記載してください。
@@ -101,96 +106,167 @@ docker-compose.ymlには下記を記載してください。
 ```yml
 version: '3'
 services:
-  db: #dbコンテナの設定について記述
-    image: postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    volumes:
-      - postgres_volume:/var/lib/postgresql/data #/dataまでpathを指定しないとdbの永続化できない。永続化しないとdocker downするたびにdbを作成しないといけない。毎回するのは手間なのでここで永続化しておく。
-    ports:
-      - '3306:3306'
-
-　#rails側のコンテナの設定について記述。docker-compose exec(run)の後にはここで指定した名前を記述して、コマンドを叩いています。
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
+  app:
+    build:
+      context: .
+      dockerfile: "Dockerfile.dev"
+    stdin_open: true
+    tty: true
     ports:
       - 3000:3000
-    stdin_open: true #dockerコンテナを起動したままにできる。コンテナ内に入ってコマンドを打ち込める
-    tty: true          #コンテナを起動させたまま、bashで入れたりできる
+    command: /bin/sh -c "bundle install && yarn install && rm -f tmp/pids/server.pid && bin/dev"
+    environment:
+      DB_USER: postgres
+      DB_PASS: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
     depends_on:
-      - db
-volumes: #永続化するvolumeの名前を指定してあげる
-  postgres_volume:
+      - postgres
+    volumes:
+      - .:/app:delegated
+      - node-modules:/app/node_modules:delegated
+      - bundle-data:/usr/local/bundle:delegated
+
+  postgres:
+    image: postgres:16.2
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Tokyo
+    volumes:
+      - pgsql-data:/var/lib/postgresql/data:cached
+
+volumes:
+  pgsql-data:
+  bundle-data:
+  node-modules:
 ```
 
-### entrypoint.sh
-entrypoint.shには下記を記載してください。
+#### ポイント1
+`command`の箇所でRailsサーバーを起動する前に`bundle install`を実行しています。
 
-```shell
-#!/bin/bash
-set -e
+この記載を行うことで、もしGemfileに変更があったとしても、コンテナを起動する前にgemの変更点が適用されます。
 
-# Remove a potentially pre-existing server.pid for Rails.
-rm -f /myapp/tmp/pids/server.pid
+#### ポイント2
+`command`の箇所でRailsサーバーを起動する前に`yarn install`を実行しています。
 
-# Then exec the container's main process (what's set as CMD in the Dockerfile).
-exec "$@"
-```
+この記載を行うことで、もしpackage.jsonに変更があったとしても、コンテナを起動する前にpackage.jsonの変更点が適用されます。
+
+#### ポイント3
+/usr/local/bundleをvolumeにマウントすることにより、`bundle install`で作成されたbundleデータが永続化されるようにしています。
+
+#### ポイント4
+/app/node_modulesをvolumeにマウントすることにより、`yarn install`で作成されたnode_modulesのデータが永続化されるようにしています。
 
 ## docker-compose buildの実行
 上記で記載した環境を構築するため一度`docker-compose build`を実行してください。
 
-
-## docker-compose run web rails new . --force --database=postgresqlの実行
-下記コマンドを実行して、rails関係のファイルを作成してください。
-
-```
-docker-compose run web rails new . --force --database=postgresql
-```
-
-そして下記コマンドを実行して、rails newをした際にgemfileに追記されたgemをインストールしてください。
+## docker compose run --rm app gem install railsの実行
+下記コマンドを実行すると、最新のRailsがインストールされます。
 
 ```
-docker compose run web bundle install
+docker compose run --rm app gem install rails
 ```
 
-## config/database.ymlの編集
-rails関係のファイルが作り終わったら`my_app/config/database.yml`を下記のように修正します。（それぞれの項目を上書きしてください）
+## docker compose run --rm app rails new . -d postgresql -j esbuildの実行
+このまま実行するとアプリの名前が App になるので、変えたい場合は -n アプリの名前 のオプションを追加してください。
+
+また、DBにはPostgreSQLを使用しますよというオプションとビルドはesbuildを使用しますよというオプションをつけています。
+
+```
+docker compose run --rm app rails new . -d postgresql -j esbuild
+```
+
+
+## config/database.yml、package.json、Procfile.devの編集
+rails関係のファイルが作り終わったら`config/database.yml`、`package.json`、`Procfile.dev`を下記のように修正します。
+
+### config/database.yml
 
 ```yml
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  host: db
-  username: postgres
-  password: password #これは、docker-compose.ymlで指定したパスワード
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: myapp_development
-
-test:
-  <<: *default
-  database: myapp_test
+  # 省略
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %>
+  host: <%= ENV['DB_HOST'] %>
 ```
 
-ここまで来れたらbundle installするために下記コマンドを実行して一度リビルドして、立ち上げ直しましょう
+### package.json
+```json
+,
+  "scripts": {
+    "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "build": "yarn build:js"
+  }
+```
+
+### Procfile.json
+```json
+web: bin/rails server -b 0.0.0.0 -p 3000
+js: yarn build:js --watch
+```
+
+#### ポイント1
+CSSのコンパイルが必要になった時のために`"scripts"`で`"build:js"`と`"build"`に分けています。
+
+また、Herokuなどにデプロイした時は`"build"`のscriptが実行されるため`"build"`も用意しています。
+
+#### ポイント2
+CSSのコンパイルが必要になった場合は`package.json`の`"scripts"`に追加しましょう。
+
+そして、追加したscriptsを実行できるように`Procfile.dev`にも追記をするのを忘れずに！
+
+下記が、tailwind cssを使った例になります。
+
+### package.json
+```json
+"scripts": {
+  "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+  "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css",
+  "build": "yarn build:js && yarn build:css"
+}
+```
+
+### Procfile.dev
+```json
+web: bin/rails server -b 0.0.0.0 -p 3000
+js: yarn build:js --watch
+css: yarn build:css --watch
+```
+
+ここまで来れたら下記コマンドを実行して、DBを作成するためにpostgresコンテナだけを立ち上げましょう。
 
 ```
-docker-compose build
-```
-
-```
-docker-compose up -d
+docker compose up postgres -d
 ```
 
 ## DBの作成
-リビルドが終わって立ち上がったら`docker compose run web bundle exec rails db:create`をしてDBを作成してください。
+postgresが立ち上がったら下記コマンドを実行してDBを作成してください。
+
+```
+docker compose run --rm app rails db:create
+```
+
+これでdevelopment用とtest用のDBが作成されます。
+
+DBが作成されたら、下記コマンドを実行してpostgresコンテナを停止させましょう。
+
+```
+docker compose stop postgres
+```
+
+postgresコンテナが停止できたら、下記コマンドを実行してRailsサーバーを起動します。
+
+```
+docker compose up
+```
+
 
 ここまで来たら[http://localhost:3000](http://localhost:3000)にアクセスしてみましょう。
 

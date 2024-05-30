@@ -59,7 +59,7 @@ export function ArticleColumn({
   children: React.ReactNode;
 }) {
   return (
-    <div className="article-column fadein">
+    <div className="article-column">
       {children}
       <style jsx>
         {`

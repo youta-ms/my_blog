@@ -30,8 +30,8 @@ export function Hero({
       <div className="hero-cover">
         <div className="hero-wrapper">
           <div className="hero-inner">
-            <h1 className="hero-title fadein">{title}</h1>
-            <p className="hero-description fadein">{description}</p>
+            <h1 className="hero-title">{title}</h1>
+            <p className="hero-description">{description}</p>
           </div>
         </div>
       </div>

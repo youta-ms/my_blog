@@ -29,8 +29,8 @@ export function CategoryHero({
         />
       </div>
       <div className="category-content">
-        <h2 className="category-title fadein">{title}</h2>
-        <p className="category-description fadein">{description}</p>
+        <h2 className="category-title">{title}</h2>
+        <p className="category-description">{description}</p>
       </div>
       <style jsx>
         {`
