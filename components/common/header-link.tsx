@@ -10,10 +10,6 @@ export const HeaderLink = () => {
   useEffect(() => {
     if (!window) return
     const handleResize = () => {
-      console.log(window.innerWidth);
-      console.log(blogConfig.styles.breakPointsNumber.medium);
-
-
       window.innerWidth >= blogConfig.styles.breakPointsNumber.medium ? setShowHamburgerList(true) : setShowHamburgerList(false)
     }
     handleResize()
