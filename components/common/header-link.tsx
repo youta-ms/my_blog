@@ -1,34 +1,27 @@
 import blogConfig from "@/blog.config";
 import Link from "next/link";
-import { useLayoutEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { CategoryHamburgerList } from "../common/category-hamburger-list";
 
 export const HeaderLink = () => {
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: 0,
-    height: 0,
-  });
-
-  useLayoutEffect(() => {
-    const getWindowDimensions = () => {
-
-      const { innerWidth: width, innerHeight: height } = window;
-      return {
-        width,
-        height
-      };
-    }
-
-    setWindowDimensions(getWindowDimensions());
-
-    return () => setWindowDimensions(getWindowDimensions());
-  }, []);
-
   const [isModal, setIsModal] = useState(false);
+  const [showHamburgerList, setShowHamburgerList] = useState(false)
+
+  useEffect(() => {
+    if (!window) return
+    const handleResize = () => {
+      console.log(window.innerWidth);
+      console.log(blogConfig.styles.breakPointsNumber.medium);
+
+
+      window.innerWidth >= blogConfig.styles.breakPointsNumber.medium ? setShowHamburgerList(true) : setShowHamburgerList(false)
+    }
+    handleResize()
+  }, [])
 
   return (
     <>
-      {windowDimensions.width >= Number(blogConfig.styles.breakPointsNumber.medium) ? (
+      {showHamburgerList ? (
         // ウィンドウの幅が指定のブレークポイント以上の場合に表示する内容
         <ul className="header-nav gnavi">
           {blogConfig.navigation.map((n) => (
