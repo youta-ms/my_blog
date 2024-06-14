@@ -7,7 +7,7 @@ type PostImageFunc = (slug: string) => React.FC<JSX.IntrinsicElements['img']>
 const PostImage: PostImageFunc = (slug) => (props) => {
   try {
     const { src, alt, title } = props
-    const image = require('@/public/images/' + slug + '/' + src).default
+    const image = require('../../public/images/' + slug + '/' + src).default
 
     return (
       <span className='next_img_box'>
